@@ -1,1 +1,6 @@
 {% extends 'core/base.html' %}
+
+{% block body %}
+Hello {{user.username}}!
+<a class="btn btn-danger" href="/logout/">Logout</a>
+{% endblock body %}

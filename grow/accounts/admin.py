@@ -3,15 +3,15 @@ from django.contrib.auth.admin import UserAdmin
 from .models import GrowUser
 
 class GrowUserAdminConfig(UserAdmin):
-    search_fields = ("email", "user_name")
-    list_display = ("email", "user_name", "is_active", "is_staff")
+    search_fields = ("email", "username")
+    list_display = ("email", "username", "is_validated", "is_staff", "is_active")
     list_filter = ("is_active", "is_staff")
-    ordering = ("user_name",)
+    ordering = ("username",)
     
     fieldsets = (
-        (None, {'fields': ("email", "user_name")}),
+        (None, {'fields': ("email", "username")}),
         ("Personal Info", {'fields': ("first_name", "last_name")}),        
-        ("Permissions", {'fields': ("is_staff", "is_active")}),
+        ("Permissions", {'fields': ("is_staff", "is_active", "is_validated")}),
         ("Important dates", {'fields': ("last_login", "date_joined")}),
     )
 
@@ -19,7 +19,7 @@ class GrowUserAdminConfig(UserAdmin):
 
 
     add_fieldsets = (
-        (None, {'fields': ("email", "user_name", "password1", "password2")}),
+        (None, {'fields': ("email", "username", "password1", "password2")}),
         ("Personal Info", {'fields': ("first_name", "last_name")}),    
         ("Permissions", {'fields': ("is_staff", "is_active")}),
     )
