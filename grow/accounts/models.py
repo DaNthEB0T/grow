@@ -2,12 +2,14 @@ from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin
 )
+from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 
 
-class UserManager(BaseUserManager):
+class GrowUserManager(BaseUserManager):
     def create_user(self, user_name, email, password=None, **other_fields):
         if not email:
-            raise ValueError('Users must have an email address :--)')
+            raise ValueError(_("Users must have an email address :--)"))
 
         user = self.model(
             email=self.normalize_email(email),
@@ -25,10 +27,10 @@ class UserManager(BaseUserManager):
         other_fields.setdefault('is_active', True)
 
         if other_fields.get('is_staff') is not True:
-            raise ValueError("Staff must be assigned!")  
+            raise ValueError(_("Staff must be assigned!"))  
 
         if other_fields.get('is_active') is not True:
-            raise ValueError("Active must be assigned!")  
+            raise ValueError(_("Active must be assigned!"))  
 
         user = self.create_user(
             email=email,
@@ -47,13 +49,13 @@ class UserManager(BaseUserManager):
         other_fields.setdefault('is_active', True)
 
         if other_fields.get('is_superuser') is not True:
-            raise ValueError("Superuser must be assigned!")  
+            raise ValueError(_("Superuser must be assigned!")) 
 
         if other_fields.get('is_staff') is not True:
-            raise ValueError("Staff must be assigned!")  
+            raise ValueError(_("Staff must be assigned!"))  
 
         if other_fields.get('is_active') is not True:
-            raise ValueError("Active must be assigned!")  
+            raise ValueError(_("Active must be assigned!"))  
 
         user = self.create_user(
             email=email,
@@ -64,22 +66,27 @@ class UserManager(BaseUserManager):
         return user
 
 
-class User(AbstractBaseUser, PermissionsMixin):
-    user_name = models.CharField(max_length=150, unique=True)
-    first_name = models.CharField(max_length=150, blank=True)
-    last_name = models.CharField(max_length=150, blank=True)
-    email = models.EmailField(
-        verbose_name='email address',
-        max_length=255,
-        unique=True,
-    )
+class GrowUser(AbstractBaseUser, PermissionsMixin):
+    # Login Info
+    email = models.EmailField(_("email address"), max_length=255, unique=True)
+    user_name = models.CharField(_("user name"), max_length=150, unique=True)
+
+    # Personal Info
+    first_name = models.CharField(_("first name"), max_length=150, blank=True)
+    last_name = models.CharField(_("last name"), max_length=150, blank=True)
+
+    # Important Dates
+    date_joined = models.DateTimeField(_("date joined"),auto_now_add=True)
+    last_login = models.DateTimeField(_("last_login"),auto_now=True)
+
+    # Permissions
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
 
-    objects = UserManager()
+    objects = GrowUserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["user_name"]
+    REQUIRED_FIELDS = ["user_name", "first_name", "last_name"]
    
 
     def __str__(self):

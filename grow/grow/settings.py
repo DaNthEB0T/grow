@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'django_extensions',
     
     # My Apps
-    "core.apps.CoreConfig",
-    "accounts.apps.AccountsConfig"
+    "core",
+    "accounts"
 ]
 
 MIDDLEWARE = [
@@ -90,7 +90,7 @@ DATABASES = {
 }
 
 # Users
-AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = 'accounts.GrowUser'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
