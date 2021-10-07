@@ -89,6 +89,7 @@ class GrowUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_validated = models.BooleanField(default=False)
+    # is_superuser field exists initially
 
     objects = GrowUserManager()
 

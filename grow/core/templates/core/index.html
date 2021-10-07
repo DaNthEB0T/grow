@@ -2,5 +2,14 @@
 
 {% block body %}
 Hello {{user.username}}!
-<a class="btn btn-danger" href="/logout/">Logout</a>
+<p><a class="btn btn-danger" href="/logout/">Logout</a></p>
+
+<p>
+{% if not user.is_validated %}
+    User needs verification!
+{% else %}
+    User is verified!
+{% endif %}
+</p>
+
 {% endblock body %}

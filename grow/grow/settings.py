@@ -112,6 +112,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# EMAIL CONNECTION
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'shibiuminfo@gmail.com'
+EMAIL_HOST_PASSWORD = 'johnnymaster248248'
+EMAIL_PORT = 587
+
+
+# Django Token Generator
+PASSWORD_RESET_TIMEOUT = 10 * 60 # Seconds 
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

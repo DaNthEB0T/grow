@@ -1,0 +1,21 @@
+[
+{
+ "model": "accounts.growuser",
+ "pk": 1,
+ "fields": {
+  "password": "pbkdf2_sha256$260000$cWuELgCX15XE226mLg7f1u$EGNJqw93o3r0yrWsdRse3yIE9fJIP7AfIw1+28VBUUI=", 
+  "is_superuser": true,
+  "email": "admin@grow.com",
+  "username": "admin",
+  "first_name": "",
+  "last_name": "",
+  "date_joined": "2021-10-07T18:13:30.470Z",
+  "last_login": "2021-10-07T18:13:30.471Z",
+  "is_active": true,
+  "is_staff": true,
+  "is_validated": true,
+  "groups": [],
+  "user_permissions": []
+ }
+}
+]

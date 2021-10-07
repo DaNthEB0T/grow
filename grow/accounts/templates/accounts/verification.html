@@ -1,0 +1,10 @@
+ {% autoescape off %}
+    {% if user.first_name %}
+    Hi {{ user.first_name }},
+    {% else %}
+    Hi {{ user.username }},
+    {% endif %}
+    Please click on the link to confirm your registration,
+
+    http://{{ domain }}{% url 'accounts:verification' uidb64=uid token=token %}
+{% endautoescape %}
