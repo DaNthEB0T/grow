@@ -121,7 +121,7 @@ EMAIL_PORT = 587
 
 
 # Django Token Generator
-PASSWORD_RESET_TIMEOUT = 10 * 60 # Seconds 
+PASSWORD_RESET_TIMEOUT = 15 * 60 # Seconds 
 
 
 # Internationalization
