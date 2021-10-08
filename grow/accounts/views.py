@@ -64,10 +64,7 @@ def login_view(request):
             raw_password = form.cleaned_data.get("password")
 
             user = authenticate(email=email, password=raw_password)
-            try:
-                login(request, user)
-            except:
-                pass
+            login(request, user)
 
             return redirect("core:home")
     else:
