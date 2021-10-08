@@ -114,10 +114,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # EMAIL CONNECTION
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'shibiuminfo@gmail.com'
-EMAIL_HOST_PASSWORD = 'johnnymaster248248'
 EMAIL_PORT = 587
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'kamenov@gchd.cz'
+EMAIL_HOST_PASSWORD = 'Johnnymaster248248'
 
 
 # Django Token Generator

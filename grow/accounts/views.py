@@ -5,15 +5,17 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.translation import gettext_lazy as _
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.contrib import messages
 from .tokens import *
 from .forms import *
 
-@login_required
-def token_generated_email(request, email_subject, template_path):
+
+def token_generated_email(request, user, email_subject, template_path):
     current_site = get_current_site(request)
-    user = request.user
+    user = user
     email_body = render_to_string(template_path,{
         'user': user,
         'domain': current_site.domain,
@@ -41,7 +43,7 @@ def registration_view(request):
             user = authenticate(email=email, password=raw_password)
             login(request, user)
 
-            token_generated_email(request, email_subject="Verify your Grow account", template_path="accounts/verification.html")
+            token_generated_email(request, request.user, email_subject="Verify your Grow account", template_path="accounts/emails/verification.html")
 
             return redirect("core:home")
     else:
@@ -86,5 +88,56 @@ def verification_view(request, uidb64, token):
     if user is not None and token_generator.check_token(user, token):
         user.is_validated = True
         user.save()
+        # DEBUG MESSAGE
+        messages.success(request, "Eyyy, validation successful")
+        # DEBUG MESSAGE
+    else:
+        # temp
+        return redirect("core:404")
 
     return redirect("core:home")
+
+def forgot_password_view(request):
+    context = {}
+
+    if request.POST:
+        forgot_password_form = GrowUserForgotPasswordForm(request.POST)
+        print(forgot_password_form.is_valid())
+        if forgot_password_form.is_valid():
+            user = GrowUser.objects.get(email=forgot_password_form.cleaned_data.get("email"))
+            print(user.email)
+            token_generated_email(request, user, email_subject="Grow Account Password Reset", template_path="accounts/emails/password_reset.html")
+        messages.info(request, _("Password reset link sent to email!"))                
+    
+    forgot_password_form = GrowUserForgotPasswordForm()
+    context["forgot_password_form"] = forgot_password_form
+    return render(request, "accounts/forgot_password.html", context)
+
+def password_reset_view(request, uidb64, token):
+    context = {}
+
+    if request.POST:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = GrowUser.objects.get(pk=uid)
+        form = GrowUserPasswordChangeForm(user, request.POST)
+        if form.is_valid():
+            form.save()
+            
+            return redirect("accounts:login")
+    else:
+        try:
+            uid = force_text(urlsafe_base64_decode(uidb64))
+            user = GrowUser.objects.get(pk=uid)
+        except(TypeError, ValueError, OverflowError, GrowUser.DoesNotExist):
+            user = None
+        if user is not None and token_generator.check_token(user, token):
+            form = GrowUserPasswordChangeForm(user)
+            logout(request)
+        else:
+            # temp
+            return redirect("core:404")
+
+    context["password_change_form"] = form
+
+
+    return render(request, "accounts/password_reset.html", context)

@@ -8,3 +8,6 @@ def index_view(request):
     context = {}
     context['user'] = request.user
     return render(request, "core/index.html", context)
+
+def error_404_view(request):
+    return render(request, "core/404.html")
