@@ -71,7 +71,7 @@ def login_view(request):
         form = GrowUserLoginForm()
 
     context['login_form'] = form
-    return render(request, "accounts/login.html", context)
+    return render(request, "accounts/welcome.html", context)
 
 def logout_view(request):
     logout(request)
