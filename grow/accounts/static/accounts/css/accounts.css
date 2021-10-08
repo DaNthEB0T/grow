@@ -2,6 +2,7 @@ body {
     background-color: black;
     font-family: 'Poppins', sans-serif;
     color: white;
+    overflow: hidden;
 }
 
 .half {
@@ -16,15 +17,25 @@ body {
 .half:hover {
   filter:grayscale(0) blur(6px) brightness(1);
 }
+.active .half {
+    z-index: 3;
+    filter:grayscale(0) blur(6px) brightness(1);
+}
 
 .half-left {
-    clip-path: polygon(0 0, 0 100%, 40% 100%, 60% 0%);
+    clip-path: polygon(0 0, 0 100%, 40.1% 100%, 60.1% 0%);
     background-image: url(https://wallpaperaccess.com/full/51364.jpg);;
+}
+.active .half-left {
+    clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
 }
 
 .half-right {
     clip-path: polygon(100% 0, 100% 100%, 40% 100%, 60% 0%);
     background-image: url(https://cdn.wallpapersafari.com/1/17/ZMBC10.jpg);
+}
+.active .half-right {
+    clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);
 }
 
 .title-text-container {
@@ -32,13 +43,27 @@ body {
     top: 0;
     height: 100vh;
     width: 50vw;
-    z-index: 4;
+    z-index: 2;
     font-size: 5rem;
     filter: blur(0);
     pointer-events: none;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.active .title-text-container {
+    z-index: 4;
+}
+#right-block .title-text-container {
+    transition: width 1s ease-in-out;
+}
+.active#right-block .title-text-container {
+    width: 100vw;
+}
+.active#left-block .title-text-container {
+    animation-name: intro-scroll;
+    animation-duration: 2s;
+    top: -100vh;
 }
 
 .half .title-text-container {
@@ -48,4 +73,38 @@ body {
 .title-text {
     text-align: center;
     line-height: 0.5;
+}
+
+#left-block, #right-block {
+    width: 0;
+    height: 0;
+}
+
+.intro-content {
+    height: 100vh;
+    width: 100vw;
+    top: 100vh;
+    left: 0;
+    position: relative;
+    z-index: 5;
+    overflow-y: scroll;
+}
+.active.intro-content {
+    animation-name: intro-scroll-content;
+    animation-duration: 2s;
+    top: 0;
+}
+
+/* ANIMATIONS */
+
+@keyframes intro-scroll {
+    0% {width: 50vw; top: 0; animation-timing-function: ease-in-out;}
+    50% {width: 100vw; top: 0; animation-timing-function: ease-in-out;}
+    100% {width: 100vw; top: -100vh; animation-timing-function: ease-in-out;}
+}
+
+@keyframes intro-scroll-content {
+    0% {top: 100vh; overflow: hidden; animation-timing-function: ease-in-out;}
+    50% {top: 100vh; overflow: hidden; animation-timing-function: ease-in-out;}
+    100% {top: 0; overflow: hidden; animation-timing-function: ease-in-out;}
 }

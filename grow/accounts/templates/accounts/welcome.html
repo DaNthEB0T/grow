@@ -4,27 +4,34 @@
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/accounts.css' %}">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap" rel="stylesheet">
+<script src="{% static 'accounts/js/accounts.js' %}"></script>
 
 {% endblock head %}
 
 
 {% block body %}
-    <div class="half half-left">
+    <div id="left-block" onclick="setActive('left-block')">
+        <div class="half half-left">
+            <div class="title-text-container" style="left:0;">
+                <div class="title-text">GET STARTED<br><span style="font-size:1rem;">I'm new here</span></div>
+            </div>
+        </div>
         <div class="title-text-container" style="left:0;">
             <div class="title-text">GET STARTED<br><span style="font-size:1rem;">I'm new here</span></div>
         </div>
     </div>
-    <div class="title-text-container" style="left:0;">
-        <div class="title-text">GET STARTED<br><span style="font-size:1rem;">I'm new here</span></div>
-    </div>
 
 
-    <div class="half half-right">
+    <div id="right-block" onclick="setActive('right-block')">
+        <div class="half half-right">
+            <div class="title-text-container" style="right:0;">
+                <div class="title-text">LOGIN<br><span style="font-size:1rem;">I already have an account</span></div>
+            </div>
+        </div>
         <div class="title-text-container" style="right:0;">
-            <div class="title-text"">LOGIN<br><span style="font-size:1rem;">I already have an account</span></div>
+            <div class="title-text">LOGIN<br><span style="font-size:1rem;">I already have an account</span></div>
         </div>
     </div>
-    <div class="title-text-container" style="right:0;">
-        <div class="title-text">LOGIN<br><span style="font-size:1rem;">I already have an account</span></div>
-    </div>
+
+    <div class="intro-content">Content<p style="padding:50px;line-height:2;font-size:2rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mattis urna velit, a molestie eros consectetur vel. Proin malesuada fringilla suscipit. Curabitur consectetur ante id nisi imperdiet hendrerit. Nulla ac dignissim libero, vel vestibulum magna. Quisque sed eros malesuada, commodo mi et, fermentum erat. Ut euismod diam at diam facilisis volutpat. Donec molestie, dui in tempor faucibus, augue orci bibendum elit, sit amet molestie turpis tortor commodo nunc. Vestibulum nisl diam, blandit in imperdiet non, sollicitudin a dolor. Aenean ornare turpis quis odio accumsan, ac faucibus sem porttitor. Nam fringilla diam tortor, vitae dapibus nulla tristique eu. Morbi fringilla scelerisque sem. In consectetur nisl vel lacus faucibus, eget tempus arcu elementum. Nunc suscipit quis magna at iaculis. Praesent cursus vehicula magna, ac tempus metus. Curabitur hendrerit velit mollis eleifend pretium. Etiam vehicula pharetra nisi ac tincidunt.  </p></div>
 {% endblock body %}
