@@ -1,0 +1,26 @@
+body {
+    background-color: black;
+}
+
+.half {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    transition: filter 0.6s, clip-path 1s ease-in-out;
+    filter: grayscale(1) blur(8px) brightness(1);
+    background-size: cover;
+    cursor: pointer;
+}
+.half:hover {
+  filter:grayscale(0) blur(6px) brightness(1);
+}
+
+.half-left {
+    clip-path: polygon(0 0, 0 100%, 40% 100%, 60% 0%);
+    background-image: url(https://wallpaperaccess.com/full/51364.jpg);;
+}
+
+.half-right {
+    clip-path: polygon(100% 0, 100% 100%, 40% 100%, 60% 0%);
+    background-image: url(https://cdn.wallpapersafari.com/1/17/ZMBC10.jpg);
+}
