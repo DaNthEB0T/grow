@@ -1,5 +1,7 @@
 body {
     background-color: black;
+    font-family: 'Poppins', sans-serif;
+    color: white;
 }
 
 .half {
@@ -23,4 +25,27 @@ body {
 .half-right {
     clip-path: polygon(100% 0, 100% 100%, 40% 100%, 60% 0%);
     background-image: url(https://cdn.wallpapersafari.com/1/17/ZMBC10.jpg);
+}
+
+.title-text-container {
+    position:absolute;
+    top: 0;
+    height: 100vh;
+    width: 50vw;
+    z-index: 4;
+    font-size: 5rem;
+    filter: blur(0);
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.half .title-text-container {
+    opacity: 0.8;
+}
+
+.title-text {
+    text-align: center;
+    line-height: 0.5;
 }
