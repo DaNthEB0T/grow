@@ -3,7 +3,6 @@
  */
 body {
     background-color: black;
-    font-family: 'Poppins', sans-serif;
     color: white;
     overflow: hidden;
 }
@@ -77,6 +76,7 @@ body {
 #left-block, #right-block {
     width: 0;
     height: 0;
+    font-family: 'Poppins', sans-serif;
 }
 
 /*
@@ -93,7 +93,7 @@ body {
 }
 
 /*
- * Attributed added when one of the clickable halves are clicked
+ * Attributes added when one of the clickable halves are clicked
  */
 
 .active .half {

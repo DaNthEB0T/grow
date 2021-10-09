@@ -1,0 +1,21 @@
+:root {
+    --block-bg: white;
+    --block-color: black;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.form-box {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--block-bg);
+    color: var(--block-color);
+    border-radius: 5px;
+    box-shadow: 0 0 8px 0 var(--block-bg);
+    font-size: 1rem;
+    line-height: 1;
+    min-width: 10rem;
+    min-height: 5rem;
+    padding: 1rem;
+}
