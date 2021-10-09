@@ -68,6 +68,8 @@ def login_view(request):
             user = authenticate(email=email, password=raw_password)
             login(request, user)
 
+            messages.success(request, _(f"Successfully logged in as {user.username}"))
+
             return redirect("core:home")
     else:
         form = GrowUserLoginForm()
@@ -76,7 +78,9 @@ def login_view(request):
     return render(request, "accounts/login.html", context)
 
 def logout_view(request):
-    logout(request)
+    if request.user.is_authenticated:
+        logout(request)
+        messages.success(request, _("Successfully logged out"))
     return redirect("core:home")
 
 def verification_view(request, uidb64, token):
@@ -92,8 +96,7 @@ def verification_view(request, uidb64, token):
         messages.success(request, "Eyyy, validation successful")
         # DEBUG MESSAGE
     else:
-        # temp
-        return redirect("core:404")
+        messages.error(request, _("Something went wrong :("))
 
     return redirect("core:home")
 
@@ -102,11 +105,10 @@ def forgot_password_view(request):
 
     if request.POST:
         forgot_password_form = GrowUserForgotPasswordForm(request.POST)
-        print(forgot_password_form.is_valid())
         if forgot_password_form.is_valid():
             user = GrowUser.objects.get(email=forgot_password_form.cleaned_data.get("email"))
-            print(user.email)
             token_generated_email(request, user, email_subject="Grow Account Password Reset", template_path="accounts/emails/password_reset.html", token_generator=password_reset_token_generator)
+
         messages.info(request, _("Password reset link sent to email!"))                
     
     forgot_password_form = GrowUserForgotPasswordForm()
@@ -122,7 +124,8 @@ def password_reset_view(request, uidb64, token):
         form = GrowUserPasswordChangeForm(user, request.POST)
         if form.is_valid():
             form.save()
-            
+            messages.success(request, _("Password successfully changed"))
+
             return redirect("accounts:login")
     else:
         try:
@@ -135,7 +138,8 @@ def password_reset_view(request, uidb64, token):
             logout(request)
         else:
             # temp
-            return redirect("core:404")
+            messages.error(request, _("Something went wrong :("))
+            return redirect("core:home")
 
     context["password_change_form"] = form
 

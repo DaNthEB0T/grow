@@ -11,18 +11,14 @@
     <title>Hello, world!</title>
   </head>
   <body>
+    {% include "core/includes/messages.html" %}
+    
+    {% block body %}
+      <h1>Wadap noob</h1>
+    {% endblock %}
 
-  {% block body %}
-    <h1>Wadap noob</h1>
-  {% endblock %}
 
-  {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-  {% endif %}  
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -10,4 +10,4 @@ def index_view(request):
     return render(request, "core/index.html", context)
 
 def error_404_view(request):
-    return render(request, "core/404.html")
+    return render(request, "core/errors/404.html")
