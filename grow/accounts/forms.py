@@ -6,6 +6,10 @@ from .models import *
 
 
 class GrowUserRegistrationForm(UserCreationForm):
+    error_messages = {
+        'invalid_email': _("Email {} is already in use"),
+        'invalid_username': _("Username {} is already in use! Yuck!!!")
+    }
 
     class Meta:
         model = GrowUser
@@ -23,7 +27,10 @@ class GrowUserRegistrationForm(UserCreationForm):
             user = GrowUser.objects.get(email=email)
         except:
             return email
-        raise forms.ValidationError(_(f"Email {email} is already in use!"), code="in_use")
+        raise forms.ValidationError(
+            self.error_messages['invalid_email'].format(email),
+            code="email_in_use",
+        )
     
     def clean_username(self):
         username = self.cleaned_data.get("username")
@@ -31,9 +38,16 @@ class GrowUserRegistrationForm(UserCreationForm):
             user = GrowUser.objects.get(username=username)
         except:
             return username
-        raise forms.ValidationError(_(f"User name {username} is already in use! Yuck!!!"), code="in_use")
+        raise forms.ValidationError(
+            self.error_messages['invalid_username'].format(username), 
+            code="username_in_use",
+        )
 
 class GrowUserLoginForm(forms.ModelForm):
+    error_messages = {
+        'invalid_email': _("Ding, dong, email is wrong"),
+        'invalid_password': _("Invalid password")
+    }
     password = forms.CharField(label=_("Password"), widget=forms.PasswordInput)
 
     class Meta:
@@ -47,12 +61,15 @@ class GrowUserLoginForm(forms.ModelForm):
             try: 
                 user = GrowUser.objects.get(email=email)
             except:
-                self.add_error("email", _("No user exists for given email"))
+                self.add_error("email", self.error_messages['invalid_email'])
                 return
             if not authenticate(email=email, password=password):
-                self.add_error("password", _("Wrong password"))
+                self.add_error("password", self.error_messages['invalid_password'])
 
 class GrowUserForgotPasswordForm(PasswordResetForm):
+    error_messages = {
+        'invalid_email': _("Ding, dong, email is wrong"),
+    }
     email = forms.EmailField(label=_('Email address'),
         max_length=255,
         required=True,
@@ -69,11 +86,15 @@ class GrowUserForgotPasswordForm(PasswordResetForm):
             user = GrowUser.objects.get(email=email)
             return email
         except:
-            raise forms.ValidationError(_("Ding, dong, email is wrong"), code="wrong_email")   
+            raise forms.ValidationError(
+                self.error_messages["invalid_email"],
+                code="invalid_email",
+                )   
 
 class GrowUserPasswordChangeForm(forms.Form):
     error_messages = {
         'password_mismatch': _("The two passwords don't match."),
+        'password_redundancy': _("Cannot set to previous password")
     }
     new_password1 = forms.CharField(label=_("New password"),
                                     widget=forms.PasswordInput)
@@ -90,9 +111,16 @@ class GrowUserPasswordChangeForm(forms.Form):
         if password1 and password2:
             if password1 != password2:
                 raise forms.ValidationError(
-                    self.error_messages['password_mismatch'],
-                    code='password_mismatch',
+                    self.error_messages['password_redundancy'],
+                    code="password_redundancy",
                 )
+
+        if(authenticate(email=self.user.email, password=password2)):
+            raise forms.ValidationError(
+                self.error_messages['password_redundancy'],
+                code="password_redundancy",
+            )
+        
         return password2
 
     def save(self, commit=True):
