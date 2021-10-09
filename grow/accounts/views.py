@@ -29,7 +29,7 @@ def token_generated_email(request, user, email_subject, template_path, token_gen
 
 def registration_view(request):
     if request.user.is_authenticated:
-        return redirect("core:home")
+        return redirect("core:dashboard")
 
     context = {}
     if request.POST:
@@ -45,43 +45,61 @@ def registration_view(request):
 
             token_generated_email(request, request.user, email_subject="Verify your Grow account", template_path="accounts/emails/verification.html", token_generator=verification_token_generator)
 
-            return redirect("core:home")
+            return redirect("core:dashboard")
     else:
         form = GrowUserRegistrationForm()
 
     context['registration_form'] = form
     return render(request, "accounts/register.html", context)
 
-def login_view(request):
+def welcome_view(request):
     if request.user.is_authenticated:
-        return redirect("core:home")
+        return redirect("core:dashboard")
 
     context = {}
 
     if request.POST:
-        form = GrowUserLoginForm(request.POST)
-        if form.is_valid():
+        # Registration form
+        registration_form = GrowUserRegistrationForm(request.POST)
+        if registration_form.is_valid():
+            registration_form.save()
 
-            email = form.cleaned_data.get("email").lower()
-            raw_password = form.cleaned_data.get("password")
+            email = registration_form.cleaned_data.get("email")
+            raw_password = registration_form.cleaned_data.get("password1")
+
+            user = authenticate(email=email, password=raw_password)
+            login(request, user)
+
+            token_generated_email(request, email_subject="Verify your Grow account", template_path="accounts/verification.html")
+
+            return redirect("core:dashboard")
+        
+        # Login form
+        login_form = GrowUserLoginForm(request.POST)
+        if login_form.is_valid():
+
+            email = login_form.cleaned_data.get("email").lower()
+            raw_password = login_form.cleaned_data.get("password")
 
             user = authenticate(email=email, password=raw_password)
             login(request, user)
 
             messages.success(request, _(f"Successfully logged in as {user.username}"))
 
-            return redirect("core:home")
+            return redirect("core:dashboard")
     else:
-        form = GrowUserLoginForm()
+        login_form = GrowUserLoginForm()
+        registration_form = GrowUserRegistrationForm()
 
-    context['login_form'] = form
-    return render(request, "accounts/login.html", context)
+    context['login_form'] = login_form
+    context['registration_form'] = registration_form
+    return render(request, "accounts/welcome.html", context)
 
 def logout_view(request):
     if request.user.is_authenticated:
         logout(request)
         messages.success(request, _("Successfully logged out"))
-    return redirect("core:home")
+    return redirect("core:dashboard")
 
 def verification_view(request, uidb64, token):
     try:

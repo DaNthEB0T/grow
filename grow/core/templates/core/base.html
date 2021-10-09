@@ -8,7 +8,18 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+
+    <!-- CSS + JS -->
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/app.css' %}">
+    <script src="{% static 'core/js/app.js' %}"></script>
+    
+    {% block head %}
+    
+    {% endblock head %}
+
+    <title>{% block title %}Grow{% endblock %}</title>
   </head>
   <body>
     {% include "core/includes/messages.html" %}
@@ -16,9 +27,6 @@
     {% block body %}
       <h1>Wadap noob</h1>
     {% endblock %}
-
-
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

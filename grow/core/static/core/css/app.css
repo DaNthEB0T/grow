@@ -1,0 +1,46 @@
+:root {
+    --block-bg: 255, 255, 255;
+    --block-color: #333;
+    --block-opacity: 0.8;
+    --primary: rgb(112, 35, 119);
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*
+ * CSS formatting and styles for basic forms
+ */
+.form-box {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgba(var(--block-bg), var(--block-opacity));
+    color: var(--block-color);
+    box-shadow: 0 0 8px 0 rgb(var(--block-bg));
+    font-size: 1rem;
+    line-height: 1;
+    max-width: 1000px;
+    min-width: 10rem;
+    min-height: 5rem;
+    padding: 1rem;
+    pointer-events: auto;
+    position: relative;
+}
+.form-box label {
+}
+.form-box input {
+    width: 100%;
+    border-radius: 0.25rem;
+    height: 2.1rem;
+    border: 1px inset var(--primary);
+    background-color: #fff;
+    margin-bottom: 1rem;
+}
+
+/*
+ * FONTS
+ * Always use "font-" prefix
+ */
+.font-poppins {
+    font-family: 'Poppins', sans-serif !important;
+}

@@ -1,0 +1,83 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/css/accounts.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap" rel="stylesheet">
+<script src="{% static 'accounts/js/accounts.js' %}"></script>
+
+{% endblock head %}
+
+
+{% block body %}
+    <div id="left-block" onclick="setActive('left-block')">
+        <div class="half half-left">
+            <div class="title-text-container" style="left:0;">
+                <div class="title-text">GET STARTED<br><span style="font-size:1rem;">I'm new here</span></div>
+            </div>
+        </div>
+        <div class="title-text-container" style="left:0;">
+            <div class="title-text">GET STARTED<br><span style="font-size:1rem;">I'm new here</span></div>
+        </div>
+    </div>
+
+
+    <div id="right-block" onclick="setActive('right-block')">
+        <div class="half half-right">
+            <div class="title-text-container">
+                <div class="title-text">LOGIN<br><span style="font-size:1rem;">I already have an account</span></div>
+            </div>
+        </div>
+        <div class="title-text-container">
+            <div class="title-text">LOGIN<br><span style="font-size:1rem;">I already have an account</span></div>
+        </div>
+
+        <div class="title-text-container">
+            <div class="form-box w-50">
+                <h3 class="font-poppins">Login</h3>
+                <form method="POST"> {% csrf_token %}
+            
+                    {% for field in login_form %}
+                        {{field.label_tag}}
+                        {{field}}
+
+                        {% if field.help_text %}
+                            <small style="color: grey;">{{field.help_text}}</small>
+                        {% endif %}
+
+                        {% for error in field.errors %}
+                            <p style="color: red;">{{error}}</p>                    
+                        {% endfor %}
+                       
+
+                    {% endfor %}
+                    <button class="btn btn-success w-100" type="submit"> Submit </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div tabindex="-1" class="intro-content">Content<br/>
+        <div class="form-box w-50">
+            <h3 class="font-poppins">Register</h3>
+            <form method="POST"> {% csrf_token %}
+        
+                {% for field in registration_form %}
+                    {{field.label_tag}}
+                    {{field}}
+
+                    {% if field.help_text %}
+                        <small style="color: grey;">{{field.help_text}}</small>
+                    {% endif %}
+
+                    {% for error in field.errors %}
+                        <p style="color: red;">{{error}}</p>                    
+                    {% endfor %}
+                   
+
+                {% endfor %}
+                <button class="btn btn-success w-100" type="submit"> Submit </button>
+            </form>
+        </div>
+    </div>
+{% endblock body %}

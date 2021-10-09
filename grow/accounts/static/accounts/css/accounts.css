@@ -1,0 +1,182 @@
+/*
+ * General bš
+ */
+body {
+    background-color: black;
+    color: white;
+    overflow: hidden;
+}
+
+/*
+ * Class for each of the clickable parts on main screen
+ */
+.half {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    transition: filter 0.6s, clip-path 1s ease-in-out;
+    filter: grayscale(1) blur(8px) brightness(1);
+    background-size: cover;
+    cursor: pointer;
+}
+.half:hover {
+  filter:grayscale(0) blur(6px) brightness(1);
+}
+
+/*
+ * Left and right clickable parts, obviusly
+ */
+.half-left {
+    clip-path: polygon(0 0, 0 100%, 40.1% 100%, 60.1% 0%);
+    background-image: url(https://wallpaperaccess.com/full/51364.jpg);;
+}
+
+.half-right {
+    clip-path: polygon(100% 0, 100% 100%, 40% 100%, 60% 0%);
+    background-image: url(https://cdn.wallpapersafari.com/1/17/ZMBC10.jpg);
+}
+
+/*
+ * Div for centering text and setting font size
+ */
+.title-text-container {
+    position:absolute;
+    top: 0;
+    height: 100vh;
+    width: 50vw;
+    z-index: 2;
+    font-size: 5rem;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#right-block .title-text-container {
+    right: 0;
+    transition: right 1s ease-in-out;
+}
+
+#right-block .title-text {
+    transition: opacity 1s, visibility 1s;
+}
+
+/*
+ * Makes "glow" effect less intense
+ */
+.half .title-text-container {
+    opacity: 0.8;
+}
+
+/*
+ * Further text centering
+ */
+.title-text {
+    text-align: center;
+    line-height: 0.5;
+}
+
+/*
+ * Parent containers of each half
+ */
+#left-block, #right-block {
+    width: 0;
+    height: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/*
+ * Holds content displayed after clicking on "GET STARTED"
+ */
+.intro-content {
+    height: 100vh;
+    width: 100vw;
+    top: 100vh;
+    left: 0;
+    position: relative;
+    z-index: 5;
+    overflow-y: scroll;
+    visibility: hidden;
+}
+
+.title-text-container .form-box
+{
+    visibility: hidden;
+    opacity: 0;
+}
+
+/*
+ * Attributes added when one of the clickable halves are clicked
+ */
+
+.active .half {
+    z-index: 3;
+    filter:grayscale(0) blur(6px) brightness(1);
+}
+
+.active .half-left {
+    clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
+}
+
+.active .half-right {
+    clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);
+}
+
+.active .title-text-container {
+    z-index: 4;
+}
+
+.active#right-block .title-text-container {
+    right: 25vw;
+}
+.active#right-block .title-text {
+    opacity: 0;
+    visibility: hidden;
+    animation-name: half-fade-out;
+    animation-duration: 1s;
+}
+
+.active#left-block .title-text-container {
+    animation-name: intro-scroll;
+    animation-duration: 2s;
+    top: -100vh;
+}
+
+.active.intro-content {
+    animation-name: intro-scroll-content;
+    animation-duration: 2s;
+    top: 0;
+    visibility: visible;
+}
+
+.active .form-box {
+    opacity: 1;
+    visibility: visible;
+    animation-name: half-fade-in;
+    animation-duration: 1s;
+}
+
+/* ANIMATIONS */
+
+@keyframes intro-scroll {
+    0% {width: 50vw; top: 0; animation-timing-function: ease-in-out;}
+    50% {width: 100vw; top: 0; animation-timing-function: ease-in-out;}
+    100% {width: 100vw; top: -100vh; animation-timing-function: ease-in-out;}
+}
+
+@keyframes intro-scroll-content {
+    0% {top: 100vh; overflow: hidden; animation-timing-function: ease-in-out;}
+    50% {top: 100vh; overflow: hidden; animation-timing-function: ease-in-out;}
+    100% {top: 0; overflow: hidden; animation-timing-function: ease-in-out;}
+}
+
+@keyframes half-fade-in {
+    0% {opacity: 0;}
+    50% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+@keyframes half-fade-out {
+    0% {opacity: 1;}
+    50% {opacity: 0;}
+    100% {opacity: 0;}
+}
