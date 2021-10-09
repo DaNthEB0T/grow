@@ -13,7 +13,7 @@ from .tokens import *
 from .forms import *
 
 
-def token_generated_email(request, user, email_subject, template_path):
+def token_generated_email(request, user, email_subject, template_path, token_generator):
     current_site = get_current_site(request)
     user = user
     email_body = render_to_string(template_path,{
@@ -43,7 +43,7 @@ def registration_view(request):
             user = authenticate(email=email, password=raw_password)
             login(request, user)
 
-            token_generated_email(request, request.user, email_subject="Verify your Grow account", template_path="accounts/emails/verification.html")
+            token_generated_email(request, request.user, email_subject="Verify your Grow account", template_path="accounts/emails/verification.html", token_generator=verification_token_generator)
 
             return redirect("core:home")
     else:
@@ -85,7 +85,7 @@ def verification_view(request, uidb64, token):
         user = GrowUser.objects.get(pk=uid)
     except(TypeError, ValueError, OverflowError, GrowUser.DoesNotExist):
         user = None
-    if user is not None and token_generator.check_token(user, token):
+    if user is not None and verification_token_generator.check_token(user, token):
         user.is_validated = True
         user.save()
         # DEBUG MESSAGE
@@ -106,7 +106,7 @@ def forgot_password_view(request):
         if forgot_password_form.is_valid():
             user = GrowUser.objects.get(email=forgot_password_form.cleaned_data.get("email"))
             print(user.email)
-            token_generated_email(request, user, email_subject="Grow Account Password Reset", template_path="accounts/emails/password_reset.html")
+            token_generated_email(request, user, email_subject="Grow Account Password Reset", template_path="accounts/emails/password_reset.html", token_generator=password_reset_token_generator)
         messages.info(request, _("Password reset link sent to email!"))                
     
     forgot_password_form = GrowUserForgotPasswordForm()
@@ -130,7 +130,7 @@ def password_reset_view(request, uidb64, token):
             user = GrowUser.objects.get(pk=uid)
         except(TypeError, ValueError, OverflowError, GrowUser.DoesNotExist):
             user = None
-        if user is not None and token_generator.check_token(user, token):
+        if user is not None and password_reset_token_generator.check_token(user, token):
             form = GrowUserPasswordChangeForm(user)
             logout(request)
         else:
