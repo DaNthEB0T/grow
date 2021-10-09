@@ -115,8 +115,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # EMAIL CONNECTION
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'shibiuminfo@gmail.com'
-EMAIL_HOST_PASSWORD = 'johnnymaster248248'
+EMAIL_HOST_USER = 'kamenov@gchd.cz'
+EMAIL_HOST_PASSWORD = 'Johnnymaster248248'
 EMAIL_PORT = 587
 
 
@@ -142,7 +142,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]

@@ -52,7 +52,12 @@ body {
     align-items: center;
 }
 #right-block .title-text-container {
-    transition: width 1s ease-in-out;
+    right: 0;
+    transition: right 1s ease-in-out;
+}
+
+#right-block .title-text {
+    transition: opacity 1s, visibility 1s;
 }
 
 /*
@@ -90,6 +95,13 @@ body {
     position: relative;
     z-index: 5;
     overflow-y: scroll;
+    visibility: hidden;
+}
+
+.title-text-container .form-box
+{
+    visibility: hidden;
+    opacity: 0;
 }
 
 /*
@@ -114,7 +126,13 @@ body {
 }
 
 .active#right-block .title-text-container {
-    width: 100vw;
+    right: 25vw;
+}
+.active#right-block .title-text {
+    opacity: 0;
+    visibility: hidden;
+    animation-name: half-fade-out;
+    animation-duration: 1s;
 }
 
 .active#left-block .title-text-container {
@@ -127,6 +145,14 @@ body {
     animation-name: intro-scroll-content;
     animation-duration: 2s;
     top: 0;
+    visibility: visible;
+}
+
+.active .form-box {
+    opacity: 1;
+    visibility: visible;
+    animation-name: half-fade-in;
+    animation-duration: 1s;
 }
 
 /* ANIMATIONS */
@@ -141,4 +167,16 @@ body {
     0% {top: 100vh; overflow: hidden; animation-timing-function: ease-in-out;}
     50% {top: 100vh; overflow: hidden; animation-timing-function: ease-in-out;}
     100% {top: 0; overflow: hidden; animation-timing-function: ease-in-out;}
+}
+
+@keyframes half-fade-in {
+    0% {opacity: 0;}
+    50% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+@keyframes half-fade-out {
+    0% {opacity: 1;}
+    50% {opacity: 0;}
+    100% {opacity: 0;}
 }
