@@ -70,7 +70,7 @@ def welcome_view(request):
             user = authenticate(email=email, password=raw_password)
             login(request, user)
 
-            token_generated_email(request, user, email_subject="Verify your Grow account", template_path="accounts/email/verification.html", token_generator=verification_token_generator)
+            token_generated_email(request, user, email_subject="Verify your Grow account", template_path="accounts/emails/verification.html", token_generator=verification_token_generator)
 
             return redirect("core:dashboard")
         
@@ -116,7 +116,7 @@ def verification_view(request, uidb64, token):
     else:
         messages.error(request, _("Something went wrong :("))
 
-    return redirect("core:home")
+    return redirect("core:dashboard")
 
 def forgot_password_view(request):
     context = {}
@@ -157,7 +157,7 @@ def password_reset_view(request, uidb64, token):
         else:
             # temp
             messages.error(request, _("Something went wrong :("))
-            return redirect("core:home")
+            return redirect("core:dashboard")
 
     context["password_change_form"] = form
 
