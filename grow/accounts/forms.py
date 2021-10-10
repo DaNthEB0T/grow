@@ -111,8 +111,8 @@ class GrowUserPasswordChangeForm(forms.Form):
         if password1 and password2:
             if password1 != password2:
                 raise forms.ValidationError(
-                    self.error_messages['password_redundancy'],
-                    code="password_redundancy",
+                    self.error_messages['password_mismatch'],
+                    code="password_mismatch",
                 )
 
         if(authenticate(email=self.user.email, password=password2)):
