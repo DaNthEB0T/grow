@@ -41,7 +41,7 @@ def registration_view(request):
             raw_password = form.cleaned_data.get("password1")
 
             user = authenticate(email=email, password=raw_password)
-            login(request, user)
+            login_extended(request, user)
 
             token_generated_email(request, request.user, email_subject="Verify your Grow account", template_path="accounts/emails/verification.html", token_generator=verification_token_generator)
 
@@ -68,7 +68,7 @@ def welcome_view(request):
             raw_password = registration_form.cleaned_data.get("password1")
 
             user = authenticate(email=email, password=raw_password)
-            login(request, user)
+            login_extended(request, user)
 
             token_generated_email(request, user, email_subject="Verify your Grow account", template_path="accounts/emails/verification.html", token_generator=verification_token_generator)
 
@@ -82,9 +82,7 @@ def welcome_view(request):
             raw_password = login_form.cleaned_data.get("password")
 
             user = authenticate(email=email, password=raw_password)
-            login(request, user)
-
-            messages.success(request, _(f"Successfully logged in as {user.username}"))
+            login_extended(request, user)
 
             return redirect("core:dashboard")
     else:
@@ -163,3 +161,8 @@ def password_reset_view(request, uidb64, token):
 
 
     return render(request, "accounts/password_reset.html", context)
+
+def login_extended(request, user):
+    login(request, user)
+    messages.success(request, _(f"Successfully logged in as {user.username}"))
+
