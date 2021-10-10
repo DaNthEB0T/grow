@@ -45,7 +45,7 @@ class GrowUserRegistrationForm(UserCreationForm):
 
 class GrowUserLoginForm(forms.ModelForm):
     error_messages = {
-        'invalid_email': _("Ding, dong, email is wrong"),
+        'invalid_email': _("Invalid email"),
         'invalid_password': _("Invalid password")
     }
     password = forms.CharField(label=_("Password"), widget=forms.PasswordInput)
@@ -55,16 +55,15 @@ class GrowUserLoginForm(forms.ModelForm):
         fields = ("email", "password")
 
     def clean(self):
-        if self.is_valid():
-            email = self.cleaned_data.get("email").lower()
-            password = self.cleaned_data.get("password")
-            try: 
-                user = GrowUser.objects.get(email=email)
-            except:
-                self.add_error("email", self.error_messages['invalid_email'])
-                return
-            if not authenticate(email=email, password=password):
-                self.add_error("password", self.error_messages['invalid_password'])
+        email = self.cleaned_data.get("email").lower()
+        password = self.cleaned_data.get("password")
+        try: 
+            user = GrowUser.objects.get(email=email)
+        except:
+            self.add_error("email", self.error_messages['invalid_email'])
+            return
+        if not authenticate(email=email, password=password):
+            self.add_error("password", self.error_messages['invalid_password'])
 
 class GrowUserForgotPasswordForm(PasswordResetForm):
     error_messages = {
