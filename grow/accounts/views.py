@@ -70,7 +70,7 @@ def welcome_view(request):
             user = authenticate(email=email, password=raw_password)
             login(request, user)
 
-            token_generated_email(request, email_subject="Verify your Grow account", template_path="accounts/verification.html")
+            token_generated_email(request, user, email_subject="Verify your Grow account", template_path="accounts/email/verification.html", token_generator=verification_token_generator)
 
             return redirect("core:dashboard")
         
