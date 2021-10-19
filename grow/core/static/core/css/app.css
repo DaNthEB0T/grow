@@ -72,17 +72,19 @@ body {
 }
 
 .button-container {
-    width: 100%;
+    width: 90%;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     height: 3rem;
+    border-radius: 999px;
+    margin: auto;
 }
 
 .button-container button {
     border-radius: 999px;
-    width: 90%;
+    width: 100%;
     font-size: 1.2rem;
     background-image: linear-gradient(150deg, rgb(0, 201, 0), green, rgb(0, 150, 0));
     transition: 0.5s;
@@ -93,21 +95,23 @@ body {
 }
 .button-container::before {
     border-radius: 999px;
-    width: 90%;
+    width: 100%;
     content: "";
     background-image: linear-gradient(150deg, rgb(0, 201, 0), green, rgb(0, 150, 0));
     transition: 0.5s;
     background-size: 200% auto;
     border: none;
     height: 100%;
-    filter: blur(5px);
+    filter: blur(3px);
     position: absolute;
     z-index: -1;
+    pointer-events: none;
+    opacity: 0;
 }
-.button-container button:hover, .button-container::before:hover {
+.button-container button:hover, .button-container:hover:before {
     background-position: right center;
+    opacity: 1;
 }
-
 
 
 /*

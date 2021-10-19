@@ -3,7 +3,6 @@
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/accounts.css' %}">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap" rel="stylesheet">
 <script src="{% static 'accounts/js/accounts.js' %}"></script>
 
 {% endblock head %}
@@ -34,7 +33,7 @@
 
         <div class="title-text-container">
             <div class="form-box w-50">
-                <h3 class="font-poppins">Login</h3>
+                <h3>Login</h3>
                 <form method="POST"> {% csrf_token %}
             
                     {% for field in login_form %}
@@ -53,7 +52,9 @@
                         </div>
 
                     {% endfor %}
-                    <button class="btn btn-success w-100" type="submit"> Submit </button>
+                    <div class="button-container">
+                        <button class="btn btn-success" type="submit"> Submit </button>
+                    </div>
                 </form>
             </div>
         </div>
