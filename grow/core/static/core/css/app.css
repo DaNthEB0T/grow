@@ -14,9 +14,7 @@ body {
  */
 .form-box {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: rgba(var(--block-bg), var(--block-opacity));
     color: var(--block-color);
-    box-shadow: 0 0 8px 0 rgb(var(--block-bg));
     font-size: 1rem;
     line-height: 1;
     max-width: 1000px;
@@ -25,17 +23,50 @@ body {
     padding: 1rem;
     pointer-events: auto;
     position: relative;
+    font-size: 1.25rem;
 }
 .form-box label {
+
 }
 .form-box input {
-    width: 100%;
-    border-radius: 0.25rem;
-    height: 2.1rem;
-    border: 1px inset var(--primary);
-    background-color: #fff;
-    margin-bottom: 1rem;
 }
+.form-input-container {
+    width: 100%;
+    position: relative;
+    margin-bottom: 1rem;
+    height: 3.5rem;
+}
+.form-input-container input {
+    width: 100%;
+    border-radius: 999px;
+    background-color: #fff;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 0;
+    font-size: 1.25rem;
+    border: none;
+    height: 3.5rem;
+    transition: padding-top 0.3s ease-in-out;
+}
+.form-input-container label {
+    left: 1.5rem;
+    top: 0;
+    position: absolute;
+    width: 100%;
+    line-height: 3.5rem;
+    pointer-events: none;
+    color: #999;
+    transition: top 0.3s ease-in-out, font-size 0.3s ease-in-out;
+}
+
+.form-input-container:focus-within label, input:not(:placeholder-shown) + label {
+    top: -0.9rem;
+    font-size: 1rem;
+}
+.form-input-container:focus-within input, input:not(:placeholder-shown) {
+    padding-top: 1.2rem;
+}
+
 
 /*
  * FONTS

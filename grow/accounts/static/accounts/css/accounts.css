@@ -28,12 +28,12 @@ body {
  */
 .half-left {
     clip-path: polygon(0 0, 0 100%, 40.1% 100%, 60.1% 0%);
-    background-image: url(https://wallpaperaccess.com/full/51364.jpg);;
+    background-image: url(https://wallpaperaccess.com/full/46542.jpg);;
 }
 
 .half-right {
     clip-path: polygon(100% 0, 100% 100%, 40% 100%, 60% 0%);
-    background-image: url(https://cdn.wallpapersafari.com/1/17/ZMBC10.jpg);
+    background-image: url(https://wallpaperaccess.com/full/4559551.jpg);
 }
 
 /*

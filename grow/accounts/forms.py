@@ -48,7 +48,12 @@ class GrowUserLoginForm(forms.ModelForm):
         'invalid_email': _("Invalid email"),
         'invalid_password': _("Invalid password")
     }
-    password = forms.CharField(label=_("Password"), widget=forms.PasswordInput)
+    email = forms.EmailField(label=_("Email address"),widget=forms.EmailInput(attrs={'placeholder': " "}))
+    password = forms.CharField(label=_("Password"), widget=forms.PasswordInput(attrs={'placeholder': " "}))
+
+    def __init__(self, *args, **kwargs):
+        super(GrowUserLoginForm, self).__init__(*args, **kwargs)  
+        self.label_suffix = ""
 
     class Meta:
         model = GrowUser

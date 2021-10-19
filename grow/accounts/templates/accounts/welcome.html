@@ -38,17 +38,19 @@
                 <form method="POST"> {% csrf_token %}
             
                     {% for field in login_form %}
-                        {{field.label_tag}}
-                        {{field}}
 
-                        {% if field.help_text %}
-                            <small style="color: grey;">{{field.help_text}}</small>
-                        {% endif %}
+                        <div class="form-input-container">
+                            {{field}}
+                            {{field.label_tag}}
 
-                        {% for error in field.errors %}
-                            <p style="color: red;">{{error}}</p>                    
-                        {% endfor %}
-                       
+                            {% if field.help_text %}
+                                <small style="color: grey;">{{field.help_text}}</small>
+                            {% endif %}
+
+                            {% for error in field.errors %}
+                                <p style="color: red;">{{error}}</p>                    
+                            {% endfor %}
+                        </div>
 
                     {% endfor %}
                     <button class="btn btn-success w-100" type="submit"> Submit </button>
