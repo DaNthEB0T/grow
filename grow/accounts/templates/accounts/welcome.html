@@ -10,6 +10,7 @@
 
 {% block body %}
     <div id="left-block" onclick="setActive('left-block')">
+        <div class="back-button" onclick="setNonActive('left-block', event)">Back</div>
         <div class="half half-left">
             <div class="title-text-container" style="left:0;">
                 <div class="title-text">GET STARTED<br><span style="font-size:1rem;">I'm new here</span></div>
@@ -22,6 +23,7 @@
 
 
     <div id="right-block" onclick="setActive('right-block')">
+        <div class="back-button" onclick="setNonActive('right-block', event)">Back</div>
         <div class="half half-right">
             <div class="title-text-container">
                 <div class="title-text">LOGIN<br><span style="font-size:1rem;">I already have an account</span></div>

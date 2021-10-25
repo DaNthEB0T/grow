@@ -56,15 +56,12 @@ body {
     transition: right 1s ease-in-out;
 }
 
-#right-block .title-text {
-    transition: opacity 1s, visibility 1s;
-}
-
 /*
- * Makes "glow" effect less intense
+ * Makes "glow" effect
  */
 .half .title-text-container {
     opacity: 0.8;
+    filter: blur(5px);
 }
 
 /*
@@ -106,12 +103,31 @@ body {
 }
 
 /*
+ * Clickable back button
+ */
+
+.back-button {
+    position: fixed;
+    bottom: 0;
+    left: 40%;
+    padding: 1rem;
+    background-color: #f00;
+    z-index: 99;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 1s ease-in-out, left 1s ease-in-out;
+}
+#left-block .back-button {
+    left: 0 !important;
+}
+
+/*
  * Attributes added when one of the clickable halves are clicked
  */
 
 .active .half {
-    z-index: 3;
     filter:grayscale(0) brightness(1);
+    cursor: default;
 }
 
 .active .half-left {
@@ -120,10 +136,6 @@ body {
 
 .active .half-right {
     clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);
-}
-
-.active .title-text-container {
-    z-index: 4;
 }
 
 .active#right-block .title-text-container {
@@ -156,6 +168,50 @@ body {
     animation-duration: 1s;
 }
 
+.active .back-button {
+    opacity: 1;
+    left: 0;
+}
+
+.active .half, .active .title-text-container {
+    z-index: 3;
+}
+
+/*
+ * Attributes added when the parent element is set NOT active
+ */
+
+.nonactive#right-block .form-box {
+    animation-name: half-fade-out;
+    animation-duration: 1s;
+}
+
+.nonactive#right-block .title-text {
+    animation-name: half-fade-in;
+    animation-duration: 1s;
+}
+
+.nonactive#right-block .title-text-container, .nonactive#right-block .half {
+    animation-name: overlap;
+    animation-duration: 1s;
+}
+
+.nonactive#left-block .title-text-container {
+    animation-name: deactivate-intro-scroll;
+    animation-duration: 2s;
+}
+
+.nonactive.intro-content {
+    animation-name: deactivate-intro-scroll-content;
+    animation-duration: 2s;
+}
+
+.nonactive .half-left {
+    animation-name: nonactive-left;
+    animation-duration: 2s;
+}
+
+
 /* ANIMATIONS */
 
 @keyframes intro-scroll {
@@ -170,6 +226,22 @@ body {
     100% {top: 0; overflow: hidden; animation-timing-function: ease-in-out;}
 }
 
+@keyframes deactivate-intro-scroll {
+    0% {width: 100vw; top: -100vh; z-index: 3; animation-timing-function: ease-in-out;}
+    50% {width: 100vw; top: 0; z-index: 3; animation-timing-function: ease-in-out;}
+    100% {width: 50vw; top: 0; z-index: 3; animation-timing-function: ease-in-out;}
+}
+@keyframes deactivate-intro-scroll-content {
+    0% {top: 0; overflow: hidden; visibility: visible; animation-timing-function: ease-in-out;}
+    50% {top: 100vh; overflow: hidden; visibility: visible; animation-timing-function: ease-in-out;}
+    100% {top: 100vh; overflow: hidden; visibility: visible; animation-timing-function: ease-in-out;}
+}
+@keyframes nonactive-left {
+    0% {clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0); z-index: 3; animation-timing-function: ease-in-out;}
+    50% {clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0); z-index: 3; animation-timing-function: ease-in-out;}
+    100% {clip-path: polygon(0 0, 0 100%, 40.1% 100%, 60.1% 0%); z-index: 3; animation-timing-function: ease-in-out;}
+}
+
 @keyframes half-fade-in {
     0% {opacity: 0;}
     50% {opacity: 0;}
@@ -177,7 +249,12 @@ body {
 }
 
 @keyframes half-fade-out {
-    0% {opacity: 1;}
-    50% {opacity: 0;}
-    100% {opacity: 0;}
+    0% {opacity: 1;visibility: visible;}
+    50% {opacity: 0;visibility: visible;}
+    100% {opacity: 0;visibility: visible;}
+}
+
+@keyframes overlap {
+    0% {z-index: 3}
+    100% {z-index: 3}
 }
