@@ -113,6 +113,22 @@ body {
     opacity: 1;
 }
 
+.form-link {
+    text-align: right;
+    display: block;
+    width: 100%;
+    padding: 0 5%;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    margin-top: -0.5rem;
+    opacity: 0.8;
+    color: black;
+}
+.form-link:hover {
+    opacity: 1;
+    color: black;
+}
+
 
 /*
  * FONTS
