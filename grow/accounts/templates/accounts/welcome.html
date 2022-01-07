@@ -44,17 +44,13 @@
                             {{field}}
                             {{field.label_tag}}
 
-                            {% if field.help_text %}
-                                <small style="color: grey;">{{field.help_text}}</small>
-                            {% endif %}
-
                             {% for error in field.errors %}
                                 <p style="color: red;">{{error}}</p>                    
                             {% endfor %}
                         </div>
 
                     {% endfor %}
-                    <a class="form-link" href="forgor-pasword">Forgot password?</a>
+                    <a class="form-link" href="{% url "accounts:forgot_password" %}">Forgot password?</a>
                     <div class="button-container">
                         <button class="btn btn-success" type="submit"> Submit </button>
                     </div>
@@ -63,27 +59,107 @@
         </div>
     </div>
 
-    <div tabindex="-1" class="intro-content">Content<br/>
-        <div class="form-box w-50">
-            <h3 class="font-poppins">Register</h3>
-            <form method="POST"> {% csrf_token %}
-        
-                {% for field in registration_form %}
-                    {{field.label_tag}}
-                    {{field}}
+    <div tabindex="-1" class="intro-content">
+        <div class="parallax-container overflow-hidden position-relative">
+            <div class="font-poppins position-absolute" style="font-size:8rem;font-weight:900;z-index:2">
+                BIG TEXT 1
+            </div>
+            <div class="parallax-10">
+                <img class="w-100" src="https://i.pinimg.com/originals/d9/f9/02/d9f9020858c36039499342f49f18d4bb.jpg">
+            </div>
+        </div>
+        <div class="svg-shape-container">
+            <span class="position-absolute" style="color:black;z-index:1000;font-size:3rem;top:40%;left:20%">some other text idk</span>
+            <svg viewBox="0 0 20 7" class="w-100">
+                <path d="M 0 1 C 3 0 7 0 10 1 C 13 2 17 2 20 1 L 20 6 C 17 7 13 7 10 6 C 7 5 3 5 0 6" stroke="white" fill="white" stroke-width="0.01" fill="black"></path>
+            </svg>
+        </div>
+        <div class="parallax-container overflow-hidden position-relative">
+            <div class="font-poppins position-absolute" style="font-size:8rem;font-weight:900;z-index:2">
+                BIG TEXT 2
+            </div>
+            <div class="parallax-10">
+                <img class="w-100" src="https://c4.wallpaperflare.com/wallpaper/957/250/385/duckling-ugly-yellow-cute-wallpaper-preview.jpg">
+            </div>
+        </div>
+        <div class="svg-shape-container">
+            <svg viewBox="0 0 20 7" class="w-100">
+                <path d="M 0 1 C 3 0 7 0 10 1 C 13 2 17 2 20 1 L 20 6 C 17 7 13 7 10 6 C 7 5 3 5 0 6" stroke="white" fill="white" stroke-width="0.01" fill="black"></path>
+            </svg>
+        </div>
+        <div class="parallax-container overflow-hidden position-relative">
+            <div class="font-poppins position-absolute" style="font-size:8rem;font-weight:900;z-index:2">
+                BIG TEXT 3
+            </div>
+            <div class="parallax-10">
+                <img class="w-100" src="https://cdn.wallpapersafari.com/37/33/xY751R.jpg">
+            </div>
+        </div>
+        <div class="svg-shape-container">
+            <svg viewBox="0 0 20 7" class="w-100">
+                <path d="M 0 1 C 3 0 7 0 10 1 C 13 2 17 2 20 1 L 20 6 C 17 7 13 7 10 6 C 7 5 3 5 0 6" stroke="white" fill="white" stroke-width="0.01" fill="black"></path>
+            </svg>
+        </div>
 
-                    {% if field.help_text %}
-                        <small style="color: grey;">{{field.help_text}}</small>
-                    {% endif %}
+        <div class="position-relativew-100 d-flex justify-content-center align-items-center" style="height:calc(100vh + 9vw); padding-top:9vw;">
+            <div class="form-box w-50 font-comfortaa">
+                <form method="POST" class="register-form"> {% csrf_token %}
+                    <div class="top">
+                        <h3>Register</h3>
+                        <div class="form-input-container">
+                            {{registration_form.email}}
+                            {{registration_form.email.label_tag}}
+                            {% for error in registration_form.email.errors %}
+                                <p style="color: red;">{{error}}</p>                    
+                            {% endfor %}
+                        </div>
+                        <div class="form-input-container">
+                            {{registration_form.password1}}
+                            {{registration_form.password1.label_tag}}
+                            {% for error in registration_form.password1.errors %}
+                                <p style="color: red;">{{error}}</p>                    
+                            {% endfor %}
+                        </div>
+                        <div class="form-input-container">
+                            {{registration_form.password2}}
+                            {{registration_form.password2.label_tag}}
+                            {% for error in registration_form.password2.errors %}
+                                <p style="color: red;">{{error}}</p>                    
+                            {% endfor %}
+                        </div>
 
-                    {% for error in field.errors %}
-                        <p style="color: red;">{{error}}</p>                    
-                    {% endfor %}
-                   
-
-                {% endfor %}
-                <button class="btn btn-success w-100" type="submit"> Submit </button>
-            </form>
+                        <div class="button-container">
+                            <button class="btn btn-success w-100" onclick="registerForm()"> Continue </button>
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <div class="form-input-container">
+                            {{registration_form.username}}
+                            {{registration_form.username.label_tag}}
+                            {% for error in registration_form.username.errors %}
+                                <p style="color: red;">{{error}}</p>                    
+                            {% endfor %}
+                        </div>
+                        <div class="form-input-container">
+                            {{registration_form.first_name}}
+                            {{registration_form.first_name.label_tag}}
+                            {% for error in registration_form.first_name.errors %}
+                                <p style="color: red;">{{error}}</p>                    
+                            {% endfor %}
+                        </div>
+                        <div class="form-input-container">
+                            {{registration_form.last_name}}
+                            {{registration_form.last_name.label_tag}}
+                            {% for error in registration_form.last_name.errors %}
+                                <p style="color: red;">{{error}}</p>                    
+                            {% endfor %}
+                        </div>
+                        <div class="button-container">
+                            <button class="btn btn-success w-100" type="submit"> Submit </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 {% endblock body %}

@@ -308,6 +308,20 @@ body {
     left: 0;
     width: 100%;
 }
+.parallax-150 {
+    transform: translateZ(25px) scale(0.75);
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.parallax-200 {
+    transform: translateZ(50px) scale(0.5);
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
 
 .svg-shape-container {
     margin: -9vw 0;
@@ -318,10 +332,39 @@ body {
     z-index: 10;
 }
 
-input {
-    background-image: linear-gradient(to right, red, blue);
-}
+/**
+register form
+*/
 
+.register-form {
+    display: flex;
+    flex-direction: column;
+}
+.register-form > div {
+    width: 100%;
+    position: absolute;
+}
+.register-form .top {
+    transform: translateY(-50%);
+    opacity: 1;
+    transition: transform 1s, opacity 1s;
+}
+.register-form .bottom {
+    transform: translateY(55%);
+    opacity: 0;
+    transition: transform 1s, opacity 1s;
+    pointer-events: none;
+}
+.register-form.active .top {
+    transform: translateY(-155%);
+    opacity: 0;
+    pointer-events: none;
+}
+.register-form.active .bottom {
+    transform: translateY(-50%);
+    opacity: 1;
+    pointer-events: initial;
+}
 
 /* ANIMATIONS */
 
@@ -332,9 +375,9 @@ input {
 }
 
 @keyframes intro-scroll-content {
-    0% {top: 100vh; overflow: hidden; animation-timing-function: ease-in-out;}
-    50% {top: 100vh; overflow: hidden; animation-timing-function: ease-in-out;}
-    100% {top: 0; overflow: hidden; animation-timing-function: ease-in-out;}
+    0% {top: 100vh; opacity: 0; animation-timing-function: ease-in-out;}
+    50% {top: 100vh; opacity: 0; animation-timing-function: ease-in-out;}
+    100% {top: 0;  opacity: 1; animation-timing-function: ease-in-out;}
 }
 
 @keyframes deactivate-intro-scroll {
@@ -343,9 +386,9 @@ input {
     100% {width: 50vw; top: 0; z-index: 3; animation-timing-function: ease-in-out;}
 }
 @keyframes deactivate-intro-scroll-content {
-    0% {top: 0; overflow: hidden; visibility: visible; animation-timing-function: ease-in-out;}
-    50% {top: 100vh; overflow: hidden; visibility: visible; animation-timing-function: ease-in-out;}
-    100% {top: 100vh; overflow: hidden; visibility: visible; animation-timing-function: ease-in-out;}
+    0% {top: 0; visibility: visible; animation-timing-function: ease-in-out;}
+    50% {top: 100vh; visibility: visible; animation-timing-function: ease-in-out;}
+    100% {top: 100vh; visibility: visible; animation-timing-function: ease-in-out;}
 }
 @keyframes nonactive-left {
     0% {clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0); z-index: 3; animation-timing-function: ease-in-out;}

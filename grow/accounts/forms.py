@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
+from django.forms import widgets
+from django.forms.fields import EmailField
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import authenticate
 from .models import *
@@ -11,15 +13,15 @@ class GrowUserRegistrationForm(UserCreationForm):
         'invalid_username': _("Username {} is already in use! Yuck!!!")
     }
 
+    email = forms.EmailField(label=_("Email address"), widget=forms.EmailInput(attrs={'placeholder': " ", 'id': "register_email"}))
+    username = forms.CharField(label=_("Username"), widget=forms.TextInput(attrs={'placeholder': " ", 'id': "register_username"}))
+    first_name = forms.CharField(label=_("First name"), widget=forms.TextInput(attrs={'placeholder': " ", 'id': "register_first_name"}))
+    last_name = forms.CharField(label=_("Last name"), widget=forms.TextInput(attrs={'placeholder': " ", 'id': "register_last_name"}))
+    password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput(attrs={'placeholder': " ", 'id': "register_password1"}))
+    password2 = forms.CharField(label=_("Confirm password"), widget=forms.PasswordInput(attrs={'placeholder': " ", 'id': "register_password2"}))
     class Meta:
         model = GrowUser
         fields = ("email", "username", "first_name", "last_name", "password1", "password2")
-        help_texts = {
-            'email': "Entrez votre email ci-dessous",
-            'username': "wadap yourself here pls",
-            'first_name': "enter your grown-ass mf name",
-            'last_name': "now the other half",
-        }
 
     def clean_email(self):
         email = self.cleaned_data.get("email").lower()
@@ -48,7 +50,7 @@ class GrowUserLoginForm(forms.ModelForm):
         'invalid_email': _("Invalid email"),
         'invalid_password': _("Invalid password")
     }
-    email = forms.EmailField(label=_("Email address"),widget=forms.EmailInput(attrs={'placeholder': " "}))
+    email = forms.EmailField(label=_("Email address"), widget=forms.EmailInput(attrs={'placeholder': " "}))
     password = forms.CharField(label=_("Password"), widget=forms.PasswordInput(attrs={'placeholder': " "}))
 
     def __init__(self, *args, **kwargs):
