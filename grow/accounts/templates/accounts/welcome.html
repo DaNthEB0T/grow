@@ -11,6 +11,7 @@
 {% block body %}
     <div id="left-block" onclick="setActive('left-block')">
         <div class="back-button" onclick="setNonActive('left-block', event)">Back</div>
+        <div class="skip-button" onclick="document.getElementsByClassName('intro-content')[0].scrollTop = document.getElementsByClassName('intro-content')[0].scrollHeight">Skip</div>
         <div class="half half-left">
             <div class="title-text-container" style="left:0;">
                 <div class="title-text">GET STARTED<br><span style="font-size:1rem;">I'm new here</span></div>
