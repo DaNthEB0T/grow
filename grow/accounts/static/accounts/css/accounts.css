@@ -69,7 +69,12 @@ body {
  */
 .title-text {
     text-align: center;
-    line-height: 0.5;
+    line-height: 0.8;
+    display: flex;
+    flex-direction: column;
+}
+.title-text span {
+    margin-top: 1rem;
 }
 
 /*
