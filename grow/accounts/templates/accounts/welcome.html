@@ -102,7 +102,7 @@
             </svg>
         </div>
 
-        <div class="position-relativew-100 d-flex justify-content-center align-items-center" style="height:calc(100vh + 9vw); padding-top:9vw;">
+        <div class="position-relative w-100 d-flex justify-content-center align-items-center" style="height:calc(100vh + 9vw); padding-top:9vw;">
             <div class="form-box w-50 font-comfortaa">
                 <form method="POST" class="register-form"> {% csrf_token %}
                     <div class="top">
@@ -130,10 +130,11 @@
                         </div>
 
                         <div class="button-container">
-                            <button class="btn btn-success w-100" onclick="registerForm()"> Continue </button>
+                            <div class="btn btn-success w-100 grow-btn-submit" onclick="registerForm()"> Continue </div>
                         </div>
                     </div>
                     <div class="bottom">
+                        <span onclick="registerForm()" title="Back to email and password" class="w-100 text-center cursor-pointer text-white d-inline-block h2"><i class="fas fa-chevron-up"></i></span>
                         <div class="form-input-container">
                             {{registration_form.username}}
                             {{registration_form.username.label_tag}}

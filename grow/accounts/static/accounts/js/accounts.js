@@ -24,6 +24,12 @@ function setNonActive(el, event) {
  */
 function registerForm()
 {
+    if (document.getElementsByClassName('register-form')[0].classList.contains('active'))
+    {
+        document.getElementsByClassName('register-form')[0].classList.remove('active');
+        return;
+    }
+
     email = document.getElementById("register_email");
     pwd1 = document.getElementById('register_password1');
     pwd2 = document.getElementById('register_password2');

@@ -78,7 +78,7 @@ body {
     margin: auto;
 }
 
-.button-container button {
+.button-container button, .grow-btn-submit {
     border-radius: 999px;
     width: 100%;
     font-size: 1.2rem;
@@ -88,6 +88,8 @@ body {
     border: none;
     height: 100%;
     position: relative;
+    line-height: 2.25rem;
+    cursor: pointer;
 }
 .button-container::before {
     border-radius: 999px;
@@ -104,7 +106,7 @@ body {
     pointer-events: none;
     opacity: 0;
 }
-.button-container button:hover, .button-container:hover:before {
+.button-container button:hover, .button-container:hover:before, .grow-btn-submit:hover {
     background-position: right center;
     opacity: 1;
 }
@@ -152,7 +154,15 @@ body {
     top: 50%;
     transform: translateY(-50%);
     font-size: 1.2rem;
-    color: #333
+    color: #333;
+    cursor: pointer;
+}
+
+/**
+ * Helping rules
+ */
+.cursor-pointer {
+    cursor: pointer;
 }
 
 
