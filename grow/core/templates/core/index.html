@@ -1,15 +1,31 @@
 {% extends 'core/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/dashboard.css' %}">
+{% endblock head %}
 
 {% block body %}
-Hello {{user.username}}!
-<p><a class="btn btn-danger" href="/logout/">Logout</a></p>
 
-<p>
-{% if not user.is_validated %}
-    User needs verification!
-{% else %}
-    User is verified!
-{% endif %}
-</p>
+    <p>
+    {% if not user.is_validated %} <!-- bruh please do this in other file-->
+            User needs verification!
+        Hello {{user.username}}!
+        <p><a class="btn btn-danger" href="/logout/">Logout</a></p>
+    {% else %}
+        
+
+        <div class="dsahboard-container">
+            <div class="sidebar">
+
+            </div>
+            <div clas="content">
+
+            </div>
+        </div>
+
+
+    {% endif %}
+    </p>
 
 {% endblock body %}
