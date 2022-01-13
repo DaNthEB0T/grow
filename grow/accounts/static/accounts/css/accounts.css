@@ -269,12 +269,7 @@ body {
 }
 
 /* PARALLAX EFFECTS*/
-
-.intro-content {
-    perspective: 100px;
-}
 .parallax-container {
-    transform-style: preserve-3d;
     position: absolute;
     width: 100%;
     display: flex;
@@ -287,13 +282,12 @@ body {
 }
 
 .parallax-10 {
-    transform: translateZ(-900px) scale(10.5);
     position: relative;
     top: 0;
     left: 0;
     width: 100%;
 }
-.parallax-50 {
+/*.parallax-50 {
     transform: translateZ(-100px) scale(2.05) translateY(-25%);
     position: relative;
     top: 0;
@@ -320,7 +314,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-}
+}*/
 
 .svg-shape-container {
     margin: -9vw 0;
@@ -385,9 +379,9 @@ register form
     100% {width: 50vw; top: 0; z-index: 3; animation-timing-function: ease-in-out;}
 }
 @keyframes deactivate-intro-scroll-content {
-    0% {top: 0; visibility: visible; animation-timing-function: ease-in-out;}
-    50% {top: 100vh; visibility: visible; animation-timing-function: ease-in-out;}
-    100% {top: 100vh; visibility: visible; animation-timing-function: ease-in-out;}
+    0% {top: 0; opacity: 1; visibility: visible; animation-timing-function: ease-in-out;}
+    50% {top: 100vh; opacity: 0; visibility: visible; animation-timing-function: ease-in-out;}
+    100% {top: 100vh; opacity: 0; visibility: visible; animation-timing-function: ease-in-out;}
 }
 @keyframes nonactive-left {
     0% {clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0); z-index: 3; animation-timing-function: ease-in-out;}
@@ -415,4 +409,21 @@ register form
 @keyframes still {
     0% {right: 2rem;}
     100% {right: 2rem;}
+}
+
+
+/*
+ * Firefox exclusive
+ */
+
+@supports(-moz-transform: translateY(1px)) {
+    .intro-content {
+        perspective: 100px;
+    }
+    .parallax-container {
+        transform-style: preserve-3d;
+    }
+    .parallax-10 {
+        transform: translateZ(-900px) scale(10.5);
+    }
 }

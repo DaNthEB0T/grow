@@ -65,7 +65,7 @@
             <div class="font-poppins position-absolute" style="font-size:8rem;font-weight:900;z-index:2">
                 BIG TEXT 1
             </div>
-            <div class="parallax-10">
+            <div class="parallax-10 jscroll">
                 <img class="w-100" src="https://i.pinimg.com/originals/d9/f9/02/d9f9020858c36039499342f49f18d4bb.jpg">
             </div>
         </div>
@@ -79,7 +79,7 @@
             <div class="font-poppins position-absolute" style="font-size:8rem;font-weight:900;z-index:2">
                 BIG TEXT 2
             </div>
-            <div class="parallax-10">
+            <div class="parallax-10 jscroll">
                 <img class="w-100" src="https://c4.wallpaperflare.com/wallpaper/957/250/385/duckling-ugly-yellow-cute-wallpaper-preview.jpg">
             </div>
         </div>
@@ -92,7 +92,7 @@
             <div class="font-poppins position-absolute" style="font-size:8rem;font-weight:900;z-index:2">
                 BIG TEXT 3
             </div>
-            <div class="parallax-10">
+            <div class="parallax-10 jscroll">
                 <img class="w-100" src="https://cdn.wallpapersafari.com/37/33/xY751R.jpg">
             </div>
         </div>
@@ -130,11 +130,10 @@
                         </div>
 
                         <div class="button-container">
-                            <div class="btn btn-success w-100 grow-btn-submit" onclick="registerForm()"> Continue </div>
+                            <button class="btn btn-success w-100" onclick="registerForm()"> Continue </button>
                         </div>
                     </div>
                     <div class="bottom">
-                        <span onclick="registerForm()" title="Back to email and password" data-toggle="tooltip" class="w-100 text-center cursor-pointer text-white d-inline-block h2"><i class="fas fa-chevron-up"></i></span>
                         <div class="form-input-container">
                             {{registration_form.username}}
                             {{registration_form.username.label_tag}}

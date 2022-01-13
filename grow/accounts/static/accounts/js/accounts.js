@@ -96,3 +96,18 @@ function popup(m)
     popup.classList.add('popup');
     document.getElementsByTagName("BODY")[0].appendChild(popup);
 }
+
+window.onload = function ()
+{
+    if (!window.CSS.supports('-moz-transform', 'translateY(1px)'))
+    {
+        introContent = document.getElementsByClassName('intro-content')[0];
+        introContent.onscroll = function (e)
+        {
+            for (let i = 0; i < 3; i++)
+            {
+                document.getElementsByClassName('jscroll')[i].style.transform = "translateY(" + (introContent.scrollTop-document.getElementsByClassName('parallax-container')[i].offsetTop)/1.1 + "px)";
+            }
+        }
+    }
+}
