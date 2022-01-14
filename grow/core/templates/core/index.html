@@ -7,25 +7,25 @@
 
 {% block body %}
 
-    <p>
     {% if not user.is_validated %} <!-- bruh please do this in other file-->
+        <p>
             User needs verification!
+        </p>
         Hello {{user.username}}!
         <p><a class="btn btn-danger" href="/logout/">Logout</a></p>
     {% else %}
         
 
-        <div class="dsahboard-container">
-            <div class="sidebar">
+        <div class="dashboard-container">
 
-            </div>
-            <div clas="content">
+        {% include 'components/navbar.html' %}
 
+            <div class="content">
+                this is dashboard
             </div>
         </div>
 
 
     {% endif %}
-    </p>
 
 {% endblock body %}

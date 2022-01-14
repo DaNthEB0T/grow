@@ -126,6 +126,15 @@ body {
 }
 
 /**
+ * Navbar
+ */
+.navbar {
+    position: sticky;
+    top: 0;
+    background-color: #02b5b5 !important;
+}
+
+/**
  * Popups and modal windows
  */
 .popup {
