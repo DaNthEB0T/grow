@@ -24,7 +24,9 @@ class GrowUserRegistrationForm(UserCreationForm):
         fields = ("email", "username", "first_name", "last_name", "password1", "password2")
 
     def clean_email(self):
-        email = self.cleaned_data.get("email").lower()
+        email = self.cleaned_data.get("email")
+        if email:
+            email = email.lower()
         try:
             user = GrowUser.objects.get(email=email)
         except:
@@ -60,15 +62,23 @@ class GrowUserLoginForm(forms.ModelForm):
     class Meta:
         model = GrowUser
         fields = ("email", "password")
+        
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        if email:
+            email = email.lower()
+        return email
 
     def clean(self):
-        email = self.cleaned_data.get("email").lower()
+        email = self.cleaned_data.get("email")
         password = self.cleaned_data.get("password")
+        
         try: 
             user = GrowUser.objects.get(email=email)
         except:
             self.add_error("email", self.error_messages['invalid_email'])
             return
+        
         if not authenticate(email=email, password=password):
             self.add_error("password", self.error_messages['invalid_password'])
 
@@ -88,6 +98,8 @@ class GrowUserForgotPasswordForm(PasswordResetForm):
     
     def clean_email(self):
         email = self.cleaned_data.get("email")
+        if email:
+            email = email.lower()
         try:
             user = GrowUser.objects.get(email=email)
             return email
