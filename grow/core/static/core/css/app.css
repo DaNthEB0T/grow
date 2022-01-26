@@ -180,6 +180,20 @@ body {
 }
 
 /**
+ * Subpage rules
+ */
+.content-container {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+}
+
+.content {
+    width: calc(100% - 15rem);
+}
+
+/**
  * Popups and modal windows
  */
 .popup {
