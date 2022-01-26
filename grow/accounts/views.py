@@ -76,8 +76,6 @@ def welcome_view(request):
                 user = None
                 
             login_extended(request, user)
-
-
             
             return redirect("core:dashboard")
         
