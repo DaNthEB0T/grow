@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     # My Apps
     "core",
     "accounts",
-    "media"
+    "media_handler"
 ]
 
 MIDDLEWARE = [

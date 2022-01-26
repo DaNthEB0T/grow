@@ -1,25 +1,28 @@
 from django.db import models
 from accounts.models import GrowUser
-from PIL import Image
+from PIL import Image as Im
 from django.core.files.uploadedfile import SimpleUploadedFile
 import os
-from io import StringIO
+from io import BytesIO
+import time
 
 
 
 class Media(models.Model):
     def user_directory_path(instance, filename):
         # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-        return 'user_{0}/med/{1}'.format(instance.user.id, filename)  
+        return time.strftime("user_{0}/%d_%m_%Y/med/{1}".format(instance.author.id, filename)) 
     
     upload = models.FileField(upload_to=user_directory_path)
+    author = models.ForeignKey(GrowUser, on_delete=models.SET_NULL, null=True, blank=True, related_name="medias")
 
     
 class Image(models.Model):
     def user_directory_path(instance, filename):
         # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-        return 'user_{0}/img/{1}'.format(instance.user.id, filename)    
+        return time.strftime("user_{0}/%d_%m_%Y/img/{1}".format(instance.author.id, filename)) 
     
+    author = models.ForeignKey(GrowUser, on_delete=models.SET_NULL, null=True, blank=True, related_name="images")    
     image = models.ImageField(
         upload_to=user_directory_path
     )
@@ -54,16 +57,16 @@ class Image(models.Model):
             FILE_EXTENSION = 'png'
 
         # Open original photo which we want to thumbnail using PIL's Image
-        image = Image.open(StringIO(self.image.read()))
+        image = Im.open(BytesIO(self.image.read()))
 
         # We use our PIL Image object to create the thumbnail, which already
         # has a thumbnail() convenience method that contrains proportions.
         # Additionally, we use Image.ANTIALIAS to make the image look better.
         # Without antialiasing the image pattern artifacts may result.
-        image.thumbnail(THUMBNAIL_SIZE, Image.ANTIALIAS)
+        image.thumbnail(THUMBNAIL_SIZE, Im.ANTIALIAS)
 
         # Save the thumbnail
-        temp_handle = StringIO()
+        temp_handle = BytesIO()
         image.save(temp_handle, PIL_TYPE)
         temp_handle.seek(0)
 
@@ -100,7 +103,7 @@ STATUS = (
 class Post(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
-    author = models.ForeignKey(GrowUser, on_delete=models.CASCADE, related_name='posts')
+    author = models.ForeignKey(GrowUser, on_delete=models.SET_NULL, null=True, blank=True, related_name='posts')
     updated_on = models.DateTimeField(auto_now=True)
     description = models.TextField(null=True, blank=True)
     media_content = models.ForeignKey(Media, on_delete=models.SET_NULL, default=None, null=True, blank=True, related_name="post")
