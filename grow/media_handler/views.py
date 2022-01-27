@@ -26,6 +26,7 @@ def post_handle_view(request):
         if form.is_valid():
             print("eyo")
             post = form.save()
+            form.save_m2m()
     else:
         form = PostUploadForm(user=request.user)
     context['form'] = form

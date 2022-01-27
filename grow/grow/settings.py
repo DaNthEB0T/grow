@@ -41,11 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'taggit',
     
     # My Apps
     "core",
     "accounts",
-    "media_handler"
+    "media_handler",
 ]
 
 MIDDLEWARE = [
@@ -125,6 +126,8 @@ EMAIL_HOST_PASSWORD = 'Johnnymaster248248'
 # Django Token Generator
 PASSWORD_RESET_TIMEOUT = 15 * 60 # Seconds 
 
+# Taggit
+TAGGIT_CASE_INSENSITIVE = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

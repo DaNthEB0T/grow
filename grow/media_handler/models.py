@@ -5,6 +5,7 @@ from PIL import Image as Im
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
+from taggit.managers import TaggableManager
 import os
 from io import BytesIO
 import time
@@ -182,6 +183,7 @@ class Post(models.Model):
     thumbnail = models.ForeignKey(Image, on_delete=models.SET_NULL, default=None, null=True, blank=True, related_name="post_parent")
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
+    tags = TaggableManager()
     
     class Meta:
         ordering = ['-created_on']

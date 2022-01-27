@@ -9,7 +9,7 @@ def dashboard_view(request):
     context = {}
     context['user'] = request.user
     
-    if "resend_verification" in request.POST:
+    if "resend_verification" in request.POST and not request.user.is_validated:
         send_verification_email(request)
     
     return render(request, "core/dashboard.html", context)

@@ -16,14 +16,14 @@ class PostUploadForm(forms.ModelForm):
     
     class Meta:
         model = Post
-        fields = ("title", "slug", "description", "status")
+        fields = ("title", "slug", "description", "status", "tags")
         
     def __init__(self, *args, **kwargs):
         user = kwargs.pop("user")
         self.author = user
         super(PostUploadForm, self).__init__(*args, **kwargs)
         if user.posts:
-            self.fields["prequel"].queryset = user.posts.filter(~Q(prequel=self.instance))
+            self.fields["prequel"].queryset = user.posts
     
     def clean_media_content(self):
         media_content = self.cleaned_data["media_content"]
