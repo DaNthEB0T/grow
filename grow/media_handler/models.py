@@ -1,7 +1,10 @@
+from re import L
 from django.db import models
 from accounts.models import GrowUser
 from PIL import Image as Im
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.dispatch import receiver
+from django.utils.translation import ugettext_lazy as _
 import os
 from io import BytesIO
 import time
@@ -95,6 +98,74 @@ class Image(models.Model):
         # Force an UPDATE SQL query if we're editing the image to avoid integrity exception
         super(Image, self).save(force_update=force_update)    
 
+@receiver(models.signals.post_delete, sender=Media)
+def auto_delete_media_on_delete(sender, instance, **kwargs):
+    """
+    Deletes file from filesystem
+    when corresponding `Media` object is deleted.
+    """
+    if instance.upload:
+        if os.path.isfile(instance.upload.path):
+            os.remove(instance.upload.path)
+            
+@receiver(models.signals.pre_save, sender=Media)
+def auto_delete_file_on_change(sender, instance, **kwargs):
+    """
+    Deletes old file from filesystem
+    when corresponding `Media` object is updated
+    with new file.
+    """
+    if not instance.pk:
+        return False
+
+    try:
+        old_media = Media.objects.get(pk=instance.pk).upload
+    except Media.DoesNotExist:
+        return False
+
+    new_media = instance.upload
+    if not old_media == new_media:
+        if os.path.isfile(old_media.path):
+            os.remove(old_media.path)
+
+@receiver(models.signals.post_delete, sender=Image)
+def auto_delete_media_on_delete(sender, instance, **kwargs):
+    """
+    Deletes file from filesystem
+    when corresponding `Image` object is deleted.
+    """
+    if instance.image:
+        if os.path.isfile(instance.image.path):
+            os.remove(instance.image.path)
+            
+    if instance.thumbnail:
+        if os.path.isfile(instance.thumbnail.path):
+            os.remove(instance.thumbnail.path)
+
+@receiver(models.signals.pre_save, sender=Image)
+def auto_delete_file_on_change(sender, instance, **kwargs):
+    """
+    Deletes old file from filesystem
+    when corresponding `Image` object is updated
+    with new file.
+    """
+    if not instance.pk:
+        return False
+
+    try:
+        old_image = Image.objects.get(pk=instance.pk).image
+        old_thumbnail = Image.objects.get(pk=instance.pk).thumbnail
+    except Image.DoesNotExist:
+        return False
+
+    new_image = instance.image
+    if not old_image == new_image:
+        if os.path.isfile(old_image.path):
+            os.remove(old_image.path)
+        if os.path.isfile(old_thumbnail.path):
+            os.remove(old_thumbnail.path)
+
+
 STATUS = (
     (0, "Draft"),
     (1, "Publish")
@@ -117,3 +188,15 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
+@receiver(models.signals.post_delete, sender=Post)
+def auto_delete_media_on_delete(sender, instance, **kwargs):
+    """
+    Deletes files from filesystem
+    when corresponding `Post` object is deleted.
+    """
+    if instance.media_content:
+        instance.media_content.delete()
+            
+    if instance.thumbnail:
+        instance.thumbnail.delete()

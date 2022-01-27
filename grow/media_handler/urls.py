@@ -4,5 +4,6 @@ from . import views
 app_name = "media_handler"
 
 urlpatterns = [
-    path("", views.mh_view, name="media_test"),
+    path("media", views.mh_view, name="media_test"),
+    path("postu", views.post_handle_view, name="post_test")
 ]
