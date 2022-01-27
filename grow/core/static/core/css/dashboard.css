@@ -13,6 +13,52 @@ body {
     background-attachment: fixed;
 }
 
+
+
+.content-head {
+    /*grid-column-start: 1;
+    grid-column-end: 5;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    height: 4rem;*/
+    display: contents;
+}
+
+.head-tile {
+    margin: 1rem;
+    position: relative;
+    background-color: var(--primary);
+    background-image: linear-gradient(230deg, #fff0, #fff6);
+    background-size: 200% auto;
+    border-radius: 7px;
+    cursor: pointer;
+    padding: 1rem;
+    font-size: 1.15rem;
+    box-shadow: 0 1px 3px 0 #0000;
+    transition: 0.3s ease;
+    background-position: right center;
+    color: white;
+}
+.head-tile:hover {
+    box-shadow: 0 1px 3px #0005;
+    background-position: left center;
+}
+
+.watch-later {
+    background-color: hsl(92, 100%, 36%);
+}
+.history {
+    background-color: hsl(92, 100%, 36%);
+}
+.saved {
+    background-color: hsl(92, 100%, 36%);
+}
+.search {
+    background-color: hsl(92, 100%, 36%);
+}
+
+
+
 .resource {
     aspect-ratio: 4/3;
     margin: 1rem;
@@ -80,20 +126,20 @@ body {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    transition: opacity 0.5s ease, bottom 0.5s ease;
+    transition: opacity 0.5s ease;
 }
 .resource:hover .resource-tags {
     opacity: 1;
-    bottom: 3rem;
 }
 .resource-save {
     opacity: 0;
     bottom: -2rem;
     font-size: 1.1rem;
     transition: opacity 0.5s ease, bottom 0.5s ease;
-    background-color: #0004;
+    background-color: #0007;
     padding: 0.3rem 0.7rem;
     border-radius: 5px;
+    right: 1rem;
 }
 .resource:hover .resource-save {
     opacity: 1;

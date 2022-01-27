@@ -2,7 +2,7 @@
     --block-bg: 255, 255, 255;
     --block-color: #333;
     --block-opacity: 0.8;
-    --primary: rgb(112, 35, 119);
+    --primary: #57b900;
 }
 
 body {
@@ -134,7 +134,7 @@ body {
     left: 0;
     width: 15rem;
     height: 100vh;
-    background-color: #02b5b5 !important;
+    background-image: linear-gradient(230deg, #57b900, #57b900b0);
 
     display: flex;
     flex-direction: column;
