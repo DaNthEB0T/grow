@@ -5,7 +5,7 @@ from .forms import ImageUpload
 # Create your views here.
 
 @login_required
-def index(request):
+def mh_view(request):
     context = {}
     if request.POST:
         form = ImageUpload(request.POST, request.FILES)

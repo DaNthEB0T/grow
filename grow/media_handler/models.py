@@ -45,7 +45,7 @@ class Image(models.Model):
 
 
         # Set our max thumbnail size in a tuple (max width, max height)
-        THUMBNAIL_SIZE = (99, 66)
+        THUMBNAIL_SIZE = (256, 144)
 
         DJANGO_TYPE = self.image.file.content_type
 

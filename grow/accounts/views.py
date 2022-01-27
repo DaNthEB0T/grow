@@ -26,31 +26,36 @@ def token_generated_email(request, user, email_subject, template_path, token_gen
     email = EmailMessage(subject=email_subject, body=email_body, from_email=settings.EMAIL_HOST_USER, to=[user.email])
     email.send()
 
+def send_verification_email(request):
+    token_generated_email(request, request.user, email_subject="Verify your Grow account", template_path="accounts/emails/verification.html", token_generator=verification_token_generator)
 
-def registration_view(request):
-    if request.user.is_authenticated:
-        return redirect("core:dashboard")
+def send_forgot_password_email(request, user):
+    token_generated_email(request, user, email_subject="Grow Account Password Reset", template_path="accounts/emails/password_reset.html", token_generator=password_reset_token_generator)
 
-    context = {}
-    if request.POST:
-        form = GrowUserRegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
+# def registration_view(request):
+#     if request.user.is_authenticated:
+#         return redirect("core:dashboard")
 
-            email = form.cleaned_data.get("email")
-            raw_password = form.cleaned_data.get("password1")
+#     context = {}
+#     if request.POST:
+#         form = GrowUserRegistrationForm(request.POST)
+#         if form.is_valid():
+#             form.save()
 
-            user = authenticate(email=email, password=raw_password)
-            login_extended(request, user)
+#             email = form.cleaned_data.get("email")
+#             raw_password = form.cleaned_data.get("password1")
 
-            token_generated_email(request, request.user, email_subject="Verify your Grow account", template_path="accounts/emails/verification.html", token_generator=verification_token_generator)
+#             user = authenticate(email=email, password=raw_password)
+#             login_extended(request, user)
 
-            return redirect("core:dashboard")
-    else:
-        form = GrowUserRegistrationForm()
+#             token_generated_email(request, request.user, email_subject="Verify your Grow account", template_path="accounts/emails/verification.html", token_generator=verification_token_generator)
 
-    context['registration_form'] = form
-    return render(request, "accounts/register.html", context)
+#             return redirect("core:dashboard")
+#     else:
+#         form = GrowUserRegistrationForm()
+
+#     context['registration_form'] = form
+#     return render(request, "accounts/register.html", context)
 
 def welcome_view(request):
     if request.user.is_authenticated:
@@ -70,7 +75,7 @@ def welcome_view(request):
             user = authenticate(email=email, password=raw_password)
             
             try:
-                token_generated_email(request, user, email_subject="Verify your Grow account", template_path="accounts/emails/verification.html", token_generator=verification_token_generator)
+                send_verification_email(request)
             except: 
                 user.delete()
                 user = None
@@ -114,7 +119,7 @@ def verification_view(request, uidb64, token):
         user.is_validated = True
         user.save()
         # DEBUG MESSAGE
-        messages.success(request, "Eyyy, validation successful")
+        messages.success(request, _("Eyyy, validation successful"))
         # DEBUG MESSAGE
     else:
         messages.error(request, _("Something went wrong :("))
@@ -128,8 +133,8 @@ def forgot_password_view(request):
         forgot_password_form = GrowUserForgotPasswordForm(request.POST)
         if forgot_password_form.is_valid():
             user = GrowUser.objects.get(email=forgot_password_form.cleaned_data.get("email"))
-            token_generated_email(request, user, email_subject="Grow Account Password Reset", template_path="accounts/emails/password_reset.html", token_generator=password_reset_token_generator)
-
+            send_forgot_password_email(request, user)
+            
         messages.info(request, _("Password reset link sent to email!"))                
     
     forgot_password_form = GrowUserForgotPasswordForm()
@@ -163,7 +168,6 @@ def password_reset_view(request, uidb64, token):
             return redirect("core:dashboard")
 
     context["password_change_form"] = form
-
 
     return render(request, "accounts/password_reset.html", context)
 
