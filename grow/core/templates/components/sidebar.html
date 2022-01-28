@@ -1,6 +1,8 @@
+{% load static %}
+
 <div class="sidebar">
     <div class="sidebar-top">
-        <a class="sidebar-logo mb-3" href="{% url "core:dashboard" %}">Logo here</a>
+        <a class="sidebar-logo mb-3" href="{% url "core:dashboard" %}"><img class="w-100" src="{% static 'core/images/logo/grow-long-transparent-white.png' %}"></a>
 
         <a class="sidebar-link active" href="{% url "core:dashboard" %}">
             <span class="sidebar-link-icon"><i class="fas fa-tachometer-alt"></i></span>

@@ -142,15 +142,23 @@ body {
     align-items: center;
 }
 
+.sidebar-logo {
+    margin-top: 0.5rem;
+    width: 80%;
+    position: relative;
+}
+
 .sidebar-top, .sidebar-bottom {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    position: relative;
     margin: 1rem 0;
 }
 
 .sidebar-link {
     position: relative;
-    color: #fffa;
+    color: #fffc;
     text-decoration: none;
     font-size: 1.1rem;
     padding: 0.5rem 1rem;
@@ -159,7 +167,7 @@ body {
     transition: color 0.25s ease-in-out, padding-right 0.25s ease, padding-left 0.25s ease;
 }
 .sidebar-link:hover {
-    color: #fffd;
+    color: #fff;
     padding-right: 0;
     padding-left: 2rem;
 }
