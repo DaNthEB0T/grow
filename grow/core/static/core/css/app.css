@@ -146,6 +146,11 @@ body {
     margin-top: 0.5rem;
     width: 80%;
     position: relative;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+.sidebar-logo:hover {
+    opacity: 1;
 }
 
 .sidebar-top, .sidebar-bottom {
@@ -187,16 +192,16 @@ body {
     width: 100%;
     transition: color 0.25s ease-in-out, padding-right 0.25s ease, padding-left 0.25s ease;
 }
-.sidebar-link:hover {
-    color: #fff;
-    padding-right: 0;
-    padding-left: 3rem;
-    background-color: #2d610020;
-}
 .sidebar-link.active {
     color: #fff;
     padding-right: 0;
     padding-left: 2rem;
+    background-color: #2d610020;
+}
+.sidebar-link:hover {
+    color: #fff;
+    padding-right: 0;
+    padding-left: 3rem;
     background-color: #2d610020;
 }
 

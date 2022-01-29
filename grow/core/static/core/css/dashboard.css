@@ -60,7 +60,7 @@ body {
     background-color: hsl(92, 100%, 36%);
 }
 .search {
-    background-color: hsl(92, 0%, 36%);
+    background-color: hsl(92, 30%, 36%);
     display: flex;
     justify-content: center;
     align-items: center;
