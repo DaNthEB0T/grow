@@ -4,18 +4,20 @@
     <div class="sidebar-top">
         <a class="sidebar-logo mb-3" href="{% url "core:dashboard" %}"><img class="w-100" src="{% static 'core/images/logo/grow-long-transparent-white.png' %}"></a>
 
-        <a class="sidebar-link active" href="{% url "core:dashboard" %}">
-            <span class="sidebar-link-icon"><i class="fas fa-tachometer-alt"></i></span>
-            Dashboard
-        </a>
-        <a class="sidebar-link" href="{% url "core:dashboard" %}">
-            <span class="sidebar-link-icon"><i class="far fa-newspaper"></i></i></span>
-            Other page
-        </a>
-        <a class="sidebar-link" href="{% url "core:dashboard" %}">
-            <span class="sidebar-link-icon"><i class="far fa-newspaper"></i></i></span>
-            Otherer page
-        </a>
+        <div class="sidebar-links-container">
+            <a class="sidebar-link active" href="{% url "core:dashboard" %}">
+                <span class="sidebar-link-icon"><i class="fas fa-tachometer-alt"></i></span>
+                Dashboard
+            </a>
+            <a class="sidebar-link" href="{% url "core:dashboard" %}">
+                <span class="sidebar-link-icon"><i class="far fa-newspaper"></i></i></span>
+                Other page
+            </a>
+            <a class="sidebar-link" href="{% url "core:dashboard" %}">
+                <span class="sidebar-link-icon"><i class="far fa-newspaper"></i></i></span>
+                Otherer page
+            </a>
+        </div>
     </div>
 
     <div class="sidebar-bottom">
