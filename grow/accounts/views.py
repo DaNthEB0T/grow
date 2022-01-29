@@ -1,3 +1,4 @@
+from shutil import ExecError
 from django.shortcuts import render, redirect
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -26,8 +27,8 @@ def token_generated_email(request, user, email_subject, template_path, token_gen
     email = EmailMessage(subject=email_subject, body=email_body, from_email=settings.EMAIL_HOST_USER, to=[user.email])
     email.send()
 
-def send_verification_email(request):
-    token_generated_email(request, request.user, email_subject="Verify your Grow account", template_path="accounts/emails/verification.html", token_generator=verification_token_generator)
+def send_verification_email(request, user):
+    token_generated_email(request, user, email_subject="Verify your Grow account", template_path="accounts/emails/verification.html", token_generator=verification_token_generator)
 
 def send_forgot_password_email(request, user):
     token_generated_email(request, user, email_subject="Grow Account Password Reset", template_path="accounts/emails/password_reset.html", token_generator=password_reset_token_generator)
@@ -74,13 +75,12 @@ def welcome_view(request):
 
             user = authenticate(email=email, password=raw_password)
             
-            try:
-                send_verification_email(request)
-            except: 
-                user.delete()
-                user = None
-                
             login_extended(request, user)
+            
+            try:
+                send_verification_email(request, request.user)
+            except Exception as e: 
+                print(e)
             
             return redirect("core:dashboard")
         
