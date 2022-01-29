@@ -61,6 +61,40 @@ body {
 }
 .search {
     background-color: hsl(92, 100%, 36%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    overflow: hidden;
+}
+.search input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    color: white;
+    padding: 1rem;
+    padding-left: 2.5rem;
+    cursor: text;
+}
+.search label {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    font-size: 1.15rem !important;
+    top: 0 !important;
+    padding: 1rem;
+    opacity: 1;
+    pointer-events: none;
+}
+.search label .search-text {
+    transition: opacity 0.2s ease;
+}
+.search input:focus-within + label .search-text, .search input:not(:placeholder-shown) + label .search-text {
+    opacity: 0;
 }
 
 
