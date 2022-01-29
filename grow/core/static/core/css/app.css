@@ -164,7 +164,7 @@ body {
 }
 .sidebar-bottom .sidebar-link {
     padding: 1.7rem 1rem;
-    padding-left: 3rem;
+    padding-left: 2rem;
 }
 .sidebar-bottom .sidebar-link:hover, .sidebar-bottom .sidebar-link.active {
     background-color: #2d610020;
@@ -183,31 +183,21 @@ body {
     font-size: 1.1rem;
     padding: 0.7rem 1rem;
     padding-right: 1rem;
-    padding-left: 3rem;
+    padding-left: 2rem;
     width: 100%;
     transition: color 0.25s ease-in-out, padding-right 0.25s ease, padding-left 0.25s ease;
 }
 .sidebar-link:hover {
     color: #fff;
     padding-right: 0;
-    padding-left: 4rem;
+    padding-left: 3rem;
     background-color: #2d610020;
 }
 .sidebar-link.active {
     color: #fff;
     padding-right: 0;
-    padding-left: 4rem;
+    padding-left: 2rem;
     background-color: #2d610020;
-}
-
-.sidebar-link-icon {
-    opacity: 0;
-    position: absolute;
-    left: 2rem;
-    transition: opacity 0.25s ease;
-}
-.sidebar-link:hover .sidebar-link-icon, .sidebar-link.active .sidebar-link-icon {
-    opacity: 1;
 }
 
 /**
