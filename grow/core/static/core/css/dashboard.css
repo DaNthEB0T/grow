@@ -13,7 +13,8 @@ body {
 
 .inner-content-container {
     width: calc(100% - 15rem);
-    background-image: linear-gradient(-30deg, #ccc, #fff)
+    background-size: 200%;
+    background-position: left center;
 }
 .inner-content-container .content {
     width: 100%;
@@ -22,12 +23,10 @@ body {
 
 
 .content-head {
-    /*grid-column-start: 1;
+    grid-column-start: 1;
     grid-column-end: 5;
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-    height: 4rem;*/
-    display: contents;
+    display: flex;
+    justify-content: end;
 }
 
 .head-tile {
@@ -41,7 +40,7 @@ body {
     padding: 1rem;
     font-size: 1.15rem;
     box-shadow: 0 1px 3px 0 #0000;
-    transition: 0.3s ease;
+    transition: background-position 0.3s ease, width 0.4s ease;
     background-position: right center;
     color: white;
 }
@@ -49,22 +48,10 @@ body {
     box-shadow: 0 1px 3px #0005;
     background-position: left center;
 }
-
-.watch-later {
-    background-color: hsl(92, 100%, 36%);
-}
-.history {
-    background-color: hsl(92, 100%, 36%);
-}
-.saved {
-    background-color: hsl(92, 100%, 36%);
-}
 .search {
-    background-color: hsl(92, 30%, 36%);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0;
     overflow: hidden;
 }
 .search input {
@@ -81,20 +68,18 @@ body {
     cursor: text;
 }
 .search label {
-    position: absolute;
-    width: 100%;
-    height: 100%;
     font-size: 1.15rem !important;
-    top: 0 !important;
-    padding: 1rem;
     opacity: 1;
     pointer-events: none;
 }
 .search label .search-text {
-    transition: opacity 0.2s ease;
+    width: 4rem;
+    transition: opacity 0.4s ease, width 0.4s ease;
+    display: inline-block;
 }
 .search input:focus-within + label .search-text, .search input:not(:placeholder-shown) + label .search-text {
     opacity: 0;
+    width: 25rem;
 }
 
 

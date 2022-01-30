@@ -3,6 +3,7 @@
 
 {% block head %}
     <link rel="stylesheet" type="text/css" href="{% static 'core/css/dashboard.css' %}">
+    <script src="{% static 'core/js/dashboard.js' %}" defer></script>
 {% endblock head %}
 
 {% block body %}
@@ -19,17 +20,14 @@
         <div class="content-container">
 
             {% include 'components/sidebar.html' %}
-            <div class="inner-content-container">
+            <div class="inner-content-container" style="background-image:url('{% static 'core/images/bg.png' %}')">
                 <div class="content">
                     <div class="content-head">
-                        <div class="head-tile watch-later">
-                            <i class="far fa-clock"></i> Watch later
+                        <div>
                         </div>
-                        <div class="head-tile history">
-                            <i class="fas fa-history"></i> History
+                        <div>
                         </div>
-                        <div class="head-tile saved">
-                            <i class="far fa-bookmark"></i> Saved
+                        <div>
                         </div>
                         <div class="head-tile search">
                             <input type="text" id="search-resources" placeholder=" ">
