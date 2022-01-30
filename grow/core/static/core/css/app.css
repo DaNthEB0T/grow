@@ -205,6 +205,14 @@ body {
     background-color: #2d610020;
 }
 
+.sidebar-hline {
+    background-color: white;
+    height: 1px;
+    width: 90%;
+    margin: 0.5rem 0;
+    opacity: 0.3;
+}
+
 /**
  * Subpage rules
  */
