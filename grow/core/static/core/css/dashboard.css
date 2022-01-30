@@ -274,6 +274,14 @@ body {
     display: block;
     margin-bottom: 2rem;
 }
+.uv-btn {
+    vertical-align: initial;
+    font-size: inherit;
+    padding-left: 0;
+}
+.uv-btn:focus {
+    box-shadow: none;
+}
 
 .uv-footer {
     position: absolute;
@@ -282,3 +290,4 @@ body {
     transform: translateX(-50%);
     color: #444;
 }
+
