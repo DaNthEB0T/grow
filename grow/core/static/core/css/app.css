@@ -148,6 +148,9 @@ body {
     position: relative;
     opacity: 0.8;
     transition: opacity 0.2s ease;
+    aspect-ratio: 19/5;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 .sidebar-logo:hover {
     opacity: 1;
@@ -211,6 +214,30 @@ body {
     width: 90%;
     margin: 0.5rem 0;
     opacity: 0.3;
+}
+
+@media screen and (max-width: 800px) {
+    .sidebar {
+        width: 4rem;
+    }
+
+    .sidebar-hide {
+        display: none;
+    }
+
+    .sidebar-logo {
+        aspect-ratio: 1;
+        width: 70%;
+        /* image change is in sidebar.html file */
+    }
+
+    .sidebar-link {
+        padding: 0.7rem 0 !important;
+        font-size: 1.5rem;
+        width: initial;
+        text-align: center;
+        width: 100%;
+    }
 }
 
 /**

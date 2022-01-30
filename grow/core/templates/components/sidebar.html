@@ -2,16 +2,16 @@
 
 <div class="sidebar">
     <div class="sidebar-top">
-        <a class="sidebar-logo mb-3" href="{% url "core:dashboard" %}"><img class="w-100" src="{% static 'core/images/logo/grow-long-transparent-white.png' %}"></a>
+        <a class="sidebar-logo mb-3" href="{% url "core:dashboard" %}" style="background-image:url('{% static 'core/images/logo/grow-long-transparent-white.png' %}')"></a>
 
         <div class="sidebar-links-container">
             <a class="sidebar-link active" href="{% url "core:dashboard" %}">
                 <i class="fas fa-tachometer-alt"></i>
-                Dashboard
+                <span class="sidebar-hide">Dashboard</span>
             </a>
             <a class="sidebar-link" href="{% url "core:dashboard" %}">
                 <i class="fas fa-chart-bar"></i>
-                My Progress
+                <span class="sidebar-hide">My Progress</span>
             </a>
         </div>
 
@@ -20,23 +20,32 @@
         <div class="sidebar-links-container">
             <a class="sidebar-link" href="{% url "core:dashboard" %}">
                 <i class="far fa-clock"></i>
-                Watch later
+                <span class="sidebar-hide">Watch later</span>
             </a>
             <a class="sidebar-link" href="{% url "core:dashboard" %}">
                 <i class="fas fa-history"></i>
-                History
+                <span class="sidebar-hide">History</span>
             </a>
             <a class="sidebar-link" href="{% url "core:dashboard" %}">
                 <i class="far fa-bookmark"></i>
-                Saved
+                <span class="sidebar-hide">Saved</span>
             </a>
         </div>
     </div>
 
     <div class="sidebar-bottom">
         <a class="sidebar-link" href="user/settings">
-            <span class="sidebar-link-icon"><i class="fas fa-users-cog"></i></span>
-            User settings
+            <i class="fas fa-users-cog"></i>
+            <span class="sidebar-hide">User settings</span>
         </a>
     </div>
 </div>
+
+{# Necessary because of static file loading :( #}
+<style>
+    @media screen and (max-width: 800px) {
+        .sidebar-logo {
+            background-image: url("{% static 'core/images/logo/2176x2176-white.png' %}") !important;
+        }
+    }
+</style>

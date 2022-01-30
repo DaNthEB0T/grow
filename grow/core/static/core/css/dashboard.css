@@ -13,7 +13,7 @@ body {
 
 .inner-content-container {
     width: calc(100% - 15rem);
-    background-size: 200%;
+    background-size: auto 100%;
     background-position: left center;
 }
 .inner-content-container .content {
@@ -79,7 +79,7 @@ body {
 }
 .search input:focus-within + label .search-text, .search input:not(:placeholder-shown) + label .search-text {
     opacity: 0;
-    width: 25rem;
+    width: 20rem;
 }
 
 
@@ -182,4 +182,39 @@ body {
 
 .st {
     border: 1px solid white !important;
+}
+
+
+@media screen and (max-width: 1200px) {
+    .content {
+        grid-template-columns: 50% 50%;
+    }
+
+    .big-tile, .content-head {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+}
+@media screen and (max-width: 800px) {
+    .content {
+        grid-template-columns: 100%;
+    }
+
+    .big-tile, .content-head {
+        grid-column-start: 1;
+        grid-column-end: 2;
+    }
+    
+    .inner-content-container {
+        width: calc(100% - 4rem);
+    }
+
+    .search {
+        width: 100%;
+        justify-content: initial;
+    }
+    .search-text {
+        transition: opacity 0.2s ease !important;
+        width: initial !important;
+    }
 }
