@@ -63,41 +63,42 @@ def welcome_view(request):
         return redirect("core:dashboard")
 
     context = {}
+    
+    login_form = GrowUserLoginForm()
+    registration_form = GrowUserRegistrationForm()
 
     if request.POST:
-        # Registration form
-        registration_form = GrowUserRegistrationForm(request.POST)
-        if registration_form.is_valid():
-            registration_form.save()
+        if "register" in request.POST:
+            # Registration form
+            registration_form = GrowUserRegistrationForm(request.POST)
+            if registration_form.is_valid():
+                registration_form.save()
 
-            email = registration_form.cleaned_data.get("email")
-            raw_password = registration_form.cleaned_data.get("password1")
+                email = registration_form.cleaned_data.get("email")
+                raw_password = registration_form.cleaned_data.get("password1")
 
-            user = authenticate(email=email, password=raw_password)
-            
-            login_extended(request, user)
-            
-            try:
-                send_verification_email(request, request.user)
-            except Exception as e: 
-                print(e)
-            
-            return redirect("core:dashboard")
-        
-        # Login form
-        login_form = GrowUserLoginForm(request.POST)
-        if login_form.is_valid():
+                user = authenticate(email=email, password=raw_password)
+                
+                login_extended(request, user)
+                
+                try:
+                    send_verification_email(request, request.user)
+                except Exception as e: 
+                    print(e)
+                
+                return redirect("core:dashboard")
+        elif "login" in request.POST:
+            # Login form
+            login_form = GrowUserLoginForm(request.POST)
+            if login_form.is_valid():
 
-            email = login_form.cleaned_data.get("email").lower()
-            raw_password = login_form.cleaned_data.get("password")
+                email = login_form.cleaned_data.get("email").lower()
+                raw_password = login_form.cleaned_data.get("password")
 
-            user = authenticate(email=email, password=raw_password)
-            login_extended(request, user)
+                user = authenticate(email=email, password=raw_password)
+                login_extended(request, user)
 
-            return redirect("core:dashboard")
-    else:
-        login_form = GrowUserLoginForm()
-        registration_form = GrowUserRegistrationForm()
+                return redirect("core:dashboard")
 
     context['login_form'] = login_form
     context['registration_form'] = registration_form

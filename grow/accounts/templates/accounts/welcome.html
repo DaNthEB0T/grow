@@ -53,7 +53,7 @@
                     {% endfor %}
                     <a class="form-link" href="{% url "accounts:forgot_password" %}">Forgot password?</a>
                     <div class="button-container">
-                        <button class="btn btn-success" type="submit"> Submit </button>
+                        <button class="btn btn-success" type="submit" name="login"> Submit </button>
                     </div>
                 </form>
             </div>
@@ -156,7 +156,7 @@
                             {% endfor %}
                         </div>
                         <div class="button-container">
-                            <button class="btn btn-success w-100" type="submit"> Submit </button>
+                            <button class="btn btn-success w-100" type="submit" name="registration"> Submit </button>
                         </div>
                     </div>
                 </form>
