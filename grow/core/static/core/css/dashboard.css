@@ -180,8 +180,9 @@ body {
     grid-column-end: 5;
 }
 
-.st {
-    border: 1px solid white !important;
+/* This is for content that shows only on small devices */
+.small-show {
+    display: none;
 }
 
 
@@ -193,6 +194,17 @@ body {
     .big-tile, .content-head {
         grid-column-start: 1;
         grid-column-end: 3;
+    }
+
+    .resource-title {
+        font-size: 2vw;
+    }
+    .resource-info {
+        font-size: 2vw;
+        top: calc(1rem + 4vw);
+    }
+    .big-tile .resource-title {
+        font-size: 4vw;
     }
 }
 @media screen and (max-width: 800px) {
@@ -216,5 +228,18 @@ body {
     .search-text {
         transition: opacity 0.2s ease !important;
         width: initial !important;
+    }
+
+    .resource-title {
+        font-size: 4vw;
+    }
+
+    .resource-save {
+        opacity: 1 !important;
+        bottom: 0.5rem !important;
+    }
+
+    .small-show {
+        display: initial;
     }
 }
