@@ -314,11 +314,10 @@ input:not(:placeholder-shown) {
 }
 .popup i {
   position: absolute;
-  right: 0.5rem;
+  right: 0.7rem;
   top: 50%;
   transform: translateY(-50%);
   font-size: 1.2rem;
-  color: #333;
   cursor: pointer;
 }
 

@@ -1,12 +1,8 @@
 {% for message in messages %}
 <div class="popup {{message.tags}}">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span
-      aria-hidden="true"
-      onclick="document.getElementsByClassName('popup')[0].remove()"
-      >&times;</span
-    >
-  </button>
+  <div type="button" class="close d-inline" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true" onclick="document.getElementsByClassName('popup')[0].remove()"><i class="fas fa-times"></i></span>
+  </div>
   {{ message }}
 </div>
 {% endfor %}
