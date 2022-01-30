@@ -243,3 +243,42 @@ body {
         display: initial;
     }
 }
+
+
+
+
+.unverified, .uv {
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.uv-content {
+    background-color: #fff4;
+    padding: 1rem 2rem;
+    border: 1px solid #0001;
+    border-radius: 7px;
+    width: 85%;
+    max-width: 40rem;
+    position: relative;
+    font-size: 1.1rem;
+}
+.uv-logo {
+    width: 60%;
+    max-width: 15rem;
+    margin: auto;
+    display: block;
+    margin-bottom: 2rem;
+}
+
+.uv-footer {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #444;
+}
