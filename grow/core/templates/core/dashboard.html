@@ -7,25 +7,6 @@
 {% endblock head %}
 
 {% block body %}
-
-    {% if not user.is_validated %} <!-- bruh please do this in other file-->
-        <div class="unverified" style="background-image:url('{% static 'core/images/unverified-bg.png' %}')">
-            <div class="uv-content">
-                <img src="{% static 'core/images/logo/grow-long-color.png' %}" class="uv-logo">
-                <p>
-                    Hello, {{user.username}}!
-                </p>
-                <p>
-                    Your account is not verified yet. Check your email for a verification link!
-                </p>
-                <p>Didn't recieve the link? <a href="sendagain">Send again</a></p>
-                <p class="text-center"><a class="btn btn-danger" href="/logout/">Logout</a></p>
-            </div>
-            <div class="uv-footer">&copy; Grow 2022 &bull; Made by Dan &amp; Greg</div>
-        </div>
-    {% else %}
-        
-
         <div class="content-container">
 
             {% include 'components/sidebar.html' %}
@@ -96,8 +77,5 @@
                 </div>
             </div>
         </div>
-
-
-    {% endif %}
 
 {% endblock body %}
