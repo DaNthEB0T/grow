@@ -1,15 +1,103 @@
 {% extends 'core/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/dashboard.css' %}">
+    <script src="{% static 'core/js/dashboard.js' %}" defer></script>
+{% endblock head %}
 
 {% block body %}
-Hello {{user.username}}!
-<p><a class="btn btn-danger" href="/logout/">Logout</a></p>
 
-<p>
-{% if not user.is_validated %}
-    User needs verification!
-{% else %}
-    User is verified!
-{% endif %}
-</p>
+    {% if not user.is_validated %} <!-- bruh please do this in other file-->
+        <div class="unverified" style="background-image:url('{% static 'core/images/unverified-bg.png' %}')">
+            <div class="uv-content">
+                <img src="{% static 'core/images/logo/grow-long-color.png' %}" class="uv-logo">
+                <p>
+                    Hello, {{user.username}}!
+                </p>
+                <p>
+                    Your account is not verified yet. Check your email for a verification link!
+                </p>
+                <p>Didn't recieve the link? <a href="sendagain">Send again</a></p>
+                <p class="text-center"><a class="btn btn-danger" href="/logout/">Logout</a></p>
+            </div>
+            <div class="uv-footer">&copy; Grow 2022 &bull; Made by Dan &amp; Greg</div>
+        </div>
+    {% else %}
+        
+
+        <div class="content-container">
+
+            {% include 'components/sidebar.html' %}
+            <div class="inner-content-container" style="background-image:url('{% static 'core/images/bg.png' %}')">
+                <div class="content">
+                    <div class="content-head">
+                        <div class="head-tile search">
+                            <input type="text" id="search-resources" placeholder=" ">
+                            <label for="search-resources"><i class="fas fa-search"></i> <span class="search-text">Search</span></label>
+                        </div>
+                    </div>
+                    <div class="big-tile recommended">
+                        <div class="resource">
+                            <span class="resource-info">Recommended for you</span>
+                            <span class="resource-title">Placeholder Title</span>
+                            <span class="resource-tags">By Author</span>
+                            <span class="resource-save"><i class="fas fa-clock"></i> Save for later</span>
+                            <img class="resource-thumbnail" src="https://www.thoughtco.com/thmb/_fjKZyImBppgDXa6L5yejRch35s=/1881x1411/smart/filters:no_upscale()/Mindfulness-8e38c4e97d94416392442d4430a3812d.jpg" alt="Media thumbnail">
+                            <div class="resource-shadow"></div>
+                        </div>
+                    </div>
+                    <div class="big-tile continue">
+                        <div class="resource">
+                            <span class="resource-info">Continue watching</span>
+                            <span class="resource-title">Placeholder Title</span>
+                            <span class="resource-tags">By Author</span>
+                            <span class="resource-save"><i class="fas fa-clock"></i> Save for later</span>
+                            <img class="resource-thumbnail" src="https://res.cloudinary.com/practicaldev/image/fetch/s--P-zvMTgt--/c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600/https://dev-to-uploads.s3.amazonaws.com/i/qyix6eyhrnc8x9c44yp2.jpg" alt="Media thumbnail">
+                            <div class="resource-shadow"></div>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="resource">
+                            <span class="resource-title">Placeholder Title</span>
+                            <span class="resource-tags">By Author</span>
+                            <span class="resource-save"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
+                            <img class="resource-thumbnail" src="https://res.cloudinary.com/practicaldev/image/fetch/s--P-zvMTgt--/c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600/https://dev-to-uploads.s3.amazonaws.com/i/qyix6eyhrnc8x9c44yp2.jpg" alt="Media thumbnail">
+                            <div class="resource-shadow"></div>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="resource">
+                            <span class="resource-title">Placeholder Title</span>
+                            <span class="resource-tags">By Author</span>
+                            <span class="resource-save"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
+                            <img class="resource-thumbnail" src="https://res.cloudinary.com/practicaldev/image/fetch/s--P-zvMTgt--/c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600/https://dev-to-uploads.s3.amazonaws.com/i/qyix6eyhrnc8x9c44yp2.jpg" alt="Media thumbnail">
+                            <div class="resource-shadow"></div>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="resource">
+                            <span class="resource-title">Placeholder Title</span>
+                            <span class="resource-tags">By Author</span>
+                            <span class="resource-save"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
+                            <img class="resource-thumbnail" src="https://res.cloudinary.com/practicaldev/image/fetch/s--P-zvMTgt--/c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600/https://dev-to-uploads.s3.amazonaws.com/i/qyix6eyhrnc8x9c44yp2.jpg" alt="Media thumbnail">
+                            <div class="resource-shadow"></div>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="resource">
+                            <span class="resource-title">Placeholder Title</span>
+                            <span class="resource-tags">By Author</span>
+                            <span class="resource-save"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
+                            <img class="resource-thumbnail" src="https://res.cloudinary.com/practicaldev/image/fetch/s--P-zvMTgt--/c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600/https://dev-to-uploads.s3.amazonaws.com/i/qyix6eyhrnc8x9c44yp2.jpg" alt="Media thumbnail">
+                            <div class="resource-shadow"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    {% endif %}
 
 {% endblock body %}

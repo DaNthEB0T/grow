@@ -1,8 +1,8 @@
 :root {
-  --block-bg: 255, 255, 255;
-  --block-color: #333;
-  --block-opacity: 0.8;
-  --primary: rgb(112, 35, 119);
+    --block-bg: 255, 255, 255;
+    --block-color: #333;
+    --block-opacity: 0.8;
+    --primary: #57b900;
 }
 
 body {
@@ -140,6 +140,135 @@ input:not(:placeholder-shown) {
 .form-link:hover {
   opacity: 1;
   color: black;
+}
+
+/**
+ * Sidebar
+ */
+.sidebar {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 15rem;
+    height: 100vh;
+    background-image: linear-gradient(230deg, #57b900, #57b900b0);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-logo {
+    margin-top: 0.5rem;
+    width: 80%;
+    position: relative;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+    aspect-ratio: 19/5;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.sidebar-logo:hover {
+    opacity: 1;
+}
+
+.sidebar-top, .sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin: 1rem 0;
+    width: 100%;
+}
+
+.sidebar-bottom {
+    margin-bottom: 0;
+    padding: 0 0;
+    background-color: #2d610010;
+}
+.sidebar-bottom .sidebar-link {
+    padding: 1.7rem 1rem;
+    padding-left: 2rem;
+}
+.sidebar-bottom .sidebar-link:hover, .sidebar-bottom .sidebar-link.active {
+    background-color: #2d610020;
+}
+
+.sidebar-links-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
+}
+.sidebar-link {
+    position: relative;
+    color: #fffc;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 0.7rem 1rem;
+    padding-right: 1rem;
+    padding-left: 2rem;
+    width: 100%;
+    transition: color 0.25s ease-in-out, padding-right 0.25s ease, padding-left 0.25s ease;
+}
+.sidebar-link.active {
+    color: #fff;
+    padding-right: 0;
+    padding-left: 2rem;
+    background-color: #2d610020;
+}
+.sidebar-link:hover {
+    color: #fff;
+    padding-right: 0;
+    padding-left: 3rem;
+    background-color: #2d610020;
+}
+
+.sidebar-hline {
+    background-color: white;
+    height: 1px;
+    width: 90%;
+    margin: 0.5rem 0;
+    opacity: 0.3;
+}
+
+@media screen and (max-width: 800px) {
+    .sidebar {
+        width: 4rem;
+    }
+
+    .sidebar-hide {
+        display: none;
+    }
+
+    .sidebar-logo {
+        aspect-ratio: 1;
+        width: 70%;
+        /* image change is in sidebar.html file */
+    }
+
+    .sidebar-link {
+        padding: 0.7rem 0 !important;
+        font-size: 1.5rem;
+        width: initial;
+        text-align: center;
+        width: 100%;
+    }
+}
+
+/**
+ * Subpage rules
+ */
+.content-container {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+}
+
+.content {
+    width: calc(100% - 15rem);
 }
 
 /**
