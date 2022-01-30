@@ -41,10 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'taggit',
     
     # My Apps
     "core",
-    "accounts"
+    "accounts",
+    "media_handler",
 ]
 
 MIDDLEWARE = [
@@ -124,6 +126,8 @@ EMAIL_HOST_PASSWORD = 'Johnnymaster248248'
 # Django Token Generator
 PASSWORD_RESET_TIMEOUT = 15 * 60 # Seconds 
 
+# Taggit
+TAGGIT_CASE_INSENSITIVE = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -147,6 +151,9 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

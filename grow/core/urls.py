@@ -6,5 +6,5 @@ app_name = "core"
 
 urlpatterns = [
     path("er404/", views.error_404_view, name='404'),
-    path("dashboard/", views.index_view, name='dashboard'),
+    path("dashboard/", views.dashboard_view, name='dashboard'),
 ]
