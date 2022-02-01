@@ -12,7 +12,7 @@
     <div id="left-block" onclick="setActive('left-block')">
         <div class="back-button" onclick="setNonActive('left-block', event)">Back</div>
         <div class="skip-button" onclick="document.getElementsByClassName('intro-content')[0].scrollTop = document.getElementsByClassName('intro-content')[0].scrollHeight">Skip</div>
-        <div class="half half-left">
+        <div class="half half-left" style="background-image:url('{% static 'accounts/images/getstarted.jpg' %}')">
             <div class="title-text-container" style="left:0;">
                 <div class="title-text">GET STARTED<br><span style="font-size:1rem;">I'm new here</span></div>
             </div>
@@ -25,7 +25,7 @@
 
     <div id="right-block" onclick="setActive('right-block')">
         <div class="back-button" onclick="setNonActive('right-block', event)">Back</div>
-        <div class="half half-right">
+        <div class="half half-right" style="background-image:url('{% static 'accounts/images/login.jpg' %}')">
             <div class="title-text-container">
                 <div class="title-text">LOGIN<br><span style="font-size:1rem;">I already have an account</span></div>
             </div>
@@ -62,43 +62,54 @@
 
     <div tabindex="-1" class="intro-content">
         <div class="parallax-container overflow-hidden position-relative">
-            <div class="font-poppins position-absolute" style="font-size:8rem;font-weight:900;z-index:2">
-                BIG TEXT 1
+            <div class="font-poppins position-absolute big-text" style="top:50vh;transform:translateY(-50%)">
+                EXPLORE.
             </div>
             <div class="parallax-10 jscroll">
-                <img class="w-100" src="https://i.pinimg.com/originals/d9/f9/02/d9f9020858c36039499342f49f18d4bb.jpg">
+                <img class="w-100" src="{% static 'accounts/images/1.jpg' %}">
             </div>
         </div>
         <div class="svg-shape-container">
-            <span class="position-absolute" style="color:black;z-index:1000;font-size:3rem;top:40%;left:20%">some other text idk</span>
-            <svg viewBox="0 0 20 7" class="w-100">
-                <path d="M 0 1 C 3 0 7 0 10 1 C 13 2 17 2 20 1 L 20 6 C 17 7 13 7 10 6 C 7 5 3 5 0 6" stroke="white" fill="white" stroke-width="0.01" fill="black"></path>
+            <div class="position-absolute small-text w-100 text-center">
+                <u>FIND A NEW LIFESTYLE</u>
+                <p class="smaller-text">We will help you find hobbies and activities that suit you best, and which will help you on your life's journey.</p>
+            </div>
+            <svg viewBox="0 0 40 10" class="w-100">
+                <path d="M 0 1 C 6 0 14 0 20 1 C 26 2 34 2 40 1 L 40 9 C 34 10 26 10 20 9 C 14 8 6 8 0 9" stroke="white" fill="white" stroke-width="0.01" fill="black"></path>
             </svg>
         </div>
         <div class="parallax-container overflow-hidden position-relative">
-            <div class="font-poppins position-absolute" style="font-size:8rem;font-weight:900;z-index:2">
-                BIG TEXT 2
+            <div class="font-poppins position-absolute big-text">
+                LEARN.
             </div>
             <div class="parallax-10 jscroll">
-                <img class="w-100" src="https://c4.wallpaperflare.com/wallpaper/957/250/385/duckling-ugly-yellow-cute-wallpaper-preview.jpg">
+                <img class="w-100" src="{% static 'accounts/images/2.jpg' %}">
             </div>
         </div>
         <div class="svg-shape-container">
-            <svg viewBox="0 0 20 7" class="w-100">
-                <path d="M 0 1 C 3 0 7 0 10 1 C 13 2 17 2 20 1 L 20 6 C 17 7 13 7 10 6 C 7 5 3 5 0 6" stroke="white" fill="white" stroke-width="0.01" fill="black"></path>
+            <div class="position-absolute small-text w-100 text-center">
+                <u>GAIN VALUABLE KNOWLEDGE</u>
+                <p class="smaller-text">Choose from a wide range of lessons to pick up wisdom for any field you're interested in.</p>
+            </div>
+            <svg viewBox="0 0 40 10" class="w-100">
+                <path d="M 0 1 C 6 0 14 0 20 1 C 26 2 34 2 40 1 L 40 9 C 34 10 26 10 20 9 C 14 8 6 8 0 9" stroke="white" fill="white" stroke-width="0.01" fill="black"></path>
             </svg>
         </div>
         <div class="parallax-container overflow-hidden position-relative">
-            <div class="font-poppins position-absolute" style="font-size:8rem;font-weight:900;z-index:2">
-                BIG TEXT 3
+            <div class="font-poppins position-absolute big-text">
+                SHARE.
             </div>
             <div class="parallax-10 jscroll">
-                <img class="w-100" src="https://cdn.wallpapersafari.com/37/33/xY751R.jpg">
+                <img class="w-100" src="{% static 'accounts/images/3.jpg' %}">
             </div>
         </div>
         <div class="svg-shape-container">
-            <svg viewBox="0 0 20 7" class="w-100">
-                <path d="M 0 1 C 3 0 7 0 10 1 C 13 2 17 2 20 1 L 20 6 C 17 7 13 7 10 6 C 7 5 3 5 0 6" stroke="white" fill="white" stroke-width="0.01" fill="black"></path>
+            <div class="position-absolute small-text w-100 text-center">
+                <u>CONTRIBUTE TO THE GROW NETWORK</u>
+                <p class="smaller-text">Take part in helping friends and strangers alike on their own journey.</p>
+            </div>
+            <svg viewBox="0 0 40 10" class="w-100">
+                <path d="M 0 1 C 6 0 14 0 20 1 C 26 2 34 2 40 1 L 40 9 C 34 10 26 10 20 9 C 14 8 6 8 0 9" stroke="white" fill="white" stroke-width="0.01" fill="black"></path>
             </svg>
         </div>
 
