@@ -31,3 +31,7 @@ def post_handle_view(request):
         form = PostUploadForm(user=request.user)
     context['form'] = form
     return render(request, "media_handler/postu.html", context)
+
+@login_required
+def post_view(request):
+    return render(request, "media_handler/post.html")
