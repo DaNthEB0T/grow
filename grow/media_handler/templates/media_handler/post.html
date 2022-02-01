@@ -19,16 +19,17 @@
                 </div>
                 <div class="video-stats">
                     <div class="video-stats-head">
-                        <span class="video-title">Mindfulness practising</span>
+                        <span class="video-title">{{ post.title }}</span>
                         <div class="video-stats-right">
                             <span id="post-save" title="Save post" data-toggle="tooltip" class="video-saved" onclick="save()">0 <i class="far fa-bookmark"></i></span>
                         </div>
                     </div>
                     <div class="video-stats-bottom">
-                        <span class="upload-date">Uploaded 1. 1. 2022</span>
+                        <span class="upload-date">Published: {{ post.created_on }}</span>
                         <span class="tags">
-                            <span class="tag">Tag</span>
-                            <span class="tag">Tag</span>
+                            {% for tag in post.tags.all %}
+                            <span class="tag">{{ tag }}</span>
+                            {% endfor %}
                         </span>
                     </div>
                 </div>
