@@ -25,6 +25,7 @@ body {
 
 .video-stats {
     width: 90%;
+    border-bottom: 1px solid #ddd;
 }
 
 .video-stats-head {
@@ -79,4 +80,11 @@ body {
     display: inline-block;
     width: 100%;
     margin: 0.3rem 0;
+}
+
+
+/* BOTTOM */
+
+.recommended-posts {
+
 }
