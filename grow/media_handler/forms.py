@@ -30,7 +30,7 @@ class PostUploadForm(forms.ModelForm):
     
     class Meta:
         model = Post
-        fields = ("title", "slug", "description", "status", "tags")
+        fields = ("title", "description", "status", "tags")
         
     def __init__(self, *args, **kwargs):
         user = kwargs.pop("user")

@@ -169,6 +169,21 @@ MESSAGE_TAGS = {
         messages.ERROR: 'danger',
 }
 
+# Logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}
+
 # Uploading files MIME (Multipurpose Internet Mail Extensions)
 ALLOWED_MEDIA_FILE_TYPES = [
     "video/mp4", "video/x-msvideo", "video/x-ms-asf", "video/x-ms-wmv",

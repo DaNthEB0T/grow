@@ -7,6 +7,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from taggit.managers import TaggableManager
+from django.utils.crypto import get_random_string
 import os
 from io import BytesIO
 import time
@@ -201,7 +202,7 @@ STATUS = (
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=10, unique=True)
     author = models.ForeignKey(GrowUser, on_delete=models.SET_NULL, null=True, blank=True, related_name='posts')
     updated_on = models.DateTimeField(auto_now=True)
     description = models.TextField(null=True, blank=True)
@@ -215,6 +216,16 @@ class Post(models.Model):
     
     class Meta:
         ordering = ['-created_on']
+        
+    def save(self, *args, **kwargs):
+        
+        while True:
+            self.slug = get_random_string(length=10)
+            if not Post.objects.filter(slug=self.slug).exists():
+                logger.debug(f"Slug: {self.slug}")
+                break
+        
+        super(Post, self).save(*args, **kwargs) 
 
     def __str__(self):
         return self.title
