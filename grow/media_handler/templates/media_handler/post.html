@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'media_handler/css/post.css' %}">
+    <script src="{% static 'media_handler/js/post.js' %}" defer></script>
+{% endblock head %}
+
+{% block body %}
+    <div class="content-container">
+        {% include 'components/sidebar.html' %}
+
+        <div class="content">
+            <div class="video-container">
+                <div class="video ratio ratio-16x9">
+                    <video class="w-100" controls>
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="video-stats">
+                    <div class="video-stats-head">lolec
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

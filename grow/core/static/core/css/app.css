@@ -269,6 +269,7 @@ input:not(:placeholder-shown) {
 
 .content {
     width: calc(100% - 15rem);
+    position: relative;
 }
 
 /**
