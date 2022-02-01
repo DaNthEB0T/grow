@@ -24,7 +24,6 @@ def post_handle_view(request):
     if request.POST:
         form = PostUploadForm(request.POST, request.FILES, user=request.user)
         if form.is_valid():
-            print("eyo")
             post = form.save()
             form.save_m2m()
     else:

@@ -105,13 +105,13 @@ class GrowUserForgotPasswordForm(PasswordResetForm):
             return email
         except:
             raise forms.ValidationError(
-                self.error_messages["invalid_email"],
+                self.error_messages['invalid_email'],
                 code="invalid_email",
                 )   
 
 class GrowUserPasswordChangeForm(forms.Form):
     error_messages = {
-        'password_mismatch': _("The two passwords don't match."),
+        'password_mismatch': _("The two passwords don't match"),
         'password_redundancy': _("Cannot set to previous password")
     }
     new_password1 = forms.CharField(label=_("New password"),

@@ -1,3 +1,4 @@
+import logging
 from re import L
 from django.db import models
 from accounts.models import GrowUser
@@ -6,25 +7,44 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from taggit.managers import TaggableManager
+from django.utils.crypto import get_random_string
 import os
 from io import BytesIO
 import time
 
-
+logger = logging.getLogger(__name__)
 
 class Media(models.Model):
     def user_directory_path(instance, filename):
-        # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-        return time.strftime("user_{0}/%d_%m_%Y/med/{1}".format(instance.author.id, filename)) 
+        return time.strftime(f"user_{instance.author.id}/%d_%m_%Y/med/{filename}") 
     
     upload = models.FileField(upload_to=user_directory_path)
     author = models.ForeignKey(GrowUser, on_delete=models.SET_NULL, null=True, blank=True, related_name="medias")
+    
+    @classmethod
+    def integrity_check(cls, **kwargs):
+        for m in Media.objects.all():
+            if not os.path.isfile(m.upload.path):
+                logger.error(f"Object {m} has no media file at {m.upload.path}")
+                
+    @classmethod
+    def clean(cls, **kwargs):
+        from grow.settings import MEDIA_ROOT
+        empty = [root for root, dirs, files, in os.walk(MEDIA_ROOT)
+                   if not len(dirs) and not len(files)]
+        for empty_dir in empty:
+            os.removedirs(empty_dir)
 
     
 class Image(models.Model):
     def user_directory_path(instance, filename):
-        # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-        return time.strftime("user_{0}/%d_%m_%Y/img/{1}".format(instance.author.id, filename)) 
+        return time.strftime(f"user_{instance.author.id}/%d_%m_%Y/img/{filename}") 
+
+    @classmethod
+    def integrity_check(cls, **kwargs):
+        for i in Image.objects.all():
+            if not (os.path.isfile(i.image.path) and os.path.isfile(i.thumbnail.path)):
+                logger.error(f"Object {i} has no image file at {i.image.path} or {i.thumbnail.path}")
     
     author = models.ForeignKey(GrowUser, on_delete=models.SET_NULL, null=True, blank=True, related_name="images")    
     image = models.ImageField(
@@ -109,6 +129,8 @@ def auto_delete_media_on_delete(sender, instance, **kwargs):
         if os.path.isfile(instance.upload.path):
             os.remove(instance.upload.path)
             
+    Media.clean()
+            
 @receiver(models.signals.pre_save, sender=Media)
 def auto_delete_file_on_change(sender, instance, **kwargs):
     """
@@ -128,6 +150,8 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
     if not old_media == new_media:
         if os.path.isfile(old_media.path):
             os.remove(old_media.path)
+            
+    Media.clean()
 
 @receiver(models.signals.post_delete, sender=Image)
 def auto_delete_media_on_delete(sender, instance, **kwargs):
@@ -142,6 +166,8 @@ def auto_delete_media_on_delete(sender, instance, **kwargs):
     if instance.thumbnail:
         if os.path.isfile(instance.thumbnail.path):
             os.remove(instance.thumbnail.path)
+    
+    Media.clean()
 
 @receiver(models.signals.pre_save, sender=Image)
 def auto_delete_file_on_change(sender, instance, **kwargs):
@@ -165,6 +191,8 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
             os.remove(old_image.path)
         if os.path.isfile(old_thumbnail.path):
             os.remove(old_thumbnail.path)
+    
+    Media.clean()
 
 
 STATUS = (
@@ -174,19 +202,30 @@ STATUS = (
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=10, unique=True)
     author = models.ForeignKey(GrowUser, on_delete=models.SET_NULL, null=True, blank=True, related_name='posts')
     updated_on = models.DateTimeField(auto_now=True)
     description = models.TextField(null=True, blank=True)
     media_content = models.ForeignKey(Media, on_delete=models.SET_NULL, default=None, null=True, blank=True, related_name="post")
     prequel = models.ForeignKey("self", on_delete=models.SET_NULL, default=None, null=True, blank=True, related_name="sequel")
     thumbnail = models.ForeignKey(Image, on_delete=models.SET_NULL, default=None, null=True, blank=True, related_name="post_parent")
+    saved = models.ManyToManyField(GrowUser, default=None, blank=True, related_name="saved_posts")
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
     
     class Meta:
         ordering = ['-created_on']
+        
+    def save(self, *args, **kwargs):
+        
+        while True:
+            self.slug = get_random_string(length=10)
+            if not Post.objects.filter(slug=self.slug).exists():
+                logger.debug(f"Slug: {self.slug}")
+                break
+        
+        super(Post, self).save(*args, **kwargs) 
 
     def __str__(self):
         return self.title

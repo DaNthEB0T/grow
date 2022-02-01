@@ -25,7 +25,7 @@ def unvalidated_view(request):
         return redirect("core:dashboard")
     
     if request.POST:
-        if "resend_verification" in request.POST and not request.user.is_validated:
+        if "resend_verification" in request.POST:
             send_verification_email(request, request.user)
             messages.info(request, _("Validation email has been sent"))    
     
