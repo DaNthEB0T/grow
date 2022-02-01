@@ -16,6 +16,8 @@ function popup(m)
     popup.innerHTML = m + '<i class="fas fa-times" onclick="document.getElementsByClassName(\'popup\')[0].remove()"></i>';
     popup.classList.add('popup');
     document.getElementsByTagName("BODY")[0].appendChild(popup);
+
+    removePopup();
 }
 
 /**
@@ -32,4 +34,13 @@ function popup(m, c)
     popup.classList.add('popup');
     popup.classList.add(c);
     document.getElementsByTagName("BODY")[0].appendChild(popup);
+
+    removePopup();
+}
+
+function removePopup()
+{
+    setTimeout(function () {
+      document.getElementsByClassName("popup")[0].remove();
+    }, 7000);
 }
