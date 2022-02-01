@@ -12,8 +12,8 @@
 
         <div class="content">
             <div class="video-container">
-                <div class="video ratio ratio-16x9">
-                    <video class="w-100" controls>
+                <div class="video">
+                    <video class="ratio ratio-16x9" controls>
                         <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                     </video>
                 </div>
@@ -21,8 +21,15 @@
                     <div class="video-stats-head">
                         <span class="video-title">Mindfulness practising</span>
                         <div class="video-stats-right">
-                            <span id="post-save" class="video-saved" onclick="save()">0 <i class="far fa-bookmark"></i></span>
+                            <span id="post-save" title="Save post" data-toggle="tooltip" class="video-saved" onclick="save()">0 <i class="far fa-bookmark"></i></span>
                         </div>
+                    </div>
+                    <div class="video-stats-bottom">
+                        <span class="upload-date">Uploaded 1. 1. 2022</span>
+                        <span class="tags">
+                            <span class="tag">Tag</span>
+                            <span class="tag">Tag</span>
+                        </span>
                     </div>
                 </div>
             </div>

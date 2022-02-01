@@ -260,7 +260,7 @@ input:not(:placeholder-shown) {
 /**
  * Subpage rules
  */
-.content-container {
+  .content-container {
     height: 100vh;
     width: 100vw;
     overflow: hidden;
@@ -272,6 +272,12 @@ input:not(:placeholder-shown) {
     position: relative;
     height: 100vh;
     overflow-y: auto;
+}
+
+@media screen and (max-width: 800px) {
+    .content {
+        width: calc(100% - 4rem);
+    }
 }
 
 /**
