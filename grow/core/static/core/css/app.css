@@ -270,6 +270,8 @@ input:not(:placeholder-shown) {
 .content {
     width: calc(100% - 15rem);
     position: relative;
+    height: 100vh;
+    overflow-y: auto;
 }
 
 /**
