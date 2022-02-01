@@ -2,17 +2,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from .models import *
 import grow.settings as settings
-import magic
-
-def get_mime_type(file):
-    """
-    Get MIME by reading the header of the file
-    """
-    initial_pos = file.tell()
-    file.seek(0)
-    mime_type = magic.from_buffer(file.read(1024), mime=True)
-    file.seek(initial_pos)
-    return mime_type
+from .library import *
 
 class ImageUploadForm(forms.ModelForm):
     class Meta:
@@ -50,9 +40,8 @@ class PostUploadForm(forms.ModelForm):
                     )
             
             mime_type = get_mime_type(media_content.file)
-            for allowed in settings.ALLOWED_MEDIA_FILE_TYPES:
-                if allowed == mime_type:
-                    return media_content
+            if mime_type in settings.ALLOWED_MEDIA_FILE_TYPES:
+                return media_content
             
             raise forms.ValidationError(
                 self.error_messages['media_bad_file'].format(mime_type),
@@ -70,9 +59,8 @@ class PostUploadForm(forms.ModelForm):
                     )
             
             mime_type = get_mime_type(thumbnail.file)
-            for allowed in settings.ALLOWED_IMAGE_FILE_TYPES:
-                if allowed == mime_type:
-                    return thumbnail
+            if mime_type in settings.ALLOWED_IMAGE_FILE_TYPES:
+                return thumbnail
             
             raise forms.ValidationError(
                 self.error_messages['media_bad_file'].format(mime_type),
