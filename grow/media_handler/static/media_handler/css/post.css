@@ -23,7 +23,21 @@ body {
 
 .video-stats-head {
     padding: 1rem;
+    display: flex;
+    justify-content: space-between;
 }
 .video-title {
     font-size: 1.5rem;
+}
+
+.video-stats-right {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+.video-saved {
+    margin: 0 1rem;
+    cursor: pointer;
+}
+.video-saved.saved {
+    color: hsl(0, 100%, 40%);
 }

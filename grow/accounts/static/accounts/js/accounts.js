@@ -41,7 +41,7 @@ function registerForm()
     if (email.value == "" || email.value == null)
     {
         email.style.border = "2px solid red";
-        popup("Please fill in your email.");
+        popup("Please fill in your email.", "danger");
         return;
     }
 
@@ -56,34 +56,37 @@ function registerForm()
     if (!validateEmail(email.value))
     {
         email.style.border = "2px solid red";
-        popup("Email is not valid.");
+        popup("Email is not valid.", "danger");
         return;
     }
 
     if (pwd1.value == "" || pwd1.value == null)
     {
         pwd1.style.border = "2px solid red";
-        popup("Please fill in your password.");
+        popup("Please fill in your password.", "danger");
+        return;
+    }
+    if (pwd1.value.length < 8)
+    {
+        pwd1.style.border = "2px solid red";
+        popup("Password must be at least 8 characters long.", "danger");
         return;
     }
     if (pwd2.value == "" || pwd2.value == null)
     {
         pwd2.style.border = "2px solid red";
-        popup("Please confirm your password.");
+        popup("Please confirm your password.", "danger");
         return;
     }
     if (pwd1.value != pwd2.value)
     {
         pwd1.style.border = "2px solid red";
         pwd2.style.border = "2px solid red";
-        popup("Passwords don't match.");
+        popup("Passwords don't match.", "danger");
         return;
     }
 
-    if (pwd1.value.length < 8)
-    {
-        return;
-    }
+    document.getElementById('register-btn').disabled = false;
     document.getElementsByClassName('register-form')[0].classList.add('active');
 }
 

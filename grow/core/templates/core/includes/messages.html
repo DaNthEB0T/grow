@@ -1,8 +1,3 @@
 {% for message in messages %}
-<div class="popup {{message.tags}}">
-  <div type="button" class="close d-inline" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true" onclick="document.getElementsByClassName('popup')[0].remove()"><i class="fas fa-times"></i></span>
-  </div>
-  {{ message }}
-</div>
+<script defer>popup('{{ message }}', '{{ message.tags }}')</script>
 {% endfor %}
