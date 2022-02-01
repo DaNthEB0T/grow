@@ -65,5 +65,13 @@ function removePopup(level)
         
     setTimeout(function() { 
         m.classList.add("closed");
+
+        element = document.querySelector('.popup.closed');
+        style = getComputedStyle(element);
+        transition = parseFloat(style.animationDuration) * 1000;
+
+        setTimeout(function() {
+            m.remove();
+        }, transition)
     }, timeOut);
 }
