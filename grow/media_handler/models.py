@@ -11,6 +11,7 @@ from django.utils.crypto import get_random_string
 import os
 from io import BytesIO
 import time
+from .library import *
 
 logger = logging.getLogger(__name__)
 
@@ -20,6 +21,10 @@ class Media(models.Model):
     
     upload = models.FileField(upload_to=user_directory_path)
     author = models.ForeignKey(GrowUser, on_delete=models.SET_NULL, null=True, blank=True, related_name="medias")
+    
+    @property
+    def mime_type(self):
+        return get_mime_type(self.upload.file)
     
     @classmethod
     def integrity_check(cls, **kwargs):
@@ -39,12 +44,6 @@ class Media(models.Model):
 class Image(models.Model):
     def user_directory_path(instance, filename):
         return time.strftime(f"user_{instance.author.id}/%d_%m_%Y/img/{filename}") 
-
-    @classmethod
-    def integrity_check(cls, **kwargs):
-        for i in Image.objects.all():
-            if not (os.path.isfile(i.image.path) and os.path.isfile(i.thumbnail.path)):
-                logger.error(f"Object {i} has no image file at {i.image.path} or {i.thumbnail.path}")
     
     author = models.ForeignKey(GrowUser, on_delete=models.SET_NULL, null=True, blank=True, related_name="images")    
     image = models.ImageField(
@@ -57,6 +56,16 @@ class Image(models.Model):
         null=True,
         blank=True
     )
+    
+    @property
+    def mime_type(self):
+        return get_mime_type(self.image.file)
+    
+    @classmethod
+    def integrity_check(cls, **kwargs):
+        for i in Image.objects.all():
+            if not (os.path.isfile(i.image.path) and os.path.isfile(i.thumbnail.path)):
+                logger.error(f"Object {i} has no image file at {i.image.path} or {i.thumbnail.path}")
 
     def create_thumbnail(self):
         # original code for this method came from

@@ -185,14 +185,14 @@ LOGGING = {
 }
 
 # Uploading files MIME (Multipurpose Internet Mail Extensions)
-ALLOWED_MEDIA_FILE_TYPES = [
+ALLOWED_MEDIA_FILE_TYPES = {
     "video/mp4", "video/x-msvideo", "video/x-ms-asf", "video/x-ms-wmv",
     "video/quicktime", "audio/x-ms-wma", "audio/mpeg", "audio/mp3",
     "audio/wav", "audio/x-wav", "audio/m4a", "audio/mp4"
-]
-ALLOWED_IMAGE_FILE_TYPES = [
+}
+ALLOWED_IMAGE_FILE_TYPES = {
     "image/jpeg", "image/x-citrix-jpeg", "image/png", "image/webp",
-]
+}
 MAX_MEDIA_FILE_SIZE = 4294967296 # 4 GB
 MAX_IMAGE_FILE_SIZE = 4194304 # 4 MB
 
