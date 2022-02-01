@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 class Media(models.Model):
     def user_directory_path(instance, filename):
-        return time.strftime("user_{0}/%d_%m_%Y/med/{1}".format(instance.author.id, filename)) 
+        return time.strftime(f"user_{instance.author.id}/%d_%m_%Y/med/{filename}") 
     
     upload = models.FileField(upload_to=user_directory_path)
     author = models.ForeignKey(GrowUser, on_delete=models.SET_NULL, null=True, blank=True, related_name="medias")
