@@ -79,22 +79,12 @@ function registerForm()
         popup("Passwords don't match.");
         return;
     }
-    document.getElementsByClassName('register-form')[0].classList.add('active');
-}
 
-/**
- * Displays a small dismissable popup message at top of screen
- */
-function popup(m)
-{
-    if (document.getElementsByClassName("popup")[0] != null)
+    if (pwd1.value.length < 8)
     {
-        document.getElementsByClassName("popup")[0].remove();
+        return;
     }
-    var popup = document.createElement("DIV");
-    popup.innerHTML = m + '<i class="fas fa-times" onclick="document.getElementsByClassName(\'popup\')[0].remove()"></i>';
-    popup.classList.add('popup');
-    document.getElementsByTagName("BODY")[0].appendChild(popup);
+    document.getElementsByClassName('register-form')[0].classList.add('active');
 }
 
 window.onload = function ()
