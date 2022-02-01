@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
 from .forms import ImageUploadForm, PostUploadForm
+from .models import Post
 
 # Create your views here.
 
@@ -32,5 +33,10 @@ def post_handle_view(request):
     return render(request, "media_handler/postu.html", context)
 
 @login_required
-def post_view(request):
-    return render(request, "media_handler/post.html")
+def post_view(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    
+    context = {}
+    context['post'] = post
+    
+    return render(request, "media_handler/post.html", context)

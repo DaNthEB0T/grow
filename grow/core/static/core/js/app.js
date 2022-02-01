@@ -23,7 +23,7 @@ function popup(m)
 /**
  * Displays a small dismissable popup message at top of screen
  */
-function popup(m, c)
+function popup(m, level)
 {
     if (document.getElementsByClassName("popup")[0] != null)
     {
@@ -32,15 +32,38 @@ function popup(m, c)
     var popup = document.createElement("DIV");
     popup.innerHTML = m + '<i class="fas fa-times" onclick="document.getElementsByClassName(\'popup\')[0].remove()"></i>';
     popup.classList.add('popup');
-    popup.classList.add(c);
+    popup.classList.add(level);
     document.getElementsByTagName("BODY")[0].appendChild(popup);
 
-    removePopup();
+    removePopup(level);
 }
 
-function removePopup()
+function removePopup(level)
 {
-    setTimeout(function () {
-      document.getElementsByClassName("popup")[0].remove();
-    }, 7000);
+    m = document.getElementsByClassName("popup")[0];
+    timeOut = -1;
+    switch (level) {
+        case "success":
+            timeOut = 3000;
+            break;
+        case "secondary":
+            timeOut = 4000;
+            break;
+        case "danger":
+            break;
+        case "warning":
+            timeOut = 10000;
+            break;
+        case "info":
+            timeOut = 7000;
+            break;
+        default:
+            break;
+    }
+    if(timeOut < 0)
+        return;
+        
+    setTimeout(function() { 
+        m.classList.add("closed");
+    }, timeOut);
 }

@@ -1,3 +1,5 @@
 {% for message in messages %}
-<script defer>popup('{{ message }}', '{{ message.tags }}')</script>
+<script defer>
+    popup('{{ message }}', '{{ message.tags }}');
+</script>
 {% endfor %}
