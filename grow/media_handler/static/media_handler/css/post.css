@@ -18,7 +18,7 @@ body {
     justify-content: center;
 }
 .video video {
-    max-width: 150vh;
+    max-width: 155vh;
     width: 90%;
     min-width: 50%;
 }
@@ -86,5 +86,133 @@ body {
 /* BOTTOM */
 
 .recommended-posts {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    padding: 1rem;
+}
 
+
+/* TRANSFERRED FROM dashboard.css */
+
+.resource {
+    aspect-ratio: 4/3;
+    margin: 1rem;
+    position: relative;
+    background: #0001;
+    border-radius: 7px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+.resource-thumbnail {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.resource:hover .resource-thumbnail {
+    transform: scale(1.1);
+}
+.resource-shadow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to top, black, #0004, #0004, black);
+    opacity: 0.3;
+    z-index: 1;
+    transition: opacity 0.5s ease;
+}
+.resource:hover .resource-shadow {
+    opacity: 0.4;
+}
+.resource-info, .resource-title, .resource-save, .resource-tags {
+    position: absolute;
+    z-index: 2;
+    color: #fff;
+    text-shadow: 0 0 2px #444;
+    font-weight: bold;
+}
+.resource-info {
+    top: calc(1rem + 2vw);
+    font-size: 1vw;
+    opacity: 0.7;
+    font-weight: normal;
+}
+.resource-title {
+    top: 0.5rem;
+    font-size: 1vw;
+    max-width: 80%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.big-tile .resource-title {
+    font-size: 2vw;
+}
+.resource-tags {
+    opacity: 0.7;
+    max-width: 90%;
+    bottom: 0.5rem;
+    left: 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: opacity 0.5s ease;
+}
+.resource:hover .resource-tags {
+    opacity: 1;
+}
+.resource-save {
+    opacity: 0;
+    bottom: -2rem;
+    font-size: 1.1rem;
+    transition: opacity 0.5s ease, bottom 0.5s ease;
+    background-color: #0007;
+    padding: 0.3rem 0.7rem;
+    border-radius: 5px;
+    right: 1rem;
+}
+.resource:hover .resource-save {
+    opacity: 1;
+    bottom: 0.5rem;
+}
+
+.small-show {
+    display: none;
+}
+
+@media screen and (max-width: 1200px) {
+    .recommended-posts {
+        grid-template-columns: 50% 50%;
+    }
+
+    .resource-title {
+        font-size: 2vw;
+    }
+    .resource-info {
+        font-size: 2vw;
+        top: calc(1rem + 4vw);
+    }
+}
+@media screen and (max-width: 800px) {
+    .recommended-posts {
+        grid-template-columns: 100%;
+    }
+
+    .resource-title {
+        font-size: 4vw;
+    }
+
+    .resource-save {
+        opacity: 1 !important;
+        bottom: 0.5rem !important;
+    }
+
+    .small-show {
+        display: initial;
+    }
 }
