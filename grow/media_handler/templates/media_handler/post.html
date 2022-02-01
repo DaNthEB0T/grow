@@ -13,34 +13,47 @@
         {% include 'components/sidebar.html' %}
 
         <div class="content">
-            <!-- IF VIDEO -->
-            <div class="video-container">
-                <div class="video">
-                    <video class="ratio ratio-16x9" controls>
-                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="video-stats">
-                    <div class="video-stats-head">
-                        <span class="video-title">{{ post.title }}</span>
-                        <div class="video-stats-right">
-                            <span id="post-save" title="Save post" data-toggle="tooltip" class="video-saved" onclick="save()">0 <i class="far fa-bookmark"></i></span>
+            {% if post.media_content and "video" in post.media_content.mime_type %}
+                <div class="video-container">
+                    <div class="video">
+                        <video id="video" class="ratio ratio-16x9" controls>
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        </video>
+                        <!--div class="controls" onclick="pauseVid()">
+                            <div class="bottom-bar" onclick="event.stopPropagation()">
+                                <div class="pause" onclick="pauseVid()"><i class="fas fa-play"></i></div>
+                                <div class="mute" onclick="muteVid()"><i class="fas fa-volume-down"></i></div>
+                            </div>
+                        </div-->
+                    </div>
+                    <div class="video-stats">
+                        <div class="video-stats-head">
+                            <span class="video-title">{{ post.title }}</span>
+                            <div class="video-stats-right">
+                                <span id="post-save" title="Save post" data-toggle="tooltip" class="video-saved" onclick="save()">0 <i class="far fa-bookmark"></i></span>
+                            </div>
+                        </div>
+                        <div class="video-stats-bottom">
+                            <span class="upload-date">Published: {{ post.created_on }}</span>
+                            <span class="tags">
+                                {% for tag in post.tags.all %}
+                                <span class="tag">{{ tag }}</span>
+                                {% endfor %}
+                            </span>
+                        </div>
+                        <div class="video-description">
+                            {{ post.description | markdown | safe }}
                         </div>
                     </div>
-                    <div class="video-stats-bottom">
-                        <span class="upload-date">Published: {{ post.created_on }}</span>
-                        <span class="tags">
-                            {% for tag in post.tags.all %}
-                            <span class="tag">{{ tag }}</span>
-                            {% endfor %}
-                        </span>
-                    </div>
-                    <div class="video-description">
-                        {{ post.description | markdown | safe }}
-                    </div>
                 </div>
-            </div>
-            <!-- ENDIF -->
+            {% else %}
+                <div class="media-container">
+                    {% if post.thumbnail %}
+                        <img src="{{ post.thumbnail.image.path }}">
+                    {% endif %}
+                </div>
+            {% endif %}
+            
             <span class="w-100 text-center d-inline-block h3 mb-0 mt-3">Recommended</span>
             <div class="recommended-posts">
                 <div class="resource">

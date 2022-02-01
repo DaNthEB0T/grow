@@ -16,3 +16,34 @@ function save()
     var newnum = num + 1;
     document.getElementById('post-save').innerHTML = icon.innerHTML.replace("" + num, "" + newnum);
 }
+
+// VIDEO HANDLING
+function pauseVid()
+{
+    var vid = document.getElementById("video");;
+    if (vid.paused)
+    {
+        vid.play();
+        $('.pause').get(0).innerHTML = '<i class="fas fa-pause"></i>';
+    }
+    else
+    {
+        vid.pause();
+        $('.pause').get(0).innerHTML = '<i class="fas fa-play"></i>';
+    }
+}
+
+function muteVid()
+{
+    var vid = document.getElementById("video");
+    if (vid.muted)
+    {
+        vid.muted = false;
+        $('.mute').get(0).innerHTML = '<i class="fas fa-volume-down"></i>';
+    }
+    else
+    {
+        vid.muted = true;
+        $('.mute').get(0).innerHTML = '<i class="fas fa-volume-mute"></i>';
+    }
+}
