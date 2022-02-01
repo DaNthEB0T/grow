@@ -22,5 +22,8 @@ body {
 }
 
 .video-stats-head {
-    width: 95%;
+    padding: 1rem;
+}
+.video-title {
+    font-size: 1.5rem;
 }
