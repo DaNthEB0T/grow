@@ -7,9 +7,9 @@
         <form enctype="multipart/form-data" method="POST"> {% csrf_token %}
                     
             {% for field in form %}
-                <div class="form-input-container">
-                    {{field}}
+                <div class="my-2">
                     {{field.label_tag}}
+                    {{field}}
 
                     {% for error in field.errors %}
                         <p style="color: red;">{{error}}</p>                    
