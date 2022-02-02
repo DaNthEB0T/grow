@@ -7,7 +7,7 @@ from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from taggit.managers import TaggableManager
 from django.utils.crypto import get_random_string
-from django.db.models import Count
+from django.db.models import Count, Case, When
 import os
 from io import BytesIO
 import time
@@ -202,7 +202,7 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
             os.remove(old_thumbnail.path)
     
     Media.clean()
-
+    
 
 STATUS = (
     (0, "Draft"),
@@ -220,25 +220,43 @@ class Post(models.Model):
     thumbnail = models.ForeignKey(Image, on_delete=models.SET_NULL, default=None, null=True, blank=True, related_name="post_parent")
     saved = models.ManyToManyField(GrowUser, default=None, blank=True, related_name="saved_posts")
     watch_later = models.ManyToManyField(GrowUser, default=None, blank=True, related_name="watch_later_posts")
-    history = models.ManyToManyField(GrowUser, default=None, blank=True, related_name="post_history")
+    history = models.ManyToManyField(GrowUser, default=None, blank=True, through="PostHistoryManager", related_name="post_history")
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
     tags = TaggableManager(blank=True)
     
     class Meta:
-        ordering = ['-created_on']
+        ordering = ['created_on']
         
     @classmethod
-    def get_recommended_posts(cls, user, **kwargs):
+    def get_recommended_posts(cls, user):
         if user.post_history.all():
             pass
             
         else:
             pass
         
+    # Return user history ordered by ascending timestamp
     @classmethod
-    def order_by_popularity(cls, **kwargs):
-        return Post.objects.annotate(fame=Count("history")).order_by("-fame")
+    def get_user_history(cls, user):
+        pks = PostHistoryManager.objects.filter(user=user).values_list("post", flat=True)
+        preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(pks)])
+        return Post.objects.filter(pk__in=pks).order_by(preserved)      
+        
+    # Return ordered by distinct view count
+    @classmethod
+    def order_by_popularity(cls, ascending=False):
+        return Post.objects.annotate(fame=Count("history")).order_by(("" if ascending else "-") + "fame")
+    
+    # Return ordered by saved count
+    @classmethod
+    def order_by_saved_count(cls, ascending=False):
+        return Post.objects.annotate(saved_count=Count("saved")).order_by(("" if ascending else "-") + "saved_count")
+    
+    # Return ordered by count in "watch later"
+    @classmethod
+    def order_by_watchlist_count(cls, ascending=False):
+        return Post.objects.annotate(watchlist_count=Count("watch_later")).order_by(("" if ascending else "-") + "watchlist_count")
     
     # Distinct view count (1 per each user)
     @property
@@ -269,3 +287,12 @@ def auto_delete_media_on_delete(sender, instance, **kwargs):
             
     if instance.thumbnail:
         instance.thumbnail.delete()
+        
+        
+class PostHistoryManager(models.Model):
+    user = models.ForeignKey(GrowUser, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    created_on = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['created_on']
