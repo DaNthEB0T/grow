@@ -2,20 +2,25 @@
 {% load static %}
 
 {% block body %}
-<form enctype="multipart/form-data" method="POST"> {% csrf_token %}
-            
-    {% for field in form %}
-            {{field.label_tag}}
-            {{field}}
+<div class="full-bg d-flex justify-content-center align-items-center" style="background-image:url({% static 'core/images/unverified-bg.png' %});">
+    <div class="form-box m-auto d-flex flex-column">
+        <form enctype="multipart/form-data" method="POST"> {% csrf_token %}
+                    
+            {% for field in form %}
+                <div class="form-input-container">
+                    {{field}}
+                    {{field.label_tag}}
 
-            {% for error in field.errors %}
-                <p style="color: red;">{{error}}</p>                    
+                    {% for error in field.errors %}
+                        <p style="color: red;">{{error}}</p>                    
+                    {% endfor %}
+                </div>
+
             {% endfor %}
-
-
-    {% endfor %}
-    <div class="button-container">
-        <button class="btn btn-success" type="submit"> Submit </button>
+            <div class="button-container">
+                <button class="btn btn-success" type="submit"> Submit </button>
+            </div>
+        </form>
     </div>
-</form>
+</div>
 {% endblock body %}
