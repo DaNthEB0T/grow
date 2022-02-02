@@ -1,0 +1,39 @@
+:root {
+    --primary: hsl(92, 30%, 36%);
+    --primary-s: 30%;
+}
+
+.form-group {
+    width: 100%;
+    padding: 2rem;
+}
+.form-group label {
+    width: 100%;
+}
+.form-group input, .form-group textarea, .form-group select {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: white;
+    padding: 0.7rem 1rem;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+.form-group input[type=text] {
+    
+}
+
+
+#preview-img {
+    aspect-ratio: 4/3;
+    width: 20rem;
+    max-width: 90%;
+    min-width: 50%;
+    margin: auto;
+    display: block;
+    border-radius: 7px;
+    overflow: hidden;
+    object-fit: cover;
+    background-color: #eee;
+    border: none;
+    text-align: center;
+}
