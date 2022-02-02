@@ -7,6 +7,7 @@ from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from taggit.managers import TaggableManager
 from django.utils.crypto import get_random_string
+from django.db.models import Count
 import os
 from io import BytesIO
 import time
@@ -235,9 +236,15 @@ class Post(models.Model):
         else:
             pass
         
+    @classmethod
+    def order_by_popularity(cls, **kwargs):
+        return Post.objects.annotate(fame=Count("history")).order_by("-fame")
+    
+    # Distinct view count (1 per each user)
     @property
-    def popularity_index(self):
-        return self.post_history.count()
+    def popularity(self):
+        return self.history.count()
+    
         
     def save(self, *args, **kwargs):    
         while True:
