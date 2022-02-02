@@ -343,10 +343,19 @@ input:not(:placeholder-shown) {
 }
 
 .full-bg {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-size: cover;
   background-position: center;
+}
+
+.generic-content {
+  background-color: #fff4;
+  padding: 1rem 2rem;
+  border: 1px solid #0001;
+  border-radius: 7px;
+  position: relative;
+  font-size: 1.1rem;
 }
 
 /*
