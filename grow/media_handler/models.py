@@ -11,7 +11,7 @@ from django.utils.crypto import get_random_string
 import os
 from io import BytesIO
 import time
-from .library import *
+from .library import get_mime_type
 
 logger = logging.getLogger(__name__)
 
@@ -231,7 +231,7 @@ class Post(models.Model):
         while True:
             self.slug = get_random_string(length=10)
             if not Post.objects.filter(slug=self.slug).exists():
-                logger.debug(f"Slug: {self.slug}")
+                logger.info(f"Slug: {self.slug}")
                 break
         
         super(Post, self).save(*args, **kwargs) 
