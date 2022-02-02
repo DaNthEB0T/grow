@@ -76,38 +76,16 @@
     
     <script>
         $(function($){
-            var initialSaved = "{{ saved|yesno:"1,0" }}";
             var saveButton = $("#post-save");
-            if(initialSaved == true){
+            {% if saved %}
                 saveButton.addClass("saved")
-            }
+            {% endif %}
 
-            $('#post-save').click(function(){
-                var saveCount = $("#saved-count")
-                $.ajax({
-                    type: "POST",
-                    url: "{% url 'media_handler:post_save' slug=post.slug  %}",
-                    data: {
-                        'csrfmiddlewaretoken': "{{ csrf_token }}"
-                    },
-                    dataType: "json",
-                    success: function(response) {
-                        selector = document.getElementsByName(response.content_id);
-                        if(response.saved == true){
-                            saveButton.addClass("saved");
-                            saveCount.text(function() {
-                                return $(this).text().replace($(this).text(), parseInt($(this).text()) + 1); 
-                            });
-                        }
-                        else if(response.saved == false){
-                            saveButton.removeClass("saved");
-                            saveCount.text(function() {
-                                return $(this).text().replace($(this).text(), parseInt($(this).text()) - 1); 
-                            });
-                        }
-                    }
-                });
-            })
+            console.log($)
+            
+            $(saveButton).click(function(){
+                $(saveEvent("{% url 'media_handler:post_save' slug=post.slug  %}", "{{ csrf_token }}", saveButton));
+            });
         });
     </script>
 {% endblock body %}

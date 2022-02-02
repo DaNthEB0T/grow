@@ -42,3 +42,52 @@ function muteVid()
         $('.mute').get(0).innerHTML = '<i class="fas fa-volume-mute"></i>';
     }
 }
+
+function saveEvent(url, csrfToken, sender) { 
+    var saveCount = $("#saved-count")
+    var saveButton = sender
+    console.log($)
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            'csrfmiddlewaretoken': csrfToken
+        },
+        dataType: "json",
+        success: function(response) {
+            if(response.saved == true){
+                saveButton.addClass("saved");
+                saveCount.text(function() {
+                    return $(this).text().replace($(this).text(), parseInt($(this).text()) + 1); 
+                });
+            }
+            else if(response.saved == false){
+                saveButton.removeClass("saved");
+                saveCount.text(function() {
+                    return $(this).text().replace($(this).text(), parseInt($(this).text()) - 1); 
+                });
+            }
+        }
+    });
+}
+
+function watchlistEvent(url, csrfToken, sender) { 
+    console.log($)
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            'csrfmiddlewaretoken': csrfToken
+        },
+        dataType: "json",
+        success: function(response) {
+            selector = document.getElementsByName(response.content_id);
+            if(response.added == true){
+
+            }
+            else if(response.added == false){
+
+            }
+        }
+    });
+}

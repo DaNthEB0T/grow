@@ -1,5 +1,4 @@
 import logging
-from re import L
 from django.db import models
 from accounts.models import GrowUser
 from PIL import Image as Im
@@ -214,11 +213,13 @@ class Post(models.Model):
     slug = models.SlugField(max_length=10, unique=True)
     author = models.ForeignKey(GrowUser, on_delete=models.SET_NULL, null=True, blank=True, related_name='posts')
     updated_on = models.DateTimeField(auto_now=True)
-    description = models.TextField(null=True, blank=True)
+    description = models.TextField(max_length=1000, null=True, blank=True)
     media_content = models.ForeignKey(Media, on_delete=models.SET_NULL, default=None, null=True, blank=True, related_name="post")
     prequel = models.ForeignKey("self", on_delete=models.SET_NULL, default=None, null=True, blank=True, related_name="sequel")
     thumbnail = models.ForeignKey(Image, on_delete=models.SET_NULL, default=None, null=True, blank=True, related_name="post_parent")
     saved = models.ManyToManyField(GrowUser, default=None, blank=True, related_name="saved_posts")
+    watch_later = models.ManyToManyField(GrowUser, default=None, blank=True, related_name="watch_later_posts")
+    history = models.ManyToManyField(GrowUser, default=None, blank=True, related_name="post_history")
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
     tags = TaggableManager(blank=True)
@@ -226,8 +227,19 @@ class Post(models.Model):
     class Meta:
         ordering = ['-created_on']
         
-    def save(self, *args, **kwargs):
+    @classmethod
+    def get_recommended_posts(cls, user, **kwargs):
+        if user.post_history.all():
+            pass
+            
+        else:
+            pass
         
+    @property
+    def popularity_index(self):
+        return self.post_history.count()
+        
+    def save(self, *args, **kwargs):    
         while True:
             self.slug = get_random_string(length=10)
             if not Post.objects.filter(slug=self.slug).exists():
