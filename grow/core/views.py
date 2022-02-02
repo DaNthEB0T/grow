@@ -27,7 +27,7 @@ def unvalidated_view(request):
     if request.POST:
         if "resend_verification" in request.POST:
             send_verification_email(request, request.user)
-            messages.info(request, _("Validation email has been sent"))    
+            messages.info(request, _("Validation email has been sent"))
     
     return render(request, "core/unvalidated.html", context)
 
