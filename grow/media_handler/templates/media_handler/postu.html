@@ -3,24 +3,26 @@
 
 {% block body %}
 <div class="full-bg d-flex justify-content-center align-items-center" style="background-image:url({% static 'core/images/unverified-bg.png' %});">
-    <div class="form-box m-auto d-flex flex-column">
-        <form enctype="multipart/form-data" method="POST"> {% csrf_token %}
-                    
-            {% for field in form %}
-                <div class="my-2">
-                    {{field.label_tag}}
-                    {{field}}
+    <div class="generic-content">
+        <div class="form-box w-75 m-auto d-flex flex-column">
+            <form enctype="multipart/form-data" method="POST"> {% csrf_token %}
+                        
+                {% for field in form %}
+                    <div class="my-2">
+                        {{field.label_tag}}
+                        {{field}}
 
-                    {% for error in field.errors %}
-                        <p style="color: red;">{{error}}</p>                    
-                    {% endfor %}
+                        {% for error in field.errors %}
+                            <script>popup("{{ error }}", "danger")</script>                  
+                        {% endfor %}
+                    </div>
+
+                {% endfor %}
+                <div class="button-container">
+                    <button class="btn btn-success" type="submit"> Submit </button>
                 </div>
-
-            {% endfor %}
-            <div class="button-container">
-                <button class="btn btn-success" type="submit"> Submit </button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock body %}
