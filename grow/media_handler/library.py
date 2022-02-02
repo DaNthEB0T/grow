@@ -1,4 +1,4 @@
-import magic
+import magic 
 
 def get_mime_type(file):
     """

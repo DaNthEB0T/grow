@@ -1,5 +1,8 @@
+import json
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from .forms import ImageUploadForm, PostUploadForm
 from .models import Post
 
@@ -35,8 +38,32 @@ def post_handle_view(request):
 @login_required
 def post_view(request, slug):
     post = get_object_or_404(Post, slug=slug)
+    user = request.user
+    saved = post in user.saved_posts.all()
     
     context = {}
     context['post'] = post
+    context['saved'] = saved
     
     return render(request, "media_handler/post.html", context)
+
+@login_required
+@require_POST
+def post_save_view(request, slug):
+    if request.POST:
+        post = get_object_or_404(Post, slug=slug)
+        
+        context = {}
+        
+        user = request.user
+        if post in user.saved_posts.all():
+            user.saved_posts.remove(post)
+            saved = False
+        else:
+            user.saved_posts.add(post)
+            saved = True
+        user.save()
+        
+        context['saved'] = saved
+        return HttpResponse(json.dumps(context), content_type="application/json")
+        
