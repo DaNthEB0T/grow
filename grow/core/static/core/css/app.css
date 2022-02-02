@@ -2,7 +2,10 @@
     --block-bg: 255, 255, 255;
     --block-color: #333;
     --block-opacity: 0.8;
-    --primary: #57b900;
+    --primary: hsl(92, 100%, 36%);
+    --primary-h: 92;
+    --primary-s: 100%;
+    --primary-l: 36%;
 }
 
 body {
@@ -87,9 +90,9 @@ input:not(:placeholder-shown) {
   font-size: 1.2rem;
   background-image: linear-gradient(
     150deg,
-    rgb(0, 201, 0),
-    green,
-    rgb(0, 150, 0)
+    hsl(calc(var(--primary-h) + 30), var(--primary-s), var(--primary-l)),
+    hsl(calc(var(--primary-h) + 30), var(--primary-s), calc(var(--primary-l) - 15%)),
+    hsl(calc(var(--primary-h) + 30), var(--primary-s), calc(var(--primary-l) - 10%))
   );
   transition: 0.5s;
   background-size: 200% auto;
@@ -105,9 +108,9 @@ input:not(:placeholder-shown) {
   content: "";
   background-image: linear-gradient(
     150deg,
-    rgb(0, 201, 0),
-    green,
-    rgb(0, 150, 0)
+    hsl(calc(var(--primary-h) + 30), var(--primary-s), var(--primary-l)),
+    hsl(calc(var(--primary-h) + 30), var(--primary-s), calc(var(--primary-l) - 15%)),
+    hsl(calc(var(--primary-h) + 30), var(--primary-s), calc(var(--primary-l) - 10%))
   );
   transition: 0.5s;
   background-size: 200% auto;
@@ -151,7 +154,7 @@ input:not(:placeholder-shown) {
     left: 0;
     width: 15rem;
     height: 100vh;
-    background-image: linear-gradient(230deg, #57b900, #57b900b0);
+    background-image: linear-gradient(230deg, var(--primary), hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.69));
 
     display: flex;
     flex-direction: column;
@@ -300,11 +303,14 @@ input:not(:placeholder-shown) {
   z-index: 999;
   animation-name: popup;
   animation-duration: 0.5s;
+  margin-top: 0;
+  transition: margin-top 0.2s ease;
 }
 .popup.closed {
   animation-name: popup-fade;
   animation-duration: 0.5s;
   top: -3rem;
+  opacity: 0;
 }
 .popup.success {
   color: #155724;

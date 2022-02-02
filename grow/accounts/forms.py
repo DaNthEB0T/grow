@@ -19,6 +19,11 @@ class GrowUserRegistrationForm(UserCreationForm):
     last_name = forms.CharField(label=_("Last name"), widget=forms.TextInput(attrs={'placeholder': " ", 'id': "register_last_name"}))
     password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput(attrs={'placeholder': " ", 'id': "register_password1"}))
     password2 = forms.CharField(label=_("Confirm password"), widget=forms.PasswordInput(attrs={'placeholder': " ", 'id': "register_password2"}))
+
+    def __init__(self, *args, **kwargs):
+        super(GrowUserRegistrationForm, self).__init__(*args, **kwargs)  
+        self.label_suffix = ""
+
     class Meta:
         model = GrowUser
         fields = ("email", "username", "first_name", "last_name", "password1", "password2")
