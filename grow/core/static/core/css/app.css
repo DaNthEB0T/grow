@@ -300,11 +300,14 @@ input:not(:placeholder-shown) {
   z-index: 999;
   animation-name: popup;
   animation-duration: 0.5s;
+  margin-top: 0;
+  transition: margin-top 0.2s ease;
 }
 .popup.closed {
   animation-name: popup-fade;
   animation-duration: 0.5s;
   top: -3rem;
+  opacity: 0;
 }
 .popup.success {
   color: #155724;

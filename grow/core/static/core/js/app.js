@@ -5,42 +5,48 @@ $(document).ready(function(){
 
 /**
  * Displays a small dismissable popup message at top of screen
- */
+ *
 function popup(m)
 {
-    if (document.getElementsByClassName("popup")[0] != null)
-    {
-        document.getElementsByClassName("popup")[0].remove();
-    }
     var popup = document.createElement("DIV");
-    popup.innerHTML = m + '<i class="fas fa-times" onclick="document.getElementsByClassName(\'popup\')[0].remove()"></i>';
+    popup.innerHTML = m + '<i class="fas fa-times" onclick="this.parentElement.remove()"></i>';
     popup.classList.add('popup');
     document.getElementsByTagName("BODY")[0].appendChild(popup);
 
+    orderPopups();
+
     removePopup();
-}
+}*/
 
 /**
  * Displays a small dismissable popup message at top of screen
  */
-function popup(m, level)
+function popup(m, level = "white")
 {
-    if (document.getElementsByClassName("popup")[0] != null)
-    {
-        document.getElementsByClassName("popup")[0].remove();
-    }
     var popup = document.createElement("DIV");
-    popup.innerHTML = m + '<i class="fas fa-times" onclick="document.getElementsByClassName(\'popup\')[0].remove()"></i>';
+    popup.innerHTML = m + '<i class="fas fa-times" onclick="deletePopup(this.parentElement)"></i>';
     popup.classList.add('popup');
     popup.classList.add(level);
     document.getElementsByTagName("BODY")[0].appendChild(popup);
 
-    removePopup(level);
+    orderPopups();
+
+    removePopup(popup, level);
 }
 
-function removePopup(level)
+/**
+ * Sets margin values to popups in order
+ */
+function orderPopups()
 {
-    m = document.getElementsByClassName("popup")[0];
+    for (i = 0; i < document.getElementsByClassName('popup').length; i++)
+    {
+        document.getElementsByClassName('popup')[i].style.marginTop = (3.5*i) + "rem";
+    }
+}
+
+function removePopup(popup, level)
+{
     timeOut = -1;
     switch (level) {
         case "success":
@@ -64,14 +70,23 @@ function removePopup(level)
         return;
         
     setTimeout(function() { 
-        m.classList.add("closed");
+        popup.classList.add("closed");
 
         element = document.querySelector('.popup.closed');
         style = getComputedStyle(element);
         transition = parseFloat(style.animationDuration) * 1000;
 
         setTimeout(function() {
-            m.remove();
+            deletePopup(popup);
         }, transition)
     }, timeOut);
+}
+
+/**
+ * Fires when X is clicked on popup
+ */
+function deletePopup(el)
+{
+    el.remove();
+    orderPopups();
 }
