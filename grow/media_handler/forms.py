@@ -20,8 +20,9 @@ class PostUploadForm(forms.ModelForm):
         
     def __init__(self, *args, **kwargs):
         user = kwargs.pop("user")
-        self.author = user
         super(PostUploadForm, self).__init__(*args, **kwargs)
+        self.author = user
+        self.label_suffix = ""
         if user.posts:
             self.fields["prequel"].queryset = user.posts        
         
