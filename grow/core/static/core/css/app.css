@@ -378,15 +378,19 @@ input:not(:placeholder-shown) {
   display: none;
 }
 
+.big-tile .small-show {
+  display: initial;
+}
+
 
 @media screen and (max-width: 1200px) {
   .content {
-      grid-template-columns: 50% 50%;
+      grid-template-columns: 50% 50% !important;
   }
 
   .big-tile {
-      grid-column-start: 1;
-      grid-column-end: 3;
+      grid-column-start: 1 !important;
+      grid-column-end: 3 !important;
   }
 
   .resource-title {
@@ -402,12 +406,12 @@ input:not(:placeholder-shown) {
 }
 @media screen and (max-width: 800px) {
   .content {
-      grid-template-columns: 100%;
+      grid-template-columns: 100% !important;
   }
 
   .big-tile {
       grid-column-start: 1;
-      grid-column-end: 2;
+      grid-column-end: 2 !important;
   }
 
   .search {
@@ -429,7 +433,13 @@ input:not(:placeholder-shown) {
   }
 
   .small-show {
-      display: initial;
+      display: initial !important;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .small-show {
+    display: none !important;
   }
 }
 
@@ -492,6 +502,13 @@ input:not(:placeholder-shown) {
 }
 
 /**
+ * SimpleMDE
+ */
+.editor-toolbar {
+  background-color: #eee;
+}
+
+/**
  * Helping rules
  */
 .cursor-pointer {
@@ -512,6 +529,11 @@ input:not(:placeholder-shown) {
   border-radius: 7px;
   position: relative;
   font-size: 1.1rem;
+}
+
+.tiny-text {
+  font-size: 0.6rem;
+  line-height: 0.6rem;
 }
 
 /*
