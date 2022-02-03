@@ -3,6 +3,7 @@
 
 {% block head %}
     <link rel="stylesheet" type="text/css" href="{% static 'media_handler/css/creator.css' %}">
+    <script src="{% static 'media_handler/js/preview.js' %}" defer></script>
 {% endblock head %}
 
 {% block body %}
@@ -17,26 +18,30 @@
                     {{form.media_content.label_tag}}{{form.media_content}}{% for error in form.media_content.errors %}<script>popup("{{ error }}", "danger")</script>{% endfor %}
                     {{form.thumbnail.label_tag}}{{form.thumbnail}}{% for error in form.thumbnail.errors %}<script>popup("{{ error }}", "danger")</script>{% endfor %}
 
-                    <img id="preview-img" src="" alt="Thumbnail preview">
+                    <h5 class="w-100 text-center">Thumbnail preview</h5>
+                    <div class="big-tile resource resource-preview">
+                        <span id="preview-title" class="resource-title">Title</span>
+                        <span class="resource-tags">By {{ user.username }}</span>
+                        <span class="resource-save"><i class="fas fa-clock"></i> Save for later</span>
+                        <img id="preview-img" class="resource-thumbnail" src="" alt="Thumbnail preview">
+                        <div class="resource-shadow"></div>
+                    </div>
 
                     {{form.tags.label_tag}}{{form.tags}}{% for error in form.tags.errors %}<script>popup("{{ error }}", "danger")</script>{% endfor %}
-                    {{form.description.label_tag}}{{form.description}}{% for error in form.description.errors %}<script>popup("{{ error }}", "danger")</script>{% endfor %}
+                    {{form.description.label_tag}}
+                    <div class="tiny-text">Note: images are not supported in video posts.</div>                    
+                    {{form.description}}{% for error in form.description.errors %}<script>popup("{{ error }}", "danger")</script>{% endfor %}
                     {{form.prequel.label_tag}}{{form.prequel}}{% for error in form.prequel.errors %}<script>popup("{{ error }}", "danger")</script>{% endfor %}
                     {{form.status.label_tag}}{{form.status}}{% for error in form.status.errors %}<script>popup("{{ error }}", "danger")</script>{% endfor %}
-                <div class="button-container">
+                <div class="button-container my-4">
                     <button class="btn btn-success" type="submit"> Submit </button>
                 </div>
             </form>
         </div>
     </div>
     <script>
-        var input = document.getElementById("id_thumbnail");
-        var prev = document.getElementById("preview-img");
-        input.onchange = evt => {
-            const [file] = input.files
-            if (file) {
-                prev.src = URL.createObjectURL(file)
-            }
-        }
+        var simplemde = new SimpleMDE({ 
+            element: document.getElementById("id_description") 
+        });
     </script>
 {% endblock body %}

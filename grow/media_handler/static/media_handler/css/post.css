@@ -89,6 +89,9 @@ body {
 .video-description {
     padding: 1rem;
 }
+.video-description img {
+    display: none;
+}
 
 .tags {
     font-size: 0.9rem;
