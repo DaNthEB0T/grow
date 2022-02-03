@@ -38,14 +38,20 @@ def post_handle_view(request):
 
 @login_required
 def post_view(request, slug):
+    context = {}
+    
     post = get_object_or_404(Post, slug=slug)
     user = request.user
-    saved = post in user.saved_posts.all()
     
-    context = {}
+    if post in user.post_history.all():
+        user.post_history.remove(post)
+    user.post_history.add(post)
+    user.save()
+     
+    saved = post in user.saved_posts.all()
+
     context['post'] = post
     context['saved'] = saved
-    
     return render(request, "media_handler/post.html", context)
 
 @login_required
@@ -68,3 +74,22 @@ def post_save_view(request, slug):
         context['saved'] = saved
         return HttpResponse(json.dumps(context), content_type="application/json")
         
+@login_required
+@require_POST
+def watch_later_view(request, slug):
+    if request.POST:
+        post = get_object_or_404(Post, slug=slug)
+        
+        context = {}
+        
+        user = request.user
+        if post in user.watch_later_posts.all():
+            user.watch_later_posts.remove(post)
+            added = False
+        else:
+            user.watch_later_posts.add(post)
+            added = True
+        user.save()
+        
+        context['added'] = added
+        return HttpResponse(json.dumps(context), content_type="application/json")
