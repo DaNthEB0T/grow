@@ -1,3 +1,5 @@
+import logging
+from multiprocessing import context
 from django.contrib import messages
 import json
 from django.http import HttpResponse
@@ -53,6 +55,12 @@ def post_view(request, slug):
     context['post'] = post
     context['saved'] = saved
     return render(request, "media_handler/post.html", context)
+
+@login_required
+def history(request):
+    user = request.user
+    
+    return render(request, "media_handler/post_list/history.html")
 
 @login_required
 @require_POST
