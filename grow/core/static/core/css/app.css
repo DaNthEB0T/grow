@@ -191,7 +191,7 @@ input:not(:placeholder-shown) {
     background-color: #2d610010;
 }
 .sidebar-bottom .sidebar-link {
-    padding: 1.7rem 1rem;
+    padding: 1rem 1rem;
     padding-left: 2rem;
 }
 .sidebar-bottom .sidebar-link:hover, .sidebar-bottom .sidebar-link.active {
