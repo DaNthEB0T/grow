@@ -27,7 +27,14 @@
                         <div class="resource-shadow"></div>
                     </div>
 
-                    {{form.tags.label_tag}}{{form.tags}}{% for error in form.tags.errors %}<script>popup("{{ error }}", "danger")</script>{% endfor %}
+                    {{form.tags.label_tag}}
+                    <div class="tag-container" onclick="document.getElementById('tag-input').focus()">
+                        <span id="tags"></span>
+                        <input type="text" id="tag-input">
+                    </div>
+                    
+                    {{form.tags}}{% for error in form.tags.errors %}<script>popup("{{ error }}", "danger")</script>{% endfor %}
+
                     {{form.description.label_tag}}
                     <div class="tiny-text">Note: images are not supported in video posts.</div>                    
                     {{form.description}}{% for error in form.description.errors %}<script>popup("{{ error }}", "danger")</script>{% endfor %}

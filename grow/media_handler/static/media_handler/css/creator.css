@@ -19,6 +19,10 @@
     width: 100%;
     margin-bottom: 1rem;
 }
+.form-group input:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
 /* .form-group input[type=text] {
     
 } */
@@ -39,6 +43,45 @@
     cursor: initial;
 }
 
-.editor-toolbar {
+.tag-container {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: white;
+    padding: 0.7rem 1rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    position: relative;
+    cursor: text;
+    line-height: 1.7rem;
+}
+#tag-input {
+    border: none;
+    height: 100%;
+    width: 2rem;
+    padding: 0;
+    margin: 0;
+}
+#id_tags {
+    visibility: hidden;
+    position: absolute;
+    width: 0;
+}
+.edit-tag {
 
+}
+
+.width-calc {
+    position: absolute;
+    visibility: hidden;
+}
+
+#tags span {
+    padding: 0.2rem 0.4rem;
+    background-color: #ccc;
+    border-radius: 3px;
+    margin: 0 0.1rem;
+    color: #020;
+}
+#tags span i {
+    cursor: pointer;
 }
