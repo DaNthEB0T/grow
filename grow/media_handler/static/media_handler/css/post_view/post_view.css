@@ -1,13 +1,149 @@
-.content {
+.post-tiles-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+.title-between {
+    width: 95%;
+    margin-top: 1.5rem;
+    border-bottom: 1px solid #ccc;
+}
+
 .post-tile {
     width: 95%;
-    padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 7px;
     margin: 0.5rem 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    color: black !important;
+    transition: transform 0.5s ease;
+    position: relative;
+}
+.post-tile:hover {
+    transform: scale(0.95);
+}
+
+.post-overlay-link {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.post-thumbnail {
+    aspect-ratio: 4/3;
+    position: relative;
+    background: #0001;
+    overflow: hidden;
+}
+.post-thumbnail-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.post-thumbnail-shadow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to top, black, #0004, #0004, black);
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.post-content-container {
+    position: relative;
+    width: 75%;
+}
+
+.post-content-sizing {
+    padding-top: 25%;
+}
+
+.post-content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.post-title, .post-author {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.post-content-head {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-title {
+    font-size: 1.1rem;
+    line-height: 1.1rem;
+    font-weight: 600;
+}
+
+.post-saved {
+    font-weight: 700;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.post-author {
+    font-size: 0.9rem;
+    line-height: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.post-type {
+    font-size: 0.9rem;
+    line-height: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: #888;
+}
+
+.post-description {
+    font-size: 0.9rem;
+    line-height: 1rem;
+    overflow: hidden;
+    position: relative;
+}
+.post-description-fade {
+    height: 2rem;
+    position: absolute;
+    background-image: linear-gradient(to top, white, white, #fff0);
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+@media screen and (max-width: 800px) {
+    .post-tile {
+        flex-direction: column;
+    }
+
+    .post-thumbnail {
+        width: 100% !important;
+    }
+
+    .post-content-container {
+        width: 100%;
+    }
+
+    .post-content-sizing {
+        padding-top: 50%;
+    }
 }
