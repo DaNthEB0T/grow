@@ -1,0 +1,13 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post-tile {
+    width: 95%;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    margin: 0.5rem 0;
+}
