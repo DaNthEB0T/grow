@@ -8,10 +8,14 @@ from django.utils.translation import ugettext_lazy as _
 from taggit.managers import TaggableManager
 from django.utils.crypto import get_random_string
 from django.db.models import Count, Case, When
+import random
 import os
 from io import BytesIO
 import time
-from .library import get_mime_type
+from collections import defaultdict
+from .library import *
+from .recomai import get_similar_posts
+from .templatetags.markdown_extras import unmark
 
 logger = logging.getLogger(__name__)
 
@@ -128,25 +132,21 @@ class Image(models.Model):
         # Force an UPDATE SQL query if we're editing the image to avoid integrity exception
         super(Image, self).save(force_update=force_update)    
 
+# Deletes file from filesystem
+# when corresponding `Media` object is deleted.
 @receiver(models.signals.post_delete, sender=Media)
 def auto_delete_media_on_delete(sender, instance, **kwargs):
-    """
-    Deletes file from filesystem
-    when corresponding `Media` object is deleted.
-    """
     if instance.upload:
         if os.path.isfile(instance.upload.path):
             os.remove(instance.upload.path)
             
     Media.clean()
             
+# Deletes old file from filesystem
+# when corresponding `Media` object is updated
+# with new file.
 @receiver(models.signals.pre_save, sender=Media)
 def auto_delete_file_on_change(sender, instance, **kwargs):
-    """
-    Deletes old file from filesystem
-    when corresponding `Media` object is updated
-    with new file.
-    """
     if not instance.pk:
         return False
 
@@ -162,12 +162,11 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
             
     Media.clean()
 
+
+# Deletes file from filesystem
+# when corresponding `Image` object is deleted.
 @receiver(models.signals.post_delete, sender=Image)
 def auto_delete_media_on_delete(sender, instance, **kwargs):
-    """
-    Deletes file from filesystem
-    when corresponding `Image` object is deleted.
-    """
     if instance.image:
         if os.path.isfile(instance.image.path):
             os.remove(instance.image.path)
@@ -178,13 +177,11 @@ def auto_delete_media_on_delete(sender, instance, **kwargs):
     
     Media.clean()
 
+# Deletes old file from filesystem
+# when corresponding `Image` object is updated
+# with new file.
 @receiver(models.signals.pre_save, sender=Image)
 def auto_delete_file_on_change(sender, instance, **kwargs):
-    """
-    Deletes old file from filesystem
-    when corresponding `Image` object is updated
-    with new file.
-    """
     if not instance.pk:
         return False
 
@@ -219,7 +216,7 @@ class Post(models.Model):
     prequel = models.ForeignKey("self", on_delete=models.SET_NULL, default=None, null=True, blank=True, related_name="sequel")
     thumbnail = models.ForeignKey(Image, on_delete=models.SET_NULL, default=None, null=True, blank=True, related_name="post_parent")
     saved = models.ManyToManyField(GrowUser, default=None, blank=True, related_name="saved_posts")
-    watch_later = models.ManyToManyField(GrowUser, default=None, blank=True, related_name="watch_later_posts")
+    watchlist = models.ManyToManyField(GrowUser, default=None, blank=True, related_name="watchlist_posts")
     history = models.ManyToManyField(GrowUser, default=None, blank=True, through="PostHistoryManager", related_name="post_history")
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
@@ -228,14 +225,45 @@ class Post(models.Model):
     class Meta:
         ordering = ['created_on']
         
+    # Gets 'amount' most relevant posts to a user according to 'depth' most recent views
     @classmethod
-    def get_recommended_posts(cls, user):
-        if user.post_history.all():
-            pass
-            
-        else:
-            pass
+    def get_recommended_posts(cls, user, amount=15, depth=15, noise=0.15):           
+        def decision(probability):
+            return random.random() < probability
         
+        if Post.objects.count() < amount or amount <= 0:
+            amount = Post.objects.count()
+            
+        if depth <= 0:
+            depth = 15
+            
+        if user.post_history.all():
+            # 1st row == similar posts to last viewed post
+            historical_similarity = [get_similar_posts(post) for post in Post.get_user_history(user).reverse()[:depth]]
+            historical_similarity = [queryset_diff(row, user.post_history.all()) for row in historical_similarity]
+            
+            average_indices = defaultdict(lambda: 0)
+            
+            for row in historical_similarity:
+                for j, val in enumerate(row):
+                    average_indices[val] += j
+            
+            average_indices = {post: i/len(historical_similarity) for post, i in average_indices.items()}
+            average_indices = dict(sorted(average_indices.items(), key=lambda item: item[1]))
+            recommendations = list(average_indices.keys())[:amount]
+        else:
+            recommendations = list(queryset_diff(Post.order_by_popularity(), user.post_history.all())[:amount])
+            
+        noise_data = list(queryset_diff((Post.objects.all().exclude(id__in=[post.id for post in recommendations])), user.post_history.all()).order_by("?"))
+        
+        for i, val in enumerate(recommendations[1:]):
+            if noise_data and decision(noise):
+                recommendations[i+1] = noise_data.pop()
+            else:
+                break    
+            
+        return recommendations    
+    
     # Return user history ordered by ascending timestamp
     @classmethod
     def get_user_history(cls, user):
@@ -256,12 +284,24 @@ class Post(models.Model):
     # Return ordered by count in "watch later"
     @classmethod
     def order_by_watchlist_count(cls, ascending=False):
-        return Post.objects.annotate(watchlist_count=Count("watch_later")).order_by(("" if ascending else "-") + "watchlist_count")
+        return Post.objects.annotate(watchlist_count=Count("watchlist")).order_by(("" if ascending else "-") + "watchlist_count")
+    
+    # Description without markdown tags
+    @property
+    def description_raw(self):
+        return unmark(self.description)
     
     # Distinct view count (1 per each user)
     @property
     def popularity(self):
         return self.history.count()
+    
+    # How likely it is for a user to save the post
+    @property
+    def save_popularity_index(self):
+        if self.popularity == 0:
+            return 0
+        return self.saved.count() / self.popularity
     
         
     def save(self, *args, **kwargs):    
