@@ -20,7 +20,7 @@ def get_metadata():
     
     metadata = metadata.merge(additional, on='id')
     
-    metadata['soup'] = metadata.apply(lambda x: x['title'] + " " + x['description'] + " " + " ".join(x["tags"]), axis=1)
+    metadata['soup'] = metadata.apply(lambda x: x['title'] + " " + x['description'] + " " + " ".join(x["tags"]) + " " + x['author'], axis=1)
     return metadata
 
 def clean_data(x):

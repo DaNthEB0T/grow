@@ -1,0 +1,538 @@
+[
+{
+    "model": "taggit.tag",
+    "pk": 1,
+    "fields": {
+        "name": "sleep",
+        "slug": "sleep"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 2,
+    "fields": {
+        "name": "mindfulness",
+        "slug": "mindfulness"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 3,
+    "fields": {
+        "name": "anxiety",
+        "slug": "anxiety"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 4,
+    "fields": {
+        "name": "calm",
+        "slug": "calm"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 5,
+    "fields": {
+        "name": "reading",
+        "slug": "reading"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 6,
+    "fields": {
+        "name": "stress-relief",
+        "slug": "stress-relief"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 7,
+    "fields": {
+        "name": "walking",
+        "slug": "walking"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 8,
+    "fields": {
+        "name": "meditation",
+        "slug": "meditation"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 9,
+    "fields": {
+        "name": "money",
+        "slug": "money"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 10,
+    "fields": {
+        "name": "anxiety-relief",
+        "slug": "anxiety-relief"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 11,
+    "fields": {
+        "name": "life-goals",
+        "slug": "life-goals"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 12,
+    "fields": {
+        "name": "stress",
+        "slug": "stress"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 13,
+    "fields": {
+        "name": "philosophy",
+        "slug": "philosophy"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 14,
+    "fields": {
+        "name": "stoicism",
+        "slug": "stoicism"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 15,
+    "fields": {
+        "name": "my-favourite-roman-emperor",
+        "slug": "my-favourite-roman-emperor"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 16,
+    "fields": {
+        "name": "absurd",
+        "slug": "absurd"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 17,
+    "fields": {
+        "name": "random",
+        "slug": "random"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 18,
+    "fields": {
+        "name": "stocastic",
+        "slug": "stocastic"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 19,
+    "fields": {
+        "name": "nonsense",
+        "slug": "nonsense"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 20,
+    "fields": {
+        "name": "turtle",
+        "slug": "turtle"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 21,
+    "fields": {
+        "name": "turtle-meditation",
+        "slug": "turtle-meditation"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 22,
+    "fields": {
+        "name": "disappointment",
+        "slug": "disappointment"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 23,
+    "fields": {
+        "name": "murder",
+        "slug": "murder"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 24,
+    "fields": {
+        "name": "marriage",
+        "slug": "marriage"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 25,
+    "fields": {
+        "name": "crime",
+        "slug": "crime"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 26,
+    "fields": {
+        "name": "babies",
+        "slug": "babies"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 27,
+    "fields": {
+        "name": "sex",
+        "slug": "sex"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 28,
+    "fields": {
+        "name": "wholesome",
+        "slug": "wholesome"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 29,
+    "fields": {
+        "name": "dan",
+        "slug": "dan"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 30,
+    "fields": {
+        "name": "gchd",
+        "slug": "gchd"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 31,
+    "fields": {
+        "name": "greg",
+        "slug": "greg"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 32,
+    "fields": {
+        "name": "obdrzalek",
+        "slug": "obdrzalek"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 33,
+    "fields": {
+        "name": "grow",
+        "slug": "grow"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 34,
+    "fields": {
+        "name": "programming",
+        "slug": "programming"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 35,
+    "fields": {
+        "name": "wallet",
+        "slug": "wallet"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 36,
+    "fields": {
+        "name": "frontend",
+        "slug": "frontend"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 37,
+    "fields": {
+        "name": "rest",
+        "slug": "rest"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 38,
+    "fields": {
+        "name": "night",
+        "slug": "night"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 39,
+    "fields": {
+        "name": "3am",
+        "slug": "3am"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 40,
+    "fields": {
+        "name": "smith",
+        "slug": "smith"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 41,
+    "fields": {
+        "name": "neo",
+        "slug": "neo"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 42,
+    "fields": {
+        "name": "matrix",
+        "slug": "matrix"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 43,
+    "fields": {
+        "name": "death",
+        "slug": "death"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 44,
+    "fields": {
+        "name": "washington",
+        "slug": "washington"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 45,
+    "fields": {
+        "name": "shocking",
+        "slug": "shocking"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 46,
+    "fields": {
+        "name": "police-called",
+        "slug": "police-called"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 47,
+    "fields": {
+        "name": "president",
+        "slug": "president"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 48,
+    "fields": {
+        "name": "lincoln",
+        "slug": "lincoln"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 49,
+    "fields": {
+        "name": "presidency",
+        "slug": "presidency"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 50,
+    "fields": {
+        "name": "children",
+        "slug": "children"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 51,
+    "fields": {
+        "name": "homeless",
+        "slug": "homeless"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 52,
+    "fields": {
+        "name": "broke",
+        "slug": "broke"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 53,
+    "fields": {
+        "name": "war",
+        "slug": "war"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 54,
+    "fields": {
+        "name": "nuclear-weapons",
+        "slug": "nuclear-weapons"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 55,
+    "fields": {
+        "name": "nukes",
+        "slug": "nukes"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 56,
+    "fields": {
+        "name": "civil-war",
+        "slug": "civil-war"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 57,
+    "fields": {
+        "name": "unboxing",
+        "slug": "unboxing"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 58,
+    "fields": {
+        "name": "showcase",
+        "slug": "showcase"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 59,
+    "fields": {
+        "name": "blind-captain",
+        "slug": "blind-captain"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 60,
+    "fields": {
+        "name": "rose",
+        "slug": "rose"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 61,
+    "fields": {
+        "name": "boat",
+        "slug": "boat"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 62,
+    "fields": {
+        "name": "jack",
+        "slug": "jack"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 63,
+    "fields": {
+        "name": "tragedy",
+        "slug": "tragedy"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 64,
+    "fields": {
+        "name": "sinking",
+        "slug": "sinking"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 65,
+    "fields": {
+        "name": "iceberg",
+        "slug": "iceberg"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 66,
+    "fields": {
+        "name": "ship",
+        "slug": "ship"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 67,
+    "fields": {
+        "name": "titanic",
+        "slug": "titanic"
+    }
+}
+]

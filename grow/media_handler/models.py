@@ -252,7 +252,7 @@ class Post(models.Model):
             average_indices = dict(sorted(average_indices.items(), key=lambda item: item[1]))
             recommendations = list(average_indices.keys())[:amount]
         else:
-            recommendations = list(queryset_diff(Post.order_by_popularity(), user.post_history.all())[:amount])
+            recommendations = list(Post.order_by_popularity())[:amount]
             
         noise_data = list(queryset_diff((Post.objects.all().exclude(id__in=[post.id for post in recommendations])), user.post_history.all()).order_by("?"))
         
@@ -261,6 +261,10 @@ class Post(models.Model):
                 recommendations[i+1] = noise_data.pop()
             else:
                 break    
+        
+        # for i in range(len(recommendations)):
+        #     while recommendations[i].prequel:
+        #         recommendations[i] = recommendations[i].prequel
             
         return recommendations    
     
