@@ -1,0 +1,41 @@
+{% extends 'media_handler/post_list.html' %}
+
+{% block title %}
+    History
+{% endblock title %}
+
+{% block content %}
+    <h1 class="my-3 w-100 text-center">Saved posts</h1>
+    <div class="post-tiles-container">
+        <div class="post-tile">
+            <a href="post" class="post-overlay-link"></a>
+            <div class="post-thumbnail w-25">
+                <img src="https://www.thoughtco.com/thmb/_fjKZyImBppgDXa6L5yejRch35s=/1881x1411/smart/filters:no_upscale()/Mindfulness-8e38c4e97d94416392442d4430a3812d.jpg" class="post-thumbnail-img" alt="Thumbnail">
+                <div class="post-thumbnail-shadow"></div>
+            </div>
+            <div class="post-content-container">
+                <div class="post-content-sizing"></div>
+                <div class="post-content p-3">
+                    <div class="post-content-head">
+                        <div class="post-title">
+                            Titel
+                        </div>
+                        <div id="post-save" class="post-saved" onclick="alert('save post')" title="Save/Unsave post" data-toggle="tooltip">
+                            <span id="saved-count">{#{ post.saved.all | length}#}0</span> <i class="far fa-bookmark"></i>
+                        </div>
+                    </div>
+                    <div class="post-author">
+                        By Timmy778
+                    </div>
+                    <div class="post-type">
+                        Video
+                    </div>
+                    <div class="post-description"> <!-- Remove markdown elements here -->
+                        Description. Placeholder text placeholder text text placeholder text text placeholder text text placeholder text.
+                    </div>
+                    <div class="post-description-fade"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

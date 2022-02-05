@@ -63,6 +63,12 @@ def history(request):
     return render(request, "media_handler/post_list/history.html")
 
 @login_required
+def saved(request):
+    user = request.user
+    
+    return render(request, "media_handler/post_list/saved.html")
+
+@login_required
 @require_POST
 def post_save_view(request, slug):
     if request.POST:

@@ -12,4 +12,5 @@ urlpatterns = [
     path("post/<slug:slug>/toggle_watch_later", views.watch_later_view, name="post_to_watchlist"),
 
     path("history", views.history, name="history"),
+    path("saved", views.saved, name="saved"),
 ]
