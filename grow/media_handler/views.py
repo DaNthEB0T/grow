@@ -58,21 +58,39 @@ def post_view(request, slug):
 
 @login_required
 def history(request):
+    context = {}
+
     user = request.user
+
+    history = user.post_history.all()
+
+    context['history'] = history
     
-    return render(request, "media_handler/post_list/history.html")
+    return render(request, "media_handler/post_list/history.html", context)
 
 @login_required
 def saved(request):
+    context = {}
+
     user = request.user
+
+    saved_posts = user.saved_posts.all()
+
+    context['saved_posts'] = saved_posts
     
-    return render(request, "media_handler/post_list/saved.html")
+    return render(request, "media_handler/post_list/saved.html", context)
 
 @login_required
 def view_later(request):
+    context = {}
+
     user = request.user
+
+    watchlist = user.watch_later_posts.all()
+
+    context['watchlist'] = watchlist
     
-    return render(request, "media_handler/post_list/view_later.html")
+    return render(request, "media_handler/post_list/view_later.html", context)
 
 @login_required
 @require_POST
