@@ -13,4 +13,5 @@ urlpatterns = [
 
     path("history", views.history, name="history"),
     path("saved", views.saved, name="saved"),
+    path("view_later", views.view_later, name="view_later"),
 ]

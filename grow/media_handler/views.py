@@ -69,6 +69,12 @@ def saved(request):
     return render(request, "media_handler/post_list/saved.html")
 
 @login_required
+def view_later(request):
+    user = request.user
+    
+    return render(request, "media_handler/post_list/view_later.html")
+
+@login_required
 @require_POST
 def post_save_view(request, slug):
     if request.POST:
