@@ -13,6 +13,7 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'core/css/app.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'media_handler/css/post_view/post_view.css' %}">
+    <script src="{% static 'media_handler/js/post_view/post_view.js' %}" defer></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -38,9 +39,10 @@
   <body>
     {% include "core/includes/messages.html" %}
     
-    <div class="content-container">
+    <div class="content-container" style="background-image:url('{% static 'core/images/bg.png' %}')">
         {% include 'components/sidebar.html' %}
         <div class="content">
+            <div id="thing"></div> {# secures background effect #}
             {% block content %}
                 <h1>Wadap noob</h1>
             {% endblock %}
