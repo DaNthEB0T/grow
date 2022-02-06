@@ -57,7 +57,7 @@
                                 <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
                             </audio>
                             {% endif %}
-                            <img class="resource-thumbnail" {% if post.thumbnail %}src="{{ post.thumbnail.image.path }}"{% else %}src="{% static 'core/images/default-img.jpg' %}"{% endif %} alt="Post thumbnail">
+                            <img class="resource-thumbnail" {% if post.thumbnail %}src="{{ post.thumbnail.image.url }}"{% else %}src="{% static 'core/images/default-img.jpg' %}"{% endif %} alt="Post thumbnail">
                             <div class="resource-shadow"></div>
                         </div>
                         <div class="video-stats">
