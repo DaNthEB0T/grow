@@ -372,6 +372,9 @@ input:not(:placeholder-shown) {
   opacity: 1;
   bottom: 0.5rem;
 }
+.resource-save.saved {
+  cursor: default;
+}
 
 /* This is for content that shows only on small devices */
 .small-show {
