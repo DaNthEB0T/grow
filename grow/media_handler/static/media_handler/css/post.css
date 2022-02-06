@@ -144,3 +144,30 @@ body {
     align-items: center;
     position: relative;
 }
+
+.media-thumbnail {
+    width: calc(100% - 4rem);
+    max-width: 120vh;
+    cursor: default;
+    text-align: center;
+}
+.media-thumbnail .resource-thumbnail {
+    transform: none !important;
+}
+.media-thumbnail .resource-shadow {
+    opacity: 0.3 !important;
+}
+.no-media .video-description img {
+    display: initial;
+    max-width: 100%;
+}
+
+/* IF AUDIO */
+
+.audio-control {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+}

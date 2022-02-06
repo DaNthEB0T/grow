@@ -47,9 +47,36 @@
                     </div>
                 </div>
             {% else %}
-                <div class="media-container">
+                <div class="media-container {% if not post.media_content %}no-media{% endif %}">
                     {% if post.thumbnail %}
-                        <img src="{{ post.thumbnail.image.path }}">
+                        <div class="big-tile resource media-thumbnail">
+                            {% if post.media_content and "audio" in post.media_content.mime_type %}
+                            <audio controls class="audio-control">
+                                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+                            </audio>
+                            {% endif %}
+                            <img class="resource-thumbnail" src="{{ post.thumbnail.image.path }}" alt="Post thumbnail">
+                            <div class="resource-shadow"></div>
+                        </div>
+                        <div class="video-stats">
+                            <div class="video-stats-head">
+                                <span class="video-title">{{ post.title }}</span>
+                                <div class="video-stats-right">
+                                    <span id="post-save" title="Save post" data-toggle="tooltip" class="video-saved"><span id="saved-count">{{ post.saved.all | length}}</span> <i class="far fa-bookmark"></i></span>
+                                </div>
+                            </div>
+                            <div class="video-stats-bottom">
+                                <span class="upload-date">Published: {{ post.created_on }}</span>
+                                <span class="tags">
+                                    {% for tag in post.tags.all %}
+                                    <span class="tag">{{ tag }}</span>
+                                    {% endfor %}
+                                </span>
+                            </div>
+                            <div class="video-description">
+                                {{ post.description | markdown | safe }}
+                            </div>
+                        </div>
                     {% endif %}
                 </div>
             {% endif %}
