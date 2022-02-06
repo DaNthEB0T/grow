@@ -24,7 +24,7 @@ body {
     min-width: 50%;
 }
 
-/* CONTROLS */
+/* CONTROLS (if video) */
 
 .controls {
     max-width: 155vh;
@@ -54,7 +54,6 @@ body {
 
 .video-stats {
     width: 90%;
-    border-bottom: 1px solid #ddd;
 }
 
 .video-stats-head {
@@ -88,6 +87,7 @@ body {
 
 .video-description {
     padding: 1rem;
+    border-bottom: 1px solid #ddd;
 }
 .video-description img {
     display: none;
@@ -111,7 +111,13 @@ body {
     font-size: 0.9rem;
     display: inline-block;
     width: 100%;
-    margin: 0.3rem 0;
+    margin-bottom: 0.3rem;
+}
+
+.media-author {
+    display: inline-block;
+    width: 100%;
+    margin-top: 0.3rem;
 }
 
 

@@ -34,6 +34,7 @@
                             </div>
                         </div>
                         <div class="video-stats-bottom">
+                            <span class="media-author">By {{ post.author }}</span>
                             <span class="upload-date">Published: {{ post.created_on }}</span>
                             <span class="tags">
                                 {% for tag in post.tags.all %}
@@ -41,21 +42,22 @@
                                 {% endfor %}
                             </span>
                         </div>
-                        <div class="video-description">
-                            {{ post.description | markdown | safe }}
-                        </div>
+                        {% if post.description %}
+                            <div class="video-description">
+                                {{ post.description | markdown | safe }}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             {% else %}
                 <div class="media-container {% if not post.media_content %}no-media{% endif %}">
-                    {% if post.thumbnail %}
                         <div class="big-tile resource media-thumbnail">
                             {% if post.media_content and "audio" in post.media_content.mime_type %}
                             <audio controls class="audio-control">
                                 <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
                             </audio>
                             {% endif %}
-                            <img class="resource-thumbnail" src="{{ post.thumbnail.image.path }}" alt="Post thumbnail">
+                            <img class="resource-thumbnail" {% if post.thumbnail %}src="{{ post.thumbnail.image.path }}"{% else %}src="{% static 'core/images/default-img.jpg' %}"{% endif %} alt="Post thumbnail">
                             <div class="resource-shadow"></div>
                         </div>
                         <div class="video-stats">
@@ -66,6 +68,7 @@
                                 </div>
                             </div>
                             <div class="video-stats-bottom">
+                                <span class="media-author">By {{ post.author }}</span>
                                 <span class="upload-date">Published: {{ post.created_on }}</span>
                                 <span class="tags">
                                     {% for tag in post.tags.all %}
@@ -73,11 +76,12 @@
                                     {% endfor %}
                                 </span>
                             </div>
-                            <div class="video-description">
-                                {{ post.description | markdown | safe }}
-                            </div>
+                            {% if post.description %}
+                                <div class="video-description">
+                                    {{ post.description | markdown | safe }}
+                                </div>
+                            {% endif %}
                         </div>
-                    {% endif %}
                 </div>
             {% endif %}
             
