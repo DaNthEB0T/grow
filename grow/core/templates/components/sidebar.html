@@ -31,6 +31,15 @@
                 <span class="sidebar-hide">Saved</span>
             </a>
         </div>
+
+        <div class="sidebar-hline"></div>
+
+        <div class="sidebar-links-container mt-0">
+            <a class="sidebar-link{% if request.path == '/postu' %} active{% endif %}" href="{% url "media_handler:post_test" %}">
+                <i class="fas fa-plus-square"></i>
+                <span class="sidebar-hide">Create post</span>
+            </a>
+        </div>
     </div>
 
     <div class="sidebar-bottom">
