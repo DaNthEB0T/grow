@@ -62,7 +62,7 @@ def history(request):
 
     user = request.user
 
-    history = user.post_history.all()
+    history = Post.get_user_history(user)
 
     context['history'] = history
     
