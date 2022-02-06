@@ -56,12 +56,18 @@ function saveEvent(url, csrfToken, sender) {
         dataType: "json",
         success: function(response) {
             if(response.saved == true){
+                // change tooltip
+                $(saveButton).attr('data-bs-original-title', 'Unsave post').tooltip('show');
+
                 saveButton.addClass("saved");
                 saveCount.text(function() {
                     return $(this).text().replace($(this).text(), parseInt($(this).text()) + 1); 
                 });
             }
             else if(response.saved == false){
+                // change tooltip
+                $(saveButton).attr('data-bs-original-title', 'Save post').tooltip('show');
+
                 saveButton.removeClass("saved");
                 saveCount.text(function() {
                     return $(this).text().replace($(this).text(), parseInt($(this).text()) - 1); 

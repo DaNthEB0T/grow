@@ -78,7 +78,8 @@
         $(function($){
             var saveButton = $("#post-save");
             {% if saved %}
-                saveButton.addClass("saved")
+                saveButton.addClass("saved");
+                $(saveButton).attr('data-bs-original-title', 'Unsave post');
             {% endif %}
 
             console.log($)
