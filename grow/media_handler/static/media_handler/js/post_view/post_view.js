@@ -17,3 +17,27 @@ function calcBg()
 }
 
 calcBg();
+
+/**
+ * Visually removes post from list (with animation)
+ */
+function removePost(el)
+{
+    el = el.parentElement;
+    el.classList.add('removed');
+
+    setTimeout(function () {
+        container = document.getElementsByClassName('post-tiles-container')[0];
+    
+        var postSlide = document.createElement('div');
+        postSlide.classList.add('post-slide');
+        postSlide.innerHTML = "<div></div>";
+    
+        container.insertBefore(postSlide, el);
+        el.remove();
+    
+        setTimeout(function () {
+            postSlide.remove();
+        }, 500);
+    }, 500);
+}
