@@ -215,8 +215,8 @@ class Post(models.Model):
     media_content = models.ForeignKey(Media, on_delete=models.SET_NULL, default=None, null=True, blank=True, related_name="post")
     prequel = models.ForeignKey("self", on_delete=models.SET_NULL, default=None, null=True, blank=True, related_name="sequel")
     thumbnail = models.ForeignKey(Image, on_delete=models.SET_NULL, default=None, null=True, blank=True, related_name="post_parent")
-    saved = models.ManyToManyField(GrowUser, default=None, blank=True, related_name="saved_posts")
-    watchlist = models.ManyToManyField(GrowUser, default=None, blank=True, related_name="watchlist_posts")
+    saved = models.ManyToManyField(GrowUser, default=None, blank=True, through="PostSavedManager", related_name="saved_posts")
+    watchlist = models.ManyToManyField(GrowUser, default=None, blank=True, through="PostWatchlistManager", related_name="watchlist_posts")
     history = models.ManyToManyField(GrowUser, default=None, blank=True, through="PostHistoryManager", related_name="post_history")
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
@@ -239,7 +239,7 @@ class Post(models.Model):
             
         if user.post_history.all():
             # 1st row == similar posts to last viewed post
-            historical_similarity = [get_similar_posts(post) for post in Post.get_user_history(user).reverse()[:depth]]
+            historical_similarity = [get_similar_posts(post, amount=Post.objects.count()-1) for post in Post.get_user_history(user).reverse()[:depth]]
             historical_similarity = [queryset_diff(row, user.post_history.all()) for row in historical_similarity]
             
             average_indices = defaultdict(lambda: 0)
@@ -274,6 +274,49 @@ class Post(models.Model):
         pks = PostHistoryManager.objects.filter(user=user).values_list("post", flat=True)
         preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(pks)])
         return Post.objects.filter(pk__in=pks).order_by(preserved)      
+    
+    # Return user saved ordered by ascending timestamp
+    @classmethod
+    def get_user_saved(cls, user):
+        pks = PostSavedManager.objects.filter(user=user).values_list("post", flat=True)
+        preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(pks)])
+        return Post.objects.filter(pk__in=pks).order_by(preserved)   
+       
+    # Return user watchlist ordered by ascending timestamp
+    @classmethod
+    def get_user_watchlist(cls, user):
+        pks = PostWatchlistManager.objects.filter(user=user).values_list("post", flat=True)
+        preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(pks)])
+        return Post.objects.filter(pk__in=pks).order_by(preserved)   
+    
+    # Adds self to user history
+    def add_to_user_history(self, user):
+        if self in user.post_history.all():
+            user.post_history.remove(self)
+        user.post_history.add(self)
+        user.save()        
+        
+    # Toggles add self to user saved
+    def toggle_add_to_user_saved(self, user):
+        if self in user.saved_posts.all():
+            user.saved_posts.remove(self)
+            saved = False
+        else:
+            user.saved_posts.add(self)
+            saved = True
+        user.save()
+        return saved
+        
+    # Toggles add self to user watchlist
+    def toggle_add_to_user_watchlist(self, user):
+        if self in user.watch_later_posts.all():
+            user.watch_later_posts.remove(self)
+            added = False
+        else:
+            user.watch_later_posts.add(self)
+            added = True
+        user.save()
+        return added  
         
     # Return ordered by distinct view count
     @classmethod
@@ -334,6 +377,22 @@ def auto_delete_media_on_delete(sender, instance, **kwargs):
         
         
 class PostHistoryManager(models.Model):
+    user = models.ForeignKey(GrowUser, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    created_on = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['created_on']
+        
+class PostSavedManager(models.Model):
+    user = models.ForeignKey(GrowUser, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    created_on = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['created_on']
+        
+class PostWatchlistManager(models.Model):
     user = models.ForeignKey(GrowUser, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)

@@ -32,7 +32,7 @@ def clean_data(x):
         else:
             return ''
     
-def get_similar_posts(post):
+def get_similar_posts(post, amount=15):
     Post = apps.get_model("media_handler", "Post")
     metadata = get_metadata()
     
@@ -47,7 +47,7 @@ def get_similar_posts(post):
     relevancy_scores = list(enumerate(cos_sim[idx]))
     relevancy_scores = sorted(relevancy_scores, key=lambda x: x[1], reverse=True)
     
-    relevancy_scores = relevancy_scores[1:]
+    relevancy_scores = relevancy_scores[1:amount + 1]
     
     post_indices = [i[0] for i in relevancy_scores]
     

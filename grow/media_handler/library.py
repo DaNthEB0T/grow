@@ -1,4 +1,5 @@
 import magic 
+import string
 
 def get_mime_type(file):
     """
@@ -12,3 +13,9 @@ def get_mime_type(file):
 
 def queryset_diff(qs1, qs2):
     return qs1.exclude(id__in=qs2.values_list("id", flat=True))
+
+def contains_whitespace(s):
+    for c in s:
+        if c in string.whitespace:
+            return True
+    return False
