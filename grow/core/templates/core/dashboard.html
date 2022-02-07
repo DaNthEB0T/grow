@@ -17,84 +17,88 @@
                 <div class="content">
                     <div class="content-head">
                         <div class="head-tile search">
-                            <input type="text" id="search-resources" placeholder=" ">
-                            <label for="search-resources"><i class="fas fa-search"></i> <span class="search-text">Search</span></label>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input name="search" type="text" id="search-resources" placeholder=" ">
+                                <label for="search-resources"><button class="btn-none" type="submit"><i class="fas fa-search"></i></button> <span class="search-text">Search</span></label>
+                            </form>
                         </div>
                     </div>
-                    <div class="big-tile recommended">
-                        {% for post, watchlist in most_recommended.items %}
-                            <div class="resource">
-                                <span class="resource-info">Recommended for you</span>
-                                <span class="resource-title">{{ post.title }}</span>
-                                <span class="resource-tags">By {{ post.author }}</span>
-                                <span id="{{post.slug}}" class="resource-save"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
-                                <img class="resource-thumbnail" {% if post.thumbnail.image %}src="{{ post.thumbnail.image.url }}"{% else %}src="{% static 'core/images/default-img.jpg' %}"{% endif %} alt="Media thumbnail">
-                                <a href="{% url 'media_handler:post' slug=post.slug %}" class="resource-shadow"></a>
-                            </div>
-                            <script>
-                                $(function($){
-                                    var saveButton = $("#{{post.slug}}");
-                                    var saveText = saveButton.find(".small-show")[0]
-                                    var icon = saveButton.find(".fas")[0]
-                                    {% if watchlist %}
-                                        $(saveText).text("Saved")
-                                        $(saveButton).addClass("saved");
-                                        $(icon).addClass("fa-check").removeClass("fa-clock");
-                                    {% endif %}
-                                    
-                                    $(saveButton).click(function(){
-                                        $(watchlistEvent("{% url 'media_handler:post_to_watchlist' slug=post.slug  %}", "{{ csrf_token }}", saveButton));
+                    {% if not search %}
+                        <div class="big-tile recommended">
+                            {% for post, watchlist in most_recommended.items %}
+                                <div class="resource">
+                                    <span class="resource-info">Recommended for you</span>
+                                    <span class="resource-title">{{ post.title }}</span>
+                                    <span class="resource-tags">By {{ post.author }}</span>
+                                    <span id="{{post.slug}}" class="resource-save"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
+                                    <img class="resource-thumbnail" {% if post.thumbnail.image %}src="{{ post.thumbnail.image.url }}"{% else %}src="{% static 'core/images/default-img.jpg' %}"{% endif %} alt="Media thumbnail">
+                                    <a href="{% url 'media_handler:post' slug=post.slug %}" class="resource-shadow"></a>
+                                </div>
+                                <script>
+                                    $(function($){
+                                        var saveButton = $("#{{post.slug}}");
+                                        var saveText = saveButton.find(".small-show")[0]
+                                        var icon = saveButton.find(".fas")[0]
+                                        {% if watchlist %}
+                                            $(saveText).text("Saved")
+                                            $(saveButton).addClass("saved");
+                                            $(icon).addClass("fa-check").removeClass("fa-clock");
+                                        {% endif %}
+                                        
+                                        $(saveButton).click(function(){
+                                            $(watchlistEvent("{% url 'media_handler:post_to_watchlist' slug=post.slug  %}", "{{ csrf_token }}", saveButton));
+                                        });
                                     });
-                                });
-                            </script>
-                        {% empty %}
-                            <div class="resource">
-                                <span class="resource-info">Recommended for you</span>
-                                <span class="resource-title">Your mom phat</span>
-                                <span class="resource-tags">By Freddy</span>
-                                <img class="resource-thumbnail" src="{% static 'core/images/default-img.jpg' %}" alt="Media thumbnail">
-                                <a href="{% url 'core:dashboard' %}" class="resource-shadow"></a>
-                            </div>
-                        {% endfor %}
-                    </div>
+                                </script>
+                            {% empty %}
+                                <div class="resource">
+                                    <span class="resource-info">Recommended for you</span>
+                                    <span class="resource-title">Your mom phat</span>
+                                    <span class="resource-tags">By Freddy</span>
+                                    <img class="resource-thumbnail" src="{% static 'core/images/default-img.jpg' %}" alt="Media thumbnail">
+                                    <a href="{% url 'core:dashboard' %}" class="resource-shadow"></a>
+                                </div>
+                            {% endfor %}
+                        </div>
 
-                    <div class="big-tile continue">
-                        {% for post, watchlist in continue.items %}
-                            <div class="resource">
-                                <span class="resource-info">Continue watching</span>
-                                <span class="resource-title">{{ post.title }}</span>
-                                <span class="resource-tags">By {{ post.author }}</span>
-                                <span id="{{post.slug}}" class="resource-save"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
-                                <img class="resource-thumbnail" {% if post.thumbnail.image %}src="{{ post.thumbnail.image.url }}"{% else %}src="{% static 'core/images/default-img.jpg' %}"{% endif %} alt="Media thumbnail">
-                                <a href="{% url 'media_handler:post' slug=post.slug %}" class="resource-shadow"></a>
-                            </div>
-                            <script>
-                                $(function($){
-                                    var saveButton = $("#{{post.slug}}");
-                                    var saveText = saveButton.find(".small-show")[0]
-                                    var icon = saveButton.find(".fas")[0]
-                                    {% if watchlist %}
-                                        $(saveText).text("Saved")
-                                        $(saveButton).addClass("saved");
-                                        $(icon).addClass("fa-check").removeClass("fa-clock");
-                                    {% endif %}
-                                    
-                                    $(saveButton).click(function(){
-                                        $(watchlistEvent("{% url 'media_handler:post_to_watchlist' slug=post.slug  %}", "{{ csrf_token }}", saveButton));
+                        <div class="big-tile continue">
+                            {% for post, watchlist in continue.items %}
+                                <div class="resource">
+                                    <span class="resource-info">Continue watching</span>
+                                    <span class="resource-title">{{ post.title }}</span>
+                                    <span class="resource-tags">By {{ post.author }}</span>
+                                    <span id="{{post.slug}}" class="resource-save"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
+                                    <img class="resource-thumbnail" {% if post.thumbnail.image %}src="{{ post.thumbnail.image.url }}"{% else %}src="{% static 'core/images/default-img.jpg' %}"{% endif %} alt="Media thumbnail">
+                                    <a href="{% url 'media_handler:post' slug=post.slug %}" class="resource-shadow"></a>
+                                </div>
+                                <script>
+                                    $(function($){
+                                        var saveButton = $("#{{post.slug}}");
+                                        var saveText = saveButton.find(".small-show")[0]
+                                        var icon = saveButton.find(".fas")[0]
+                                        {% if watchlist %}
+                                            $(saveText).text("Saved")
+                                            $(saveButton).addClass("saved");
+                                            $(icon).addClass("fa-check").removeClass("fa-clock");
+                                        {% endif %}
+                                        
+                                        $(saveButton).click(function(){
+                                            $(watchlistEvent("{% url 'media_handler:post_to_watchlist' slug=post.slug  %}", "{{ csrf_token }}", saveButton));
+                                        });
                                     });
-                                });
-                            </script>
-                        {% empty %}
-                            <div class="resource">
-                                <span class="resource-info">Continue watching</span>
-                                <span class="resource-title">Your mom phat</span>
-                                <span class="resource-tags">By Freddy</span>
-                                <img class="resource-thumbnail" src="{% static 'core/images/default-img.jpg' %}" alt="Media thumbnail">
-                                <a href="{% url 'core:dashboard' %}" class="resource-shadow"></a>
-                            </div>
-                        {% endfor %}
-                    </div>
-
+                                </script>
+                            {% empty %}
+                                <div class="resource">
+                                    <span class="resource-info">Continue watching</span>
+                                    <span class="resource-title">Your mom phat</span>
+                                    <span class="resource-tags">By Freddy</span>
+                                    <img class="resource-thumbnail" src="{% static 'core/images/default-img.jpg' %}" alt="Media thumbnail">
+                                    <a href="{% url 'core:dashboard' %}" class="resource-shadow"></a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                     {% for post, watchlist in recommended.items %}
                         <div>
                             <div class="resource">

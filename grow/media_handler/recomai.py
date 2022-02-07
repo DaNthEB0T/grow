@@ -33,11 +33,13 @@ def clean_data(x):
             return ''
     
 def get_similar_posts(post, amount=15):
-    Post = apps.get_model("media_handler", "Post")
     metadata = get_metadata()
-    
+    return get_similar(post.id, metadata, amount)
+
+def get_similar(id, metadata, amount=15):
+    Post = apps.get_model("media_handler", "Post")
     indices = pd.Series(metadata.index, index=metadata['id'])
-    idx = indices[post.id]
+    idx = indices[id]
     
     count = CountVectorizer(stop_words="english")
     count_matrix = count.fit_transform(metadata['soup'])
@@ -55,3 +57,12 @@ def get_similar_posts(post, amount=15):
     preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(pks)])
     
     return Post.objects.filter(pk__in=pks).order_by(preserved)
+
+def search_posts(search_input, amount=15):
+    Post = apps.get_model("media_handler", "Post")
+    metadata = get_metadata()
+    search = pd.DataFrame([{'id': -1, 'soup': search_input}])
+    metadata = pd.concat([metadata, search], ignore_index=True)
+    
+    return get_similar(-1, metadata, amount)
+    
