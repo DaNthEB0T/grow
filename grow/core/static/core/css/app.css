@@ -525,6 +525,66 @@ input:not(:placeholder-shown) {
 }
 
 /**
+ * Modal windows
+ */
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0003;
+  z-index: 99;
+}
+.modal-window {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  transform: translateX(-50%) translateY(-50%);
+  min-width: 50vw;
+  min-height: 50vh;
+  width: 30rem;
+  height: 20rem;
+  max-width: 90%;
+  border-radius: 7px;
+  background-color: #fff;
+  box-shadow: 0 0 5px 0 #0003;
+  padding: 1rem;
+}
+.modal-window .h {
+  font-size: 2rem;
+  font-family: "Comfortaa", cursive;
+  font-weight: 300;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+/**
+ * Universal form group
+ */
+ .form-group {
+  width: 100%;
+  padding: 2rem;
+}
+.form-group label {
+  width: 100%;
+  font-size: 1.1rem !important;
+}
+.form-group input, .form-group textarea, .form-group select {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: white;
+  padding: 0.7rem 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.form-group input:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/**
  * SimpleMDE
  */
 .editor-toolbar {
