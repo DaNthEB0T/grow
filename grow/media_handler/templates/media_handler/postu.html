@@ -1,0 +1,56 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'media_handler/css/creator.css' %}">
+    <script src="{% static 'media_handler/js/preview.js' %}" defer></script>
+{% endblock head %}
+
+{% block title %}Create post{% endblock title %}
+
+{% block body %}
+    <div class="content-container">
+        {% include 'components/sidebar.html' %}
+
+        <div class="content">
+            <h1 class="text-center mt-5"> New Post </h1>
+            <form enctype="multipart/form-data" class="form-group pt-0" method="POST"> {% csrf_token %}
+                    {# BIG FORM MESS :) #}
+                    {{form.title.label_tag}}{{form.title}}{% for error in form.title.errors %}<script>popup("{{ error }}", "danger")</script>{% endfor %}
+                    {{form.media_content.label_tag}}{{form.media_content}}{% for error in form.media_content.errors %}<script>popup("{{ error }}", "danger")</script>{% endfor %}
+                    {{form.thumbnail.label_tag}}{{form.thumbnail}}{% for error in form.thumbnail.errors %}<script>popup("{{ error }}", "danger")</script>{% endfor %}
+
+                    <h5 class="w-100 text-center">Thumbnail preview</h5>
+                    <div class="big-tile resource resource-preview">
+                        <span id="preview-title" class="resource-title">Title</span>
+                        <span class="resource-tags">By {{ user.username }}</span>
+                        <span class="resource-save"><i class="fas fa-clock"></i> Save for later</span>
+                        <img id="preview-img" class="resource-thumbnail" src="" alt="Thumbnail preview">
+                        <div class="resource-shadow"></div>
+                    </div>
+
+                    {{form.tags.label_tag}}
+                    <div class="tag-container" onclick="document.getElementById('tag-input').focus()">
+                        <span id="tags"></span>
+                        <input type="text" id="tag-input">
+                    </div>
+                    
+                    {{form.tags}}{% for error in form.tags.errors %}<script>popup("{{ error }}", "danger")</script>{% endfor %}
+
+                    {{form.description.label_tag}}
+                    <div class="tiny-text">Note: images are not supported in video/audio posts.</div>                    
+                    {{form.description}}{% for error in form.description.errors %}<script>popup("{{ error }}", "danger")</script>{% endfor %}
+                    {{form.prequel.label_tag}}{{form.prequel}}{% for error in form.prequel.errors %}<script>popup("{{ error }}", "danger")</script>{% endfor %}
+                    {{form.status.label_tag}}{{form.status}}{% for error in form.status.errors %}<script>popup("{{ error }}", "danger")</script>{% endfor %}
+                <div class="button-container my-4">
+                    <button class="btn btn-success" type="submit"> Submit </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        var simplemde = new SimpleMDE({ 
+            element: document.getElementById("id_description") 
+        });
+    </script>
+{% endblock body %}

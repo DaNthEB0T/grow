@@ -1,0 +1,226 @@
+/* for background effect */
+.content-container {
+    background-size: auto 100%;
+    background-position: left center;
+}
+
+/* other */
+.post-tiles-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+.title-between {
+    width: 95%;
+    margin-top: 1.5rem;
+    border-bottom: 1px solid #ccc;
+}
+
+.post-tile {
+    width: 95%;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    margin: 0.5rem 0;
+    margin-left: 0;
+    opacity: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    transition: transform 0.3s ease, margin-left 0.5s ease, opacity 0.5s ease;
+    position: relative;
+    background-color: white;
+}
+.post-tile:hover {
+    transform: scale(0.97);
+}
+
+/* When remove button is clicked, this class is added */
+.post-tile.removed {
+    margin-left: 100%;
+    opacity: 0;
+}
+
+/* button to remove the post from the current list */
+.post-tile-remove {
+    position: absolute;
+    right: -15%;
+    top: 0;
+    bottom: 0;
+    width: 15%;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: hsl(0, 0%, 45%);
+    color: white;
+    opacity: 0;
+    z-index: 1;
+    transition: opacity 0.4s ease, right 0.4s ease, background-color 0.2s ease;
+    cursor: pointer;
+}
+.post-tile:hover .post-tile-remove {
+    right: 0;
+    opacity: 1;
+}
+.post-tile-remove:hover {
+    background-color: hsl(0, 0%, 50%);
+}
+
+/* makes nice animation when removing post */
+.post-slide {
+    width: 95%;
+    margin: 0;
+    position: relative;
+    visibility: hidden;
+    animation-name: post-slide;
+    animation-duration: 0.5s;
+}
+@keyframes post-slide {
+    0% {margin: 0.5rem 0;}
+    100% {margin: 0 0;}
+}
+.post-slide div {
+    padding-top: 0;
+    animation-name: post-slide-div;
+    animation-duration: 0.5s;
+}
+@keyframes post-slide-div {
+    0% {padding-top: 18.75%;}
+    100% {padding-top: 0;}
+}
+
+.post-thumbnail, .post-content {
+    text-decoration: none;
+    color: black !important;
+}
+.post-thumbnail {
+    aspect-ratio: 4/3;
+    position: relative;
+    background: #0001;
+    overflow: hidden;
+}
+.post-thumbnail-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.post-thumbnail-shadow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to top, black, #0004, #0004, black);
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.post-content-container {
+    position: relative;
+    width: 75%;
+}
+
+.post-content-sizing {
+    padding-top: 25%;
+}
+
+.post-content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.post-title, .post-author {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.post-content-head {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-title {
+    font-size: 1.1rem;
+    line-height: 1.1rem;
+    font-weight: 600;
+}
+
+.post-saved {
+    font-weight: 700;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.post-author {
+    font-size: 0.9rem;
+    line-height: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.post-type {
+    font-size: 0.9rem;
+    line-height: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: #888;
+}
+
+.post-description {
+    font-size: 0.9rem;
+    line-height: 1rem;
+    overflow: hidden;
+    position: relative;
+}
+.post-description-fade {
+    height: 2rem;
+    position: absolute;
+    background-image: linear-gradient(to top, white, white, #fff0);
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+@media screen and (max-width: 800px) {
+    .post-tile {
+        flex-direction: column;
+    }
+
+    .post-thumbnail {
+        width: 100% !important;
+    }
+
+    .post-content-container {
+        width: 100%;
+    }
+
+    .post-content-sizing {
+        padding-top: 75%;
+    }
+
+    .post-content {
+        padding-bottom: 25% !important;
+    }
+
+    .post-description-fade {
+        bottom: 33%;
+    }
+
+    .post-tile-remove {
+        right: 0;
+        opacity: 1;
+        left: 0;
+        top: initial;
+        width: initial;
+        height: 16.66%;
+    }
+}

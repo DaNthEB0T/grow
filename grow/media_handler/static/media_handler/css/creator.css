@@ -1,0 +1,60 @@
+:root {
+    --primary: hsl(92, 30%, 36%);
+    --primary-s: 30%;
+}
+
+
+#preview-img {
+    object-fit: cover;
+    text-align: center;
+    line-height: 30vw;
+}
+
+.resource-preview {
+    width: 30rem;
+    max-width: 95%;
+    min-width: 50%;
+    aspect-ratio: 4/3;
+    margin: 1rem auto;
+    cursor: initial;
+}
+
+.tag-container {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: white;
+    padding: 0.7rem 1rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    position: relative;
+    cursor: text;
+    line-height: 1.7rem;
+}
+#tag-input {
+    border: none;
+    height: 100%;
+    width: 2rem;
+    padding: 0;
+    margin: 0;
+}
+#id_tags {
+    visibility: hidden;
+    position: absolute;
+    width: 0;
+}
+
+.width-calc {
+    position: absolute;
+    visibility: hidden;
+}
+
+#tags span {
+    padding: 0.2rem 0.4rem;
+    background-color: #ccc;
+    border-radius: 3px;
+    margin: 0 0.1rem;
+    color: #020;
+}
+#tags span i {
+    cursor: pointer;
+}

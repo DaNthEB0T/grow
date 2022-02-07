@@ -46,6 +46,60 @@ class GrowUserManager(BaseUserManager):
         user.is_staff = True
         user.save()
         return user
+    
+    def create_staffcreator(self, username, email, password, **other_fields):
+
+        other_fields.setdefault('is_staff', True)
+        other_fields.setdefault('is_active', True)
+        other_fields.setdefault('is_validated', True)
+
+
+        if other_fields.get('is_creator') is not True:
+            raise ValueError(_("Creator must be assigned!"))  
+
+        if other_fields.get('is_staff') is not True:
+            raise ValueError(_("Staff must be assigned!"))  
+
+        if other_fields.get('is_active') is not True:
+            raise ValueError(_("Active must be assigned!"))  
+
+        if other_fields.get('is_validated') is not True:
+            raise ValueError(_("Validated must be assigned!"))  
+
+        user = self.create_user(
+            email=email,
+            password=password,
+            username=username,
+            **other_fields
+        )
+        user.is_staff = True
+        user.save()
+        return user
+    
+    def create_creatoruser(self, username, email, password, **other_fields):
+
+        other_fields.setdefault('is_active', True)
+        other_fields.setdefault('is_validated', True)
+        other_fields.setdefault('is_creator', True)
+
+        if other_fields.get('is_active') is not True:
+            raise ValueError(_("Active must be assigned!"))  
+
+        if other_fields.get('is_validated') is not True:
+            raise ValueError(_("Validated must be assigned!"))  
+        
+        if other_fields.get('is_active') is not True:
+            raise ValueError(_("Active must be assigned!"))  
+
+        user = self.create_user(
+            email=email,
+            password=password,
+            username=username,
+            **other_fields
+        )
+        user.is_staff = True
+        user.save()
+        return user
 
     def create_superuser(self, username, email, password, **other_fields):
 
@@ -53,15 +107,22 @@ class GrowUserManager(BaseUserManager):
         other_fields.setdefault('is_superuser', True)
         other_fields.setdefault('is_active', True)
         other_fields.setdefault('is_validated', True)
+        other_fields.setdefault('is_creator', True)
 
         if other_fields.get('is_superuser') is not True:
             raise ValueError(_("Superuser must be assigned!")) 
+        
+        if other_fields.get('is_active') is not True:
+            raise ValueError(_("Active must be assigned!"))  
 
         if other_fields.get('is_staff') is not True:
             raise ValueError(_("Staff must be assigned!"))  
 
         if other_fields.get('is_validated') is not True:
             raise ValueError(_("Validated must be assigned!"))  
+        
+        if other_fields.get('is_creator') is not True:
+            raise ValueError(_("Creator must be assigned!"))  
 
         user = self.create_user(
             email=email,
@@ -89,6 +150,7 @@ class GrowUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_validated = models.BooleanField(default=False)
+    is_creator = models.BooleanField(default=False)
     
     # is_superuser field exists initially as well as passwords
 

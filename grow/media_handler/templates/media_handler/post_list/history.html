@@ -1,0 +1,53 @@
+{% extends 'media_handler/post_list.html' %}
+{% load static %}
+
+{% block title %}
+    History
+{% endblock title %}
+
+{% block content %}
+    <h1 class="my-3 w-100 text-center">History</h1>
+    <div class="post-tiles-container">
+        {% for post in history %}
+            <div class="post-tile">
+                <div id="{{ post.slug }}" class="post-tile-remove">Remove from History</div>
+                
+                <a href="{% url 'media_handler:post' slug=post.slug %}" class="post-thumbnail w-25">
+                    <img {% if post.thumbnail.thumbnail %}src="{{ post.thumbnail.thumbnail.url }}"{% else %}src="{% static 'core/images/default-thumbnail.jpg' %}"{% endif %} class="post-thumbnail-img" alt="Thumbnail">
+                    <div class="post-thumbnail-shadow"></div>
+                </a>
+                <a href="{% url 'media_handler:post' slug=post.slug %}" class="post-content-container">
+                    <div class="post-content-sizing"></div>
+                    <div class="post-content p-3">
+                        <div class="post-content-head">
+                            <div class="post-title">
+                                {{ post.title }}
+                            </div>
+                            {% comment %} <div id="post-save" class="post-saved" onclick="alert('save post')" title="Save/Unsave post" data-toggle="tooltip">
+                                <span id="saved-count">{#{ post.saved.all | length}#}0</span> <i class="far fa-bookmark"></i>
+                            </div> {% endcomment %}
+                        </div>
+                        <div class="post-author">
+                            {{ post.author }}
+                        </div>
+                        <div class="post-type">
+                            {{ post.media_content.mime_type }}
+                        </div>
+                        <div class="post-description"> <!-- Remove markdown elements here -->
+                            {{ post.description_raw }}
+                        </div>
+                        <div class="post-description-fade"></div>
+                    </div>
+                </a>
+            </div>
+            <script>
+                $(function($){
+                    var deleteButton = $("#{{ post.slug }}")
+                    $(deleteButton).click(function(){
+                        $(removeFromList("{% url 'media_handler:remove_from_history' slug=post.slug  %}", "{{ csrf_token }}", deleteButton));
+                    });
+                });
+            </script>
+        {% endfor %}
+    </div>
+{% endblock content %}

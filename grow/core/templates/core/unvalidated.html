@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/dashboard.css' %}">
+{% endblock head %}
+
+{% block title %}Validation{% endblock title %}
+
+{% block body %}
+    <div class="unverified" style="background-image:url('{% static 'core/images/unverified-bg.png' %}')">
+        <div class="uv-content">
+            <img src="{% static 'core/images/logo/grow-long-color.png' %}" class="uv-logo">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <p>
+                    Hello, {{user.username}}!
+                </p>
+                <p>
+                    Your account is not verified yet. Check your email for a verification link!
+                </p>
+                <p>Didn't recieve the link? <button class="btn btn-link uv-btn" type="submit" name="resend_verification">Send again</button></p>
+            </form>
+            <p class="text-center"><a class="btn btn-danger" href="/logout/">Logout</a></p>
+        </div>
+        <div class="uv-footer">&copy; Grow 2022 &bull; Made by Dan &amp; Greg</div>
+    </div>
+{% endblock %}

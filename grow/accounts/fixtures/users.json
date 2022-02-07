@@ -14,6 +14,7 @@
   "is_active": true,
   "is_staff": true,
   "is_validated": true,
+  "is_creator": true,
   "groups": [],
   "user_permissions": []
  }

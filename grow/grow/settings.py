@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-kna&s+#mxut(e95n32&+fr3=asrwo&yw81t&@oz+@%!knd1v_z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -41,10 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'taggit',
     
     # My Apps
     "core",
-    "accounts"
+    "accounts",
+    "media_handler",
 ]
 
 MIDDLEWARE = [
@@ -124,6 +126,8 @@ EMAIL_HOST_PASSWORD = 'Johnnymaster248248'
 # Django Token Generator
 PASSWORD_RESET_TIMEOUT = 15 * 60 # Seconds 
 
+# Taggit
+TAGGIT_CASE_INSENSITIVE = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -148,6 +152,9 @@ STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
 
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -160,4 +167,34 @@ MESSAGE_TAGS = {
         messages.SUCCESS: 'success',
         messages.WARNING: 'warning',
         messages.ERROR: 'danger',
- }
+}
+
+# Logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
+    },
+}
+
+# Uploading files MIME (Multipurpose Internet Mail Extensions)
+ALLOWED_MEDIA_FILE_TYPES = {
+    "video/mp4", "video/x-msvideo", "video/x-ms-asf", "video/x-ms-wmv",
+    "video/quicktime", "audio/x-ms-wma", "audio/mpeg", "audio/mp3",
+    "audio/wav", "audio/x-wav", "audio/m4a", "audio/mp4"
+}
+ALLOWED_IMAGE_FILE_TYPES = {
+    "image/jpeg", "image/x-citrix-jpeg", "image/png", "image/webp",
+}
+MAX_MEDIA_FILE_SIZE = 4294967296 # 4 GB
+MAX_IMAGE_FILE_SIZE = 4194304 # 4 MB
+FILE_UPLOAD_PERMISSIONS = 0o777
+
+
