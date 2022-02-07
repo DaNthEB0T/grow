@@ -505,6 +505,26 @@ input:not(:placeholder-shown) {
 }
 
 /**
+ * Cards
+ */
+.g-card {
+  border-radius: 7px;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+}
+.g-card.dark {
+  background-color: #e8e8e8;
+}
+.g-card .h {
+  font-size: 2rem;
+  font-family: "Comfortaa", cursive;
+  font-weight: 300;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+/**
  * SimpleMDE
  */
 .editor-toolbar {

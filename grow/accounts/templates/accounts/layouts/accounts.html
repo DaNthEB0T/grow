@@ -34,7 +34,7 @@
     
     {% endblock head %}
 
-    <title>{% block title %}Grow{% endblock %}</title>
+    <title>{% block title %}{% endblock %} | Grow</title>
   </head>
   <body>
     {% include "core/includes/messages.html" %}
@@ -42,7 +42,6 @@
     <div class="content-container">
         {% include 'components/sidebar.html' %}
         <div class="content">
-            <div id="thing"></div> {# secures background effect #}
             {% block content %}
                 <h1>Wadap nerd</h1>
             {% endblock %}

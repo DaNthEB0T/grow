@@ -2,3 +2,29 @@
     --primary: hsl(92, 30%, 36%);
     --primary-s: 30%;
 }
+
+.input-label {
+    width: 100%;
+    display: inline-block;
+    padding-bottom: 0.1rem;
+}
+.input-box {
+    position: relative;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+    padding: 0.7rem 1rem;
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+}
+.input-box.muted {
+    cursor: no-drop;
+    background-color: #ddd;
+}
+.input-icon {
+    position: absolute;
+    right: 0.5rem;
+    line-height: 1.5rem !important;
+    color: #555;
+}
