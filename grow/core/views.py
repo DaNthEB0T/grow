@@ -3,13 +3,19 @@ from django.contrib.auth.decorators import login_required
 from accounts.views import send_verification_email
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
+from media_handler.models import Post
 
 # Create your views here.
 
 @login_required
 def dashboard_view(request):          
     context = {}
-    context['user'] = request.user
+
+    user = request.user
+
+    context['user'] = user
+    context['recommended'] = Post.get_recommended_posts(user, amount=9)
+    context['continue'] = Post.get_user_history(user).first()
     
     if not request.user.is_validated:
         return redirect("core:unvalidated") # TODO: greg

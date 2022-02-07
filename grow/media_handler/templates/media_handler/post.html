@@ -17,7 +17,7 @@
                 <div class="video-container">
                     <div class="video">
                         <video id="video" class="ratio ratio-16x9" controls>
-                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                            <source src="{{ post.media_content.upload.url }}" type="{{ post.media_content.mime_type }}">
                         </video>
                         <!--div class="controls" onclick="pauseVid()">
                             <div class="bottom-bar" onclick="event.stopPropagation()">
@@ -54,7 +54,7 @@
                         <div class="big-tile resource media-thumbnail">
                             {% if post.media_content and "audio" in post.media_content.mime_type %}
                             <audio controls class="audio-control">
-                                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+                                <source src="{{ post.media_content.upload.url }}" type="{{ post.media_content.mime_type }}">
                             </audio>
                             {% endif %}
                             <img class="resource-thumbnail" {% if post.thumbnail %}src="{{ post.thumbnail.image.url }}"{% else %}src="{% static 'core/images/default-img.jpg' %}"{% endif %} alt="Post thumbnail">

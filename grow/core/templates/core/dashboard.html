@@ -19,61 +19,60 @@
                         </div>
                     </div>
                     <div class="big-tile recommended">
-                        <div class="resource">
-                            <span class="resource-info">Recommended for you</span>
-                            <span class="resource-title">Placeholder Title</span>
-                            <span class="resource-tags">By Author</span>
-                            <span class="resource-save" onclick="viewLater(this)"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
-                            <img class="resource-thumbnail" src="https://www.thoughtco.com/thmb/_fjKZyImBppgDXa6L5yejRch35s=/1881x1411/smart/filters:no_upscale()/Mindfulness-8e38c4e97d94416392442d4430a3812d.jpg" alt="Media thumbnail">
-                            <div class="resource-shadow"></div>
-                        </div>
+                        {% if recommended %}
+                            <a href="{% url 'media_handler:post' slug=recommended.0.slug %}" class="resource">
+                                <span class="resource-info">Recommended for you</span>
+                                <span class="resource-title">{{ recommended.0.title }}</span>
+                                <span class="resource-tags">By {{ recommended.0.author }}</span>
+                                <span class="resource-save" onclick="viewLater(this)"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
+                                <img class="resource-thumbnail" {% if recommended.0.thumbnail.image %}src="{{ recommended.0.thumbnail.image.url }}"{% else %}src="{% static 'core/images/default-img.jpg' %}"{% endif %} alt="Media thumbnail">
+                                <div class="resource-shadow"></div>
+                            </a>
+                        {% else %}
+                            <a href="{% url 'core:dashboard' %}" class="resource">
+                                <span class="resource-info">Recommended for you</span>
+                                <span class="resource-title">Your mom phat</span>
+                                <span class="resource-tags">By Freddy</span>
+                                <span class="resource-save" onclick="viewLater(this)"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
+                                <img class="resource-thumbnail" src="{% static 'core/images/default-img.jpg' %}" alt="Media thumbnail">
+                                <div class="resource-shadow"></div>
+                            </a>
+                        {% endif %}
                     </div>
+
                     <div class="big-tile continue">
-                        <div class="resource">
-                            <span class="resource-info">Continue watching</span>
-                            <span class="resource-title">Placeholder Title</span>
-                            <span class="resource-tags">By Author</span>
-                            <span class="resource-save" onclick="viewLater(this)"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
-                            <img class="resource-thumbnail" src="https://res.cloudinary.com/practicaldev/image/fetch/s--P-zvMTgt--/c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600/https://dev-to-uploads.s3.amazonaws.com/i/qyix6eyhrnc8x9c44yp2.jpg" alt="Media thumbnail">
-                            <div class="resource-shadow"></div>
-                        </div>
+                        {% if continue %}
+                            <a href="{% url 'media_handler:post' slug=continue.slug %}" class="resource">
+                                <span class="resource-info">Continue watching</span>
+                                <span class="resource-title">{{ continue.title }}</span>
+                                <span class="resource-tags">By {{ continue.author }}</span>
+                                <span class="resource-save" onclick="viewLater(this)"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
+                                <img class="resource-thumbnail" {% if continue.thumbnail.image %}src="{{ continue.thumbnail.image.url }}"{% else %}src="{% static 'core/images/default-img.jpg' %}"{% endif %} alt="Media thumbnail">
+                                <div class="resource-shadow"></div>
+                            </a>
+                        {% else %}
+                            <a href="{% url 'core:dashboard' %}" class="resource">
+                                <span class="resource-info">Continue watching</span>
+                                <span class="resource-title">Your mom phat</span>
+                                <span class="resource-tags">By Freddy</span>
+                                <span class="resource-save" onclick="viewLater(this)"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
+                                <img class="resource-thumbnail" src="{% static 'core/images/default-img.jpg' %}" alt="Media thumbnail">
+                                <div class="resource-shadow"></div>
+                            </a>
+                        {% endif %}
                     </div>
-                    <div class="">
-                        <div class="resource">
-                            <span class="resource-title">Placeholder Title</span>
-                            <span class="resource-tags">By Author</span>
-                            <span class="resource-save" onclick="viewLater(this)"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
-                            <img class="resource-thumbnail" src="https://res.cloudinary.com/practicaldev/image/fetch/s--P-zvMTgt--/c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600/https://dev-to-uploads.s3.amazonaws.com/i/qyix6eyhrnc8x9c44yp2.jpg" alt="Media thumbnail">
-                            <div class="resource-shadow"></div>
+
+                    {% for post in recommended|slice:"1:" %}
+                        <div class="">
+                            <a href="{% url 'media_handler:post' slug=post.slug %}" class="resource">
+                                <span class="resource-title">{{ post.title }}</span>
+                                <span class="resource-tags">By {{ post.author }}</span>
+                                <span class="resource-save" onclick="viewLater(this)"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
+                                <img class="resource-thumbnail" {% if post.thumbnail.image %}src="{{ post.thumbnail.image.url }}"{% else %}src="{% static 'core/images/default-img.jpg' %}"{% endif %} alt="Media thumbnail">
+                                <div class="resource-shadow"></div>
+                            </a>
                         </div>
-                    </div>
-                    <div class="">
-                        <div class="resource">
-                            <span class="resource-title">Placeholder Title</span>
-                            <span class="resource-tags">By Author</span>
-                            <span class="resource-save" onclick="viewLater(this)"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
-                            <img class="resource-thumbnail" src="https://res.cloudinary.com/practicaldev/image/fetch/s--P-zvMTgt--/c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600/https://dev-to-uploads.s3.amazonaws.com/i/qyix6eyhrnc8x9c44yp2.jpg" alt="Media thumbnail">
-                            <div class="resource-shadow"></div>
-                        </div>
-                    </div>
-                    <div class="">
-                        <div class="resource">
-                            <span class="resource-title">Placeholder Title</span>
-                            <span class="resource-tags">By Author</span>
-                            <span class="resource-save" onclick="viewLater(this)"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
-                            <img class="resource-thumbnail" src="https://res.cloudinary.com/practicaldev/image/fetch/s--P-zvMTgt--/c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600/https://dev-to-uploads.s3.amazonaws.com/i/qyix6eyhrnc8x9c44yp2.jpg" alt="Media thumbnail">
-                            <div class="resource-shadow"></div>
-                        </div>
-                    </div>
-                    <div class="">
-                        <div class="resource">
-                            <span class="resource-title">Placeholder Title</span>
-                            <span class="resource-tags">By Author</span>
-                            <span class="resource-save" onclick="viewLater(this)"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
-                            <img class="resource-thumbnail" src="https://res.cloudinary.com/practicaldev/image/fetch/s--P-zvMTgt--/c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600/https://dev-to-uploads.s3.amazonaws.com/i/qyix6eyhrnc8x9c44yp2.jpg" alt="Media thumbnail">
-                            <div class="resource-shadow"></div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

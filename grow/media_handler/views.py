@@ -34,7 +34,7 @@ def post_handle_view(request):
             post = form.save()
             form.save_m2m()
             messages.success(request, "Post created successfuly")
-            return redirect("media_handler:post", slug=post.slug)
+            #return redirect("media_handler:post", slug=post.slug)
     else:
         form = PostUploadForm(user=request.user)
     context['form'] = form
@@ -73,7 +73,7 @@ def saved_view(request):
 
     user = request.user
 
-    saved_posts = user.saved_posts.all()
+    saved_posts = Post.get_user_saved(user)
 
     context['saved_posts'] = saved_posts
     
@@ -85,7 +85,7 @@ def watchlist_view(request):
 
     user = request.user
 
-    watchlist = user.watch_later_posts.all()
+    watchlist = Post.get_user_watchlist(user)
 
     context['watchlist'] = watchlist
     
