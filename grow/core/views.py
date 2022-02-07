@@ -45,6 +45,3 @@ def unvalidated_view(request):
             messages.info(request, _("Validation email has been sent"))
     
     return render(request, "core/unvalidated.html", context)
-
-def error_404_view(request):
-    return render(request, "core/errors/404.html")

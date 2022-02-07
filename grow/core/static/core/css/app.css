@@ -546,6 +546,14 @@ blockquote {
   color: white;
 }
 
+.text-white {
+  color: white !important;
+}
+
+.text-black {
+  color: black !important;
+}
+
 /*
  * FONTS
  * Always use "font-" prefix

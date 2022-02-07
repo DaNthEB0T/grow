@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/dashboard.css' %}">
+{% endblock head %}
+
+{% block title %}500 Internal Server Error{% endblock title %}
+
+{% block body %}
+    <div class="unverified" style="background-image:url('{% static 'core/images/error-bg.jpg' %}')">
+        <div class="uv-content" style="border:1px solid white;color:#ddd">
+            <h2 class="w-100 text-center">500 - Internal Server Error</h2>
+            <p>The website has encountered an error causing it to crash. We are sorry for this inconvenience. If the error shows repeatedly, please contact us as soon as possible.</p>
+            <a href="/" class="text-white w-100 text-center d-inline-block">To main page</a>
+        </div>
+        <div class="uv-footer text-white">&copy; Grow 2022 &bull; Made by Dan &amp; Greg</div>
+    </div>
+{% endblock %}
