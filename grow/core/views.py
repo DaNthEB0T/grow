@@ -13,6 +13,8 @@ from media_handler.recomai import search_posts
 def dashboard_view(request):          
     context = {}
     
+    user = request.user
+
     search=False
     if "search" in request.POST:
         search=True
