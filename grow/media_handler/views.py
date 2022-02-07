@@ -34,7 +34,7 @@ def post_handle_view(request):
             post = form.save()
             form.save_m2m()
             messages.success(request, "Post created successfuly")
-            #return redirect("media_handler:post", slug=post.slug)
+            return redirect("media_handler:post", slug=post.slug)
     else:
         form = PostUploadForm(user=request.user)
     context['form'] = form

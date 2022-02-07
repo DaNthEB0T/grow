@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/dashboard.css' %}">
+{% endblock head %}
+
+{% block title %}Cookies{% endblock title %}
+
+{% block body %}
+    <div class="unverified" style="background-image:url('{% static 'core/images/unverified-bg.png' %}')">
+        <div class="uv-content">
+            <h2 class="w-100 text-center">Cookies</h2>
+            <p>We use the following cookies:</p>
+            <ul>
+                <li><code>cookielaw</code> - Used to remember if the user accepted the use of cookies</li>
+                <li><code>csrftoken</code> - Used to prevent Cross Site Forgery Request attacks on the website</li>
+                <li><code>sessionid</code> - Keeps the user logged in when navigating through the website and after closing their browser</li>
+            </ul>
+            <a href="/" class="w-100 text-center d-inline-block">To main page</a>
+        </div>
+        <div class="uv-footer">&copy; Grow 2022 &bull; Made by Dan &amp; Greg</div>
+    </div>
+{% endblock %}

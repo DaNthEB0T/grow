@@ -151,3 +151,53 @@ class GrowUserPasswordChangeForm(forms.Form):
         if commit:
             self.user.save()
         return self.user
+
+class GrowUserLoggedPasswordChangeForm(forms.Form):
+    error_messages = {
+        'wrong_password': _("The entered password is incorrect"),
+        'password_mismatch': _("The two passwords don't match"),
+        'password_redundancy': _("Cannot set to previous password")
+    }
+    current_password = forms.CharField(label=_("Current password"),
+                                    widget=forms.PasswordInput)
+    new_password1 = forms.CharField(label=_("New password"),
+                                    widget=forms.PasswordInput)
+    new_password2 = forms.CharField(label=_("New password confirmation"),
+                                    widget=forms.PasswordInput)
+
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(GrowUserLoggedPasswordChangeForm, self).__init__(*args, **kwargs)
+
+    def clean_current_password(self):
+        current_password = self.cleaned_data.get('current_password')
+        if(not authenticate(email=self.user.email, password=current_password)):
+            raise forms.ValidationError(
+                self.error_messages['wrong_password'],
+                code="wrong_password",
+            )
+        return current_password
+
+    def clean_new_password2(self):
+        password1 = self.cleaned_data.get('new_password1')
+        password2 = self.cleaned_data.get('new_password2')
+        if password1 and password2:
+            if password1 != password2:
+                raise forms.ValidationError(
+                    self.error_messages['password_mismatch'],
+                    code="password_mismatch",
+                )
+
+        if(authenticate(email=self.user.email, password=password2)):
+            raise forms.ValidationError(
+                self.error_messages['password_redundancy'],
+                code="password_redundancy",
+            )
+        
+        return password2
+
+    def save(self, commit=True):
+        self.user.set_password(self.cleaned_data['new_password1'])
+        if commit:
+            self.user.save()
+        return self.user

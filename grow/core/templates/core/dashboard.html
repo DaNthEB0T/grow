@@ -9,6 +9,8 @@
     <script src="{% static 'media_handler/js/post.js' %}" defer></script>
 {% endblock head %}
 
+{% block title %}Dashboard{% endblock title %}
+
 {% block body %}
         <div class="content-container">
 
@@ -54,7 +56,7 @@
                             {% empty %}
                                 <div class="resource">
                                     <span class="resource-info">Recommended for you</span>
-                                    <span class="resource-title">Your mom phat</span>
+                                    <span class="resource-title">No posts available</span>
                                     <span class="resource-tags">By Freddy</span>
                                     <img class="resource-thumbnail" src="{% static 'core/images/default-img.jpg' %}" alt="Media thumbnail">
                                     <a href="{% url 'core:dashboard' %}" class="resource-shadow"></a>
@@ -91,7 +93,7 @@
                             {% empty %}
                                 <div class="resource">
                                     <span class="resource-info">Continue watching</span>
-                                    <span class="resource-title">Your mom phat</span>
+                                    <span class="resource-title">Didn't watch anything yet!</span>
                                     <span class="resource-tags">By Freddy</span>
                                     <img class="resource-thumbnail" src="{% static 'core/images/default-img.jpg' %}" alt="Media thumbnail">
                                     <a href="{% url 'core:dashboard' %}" class="resource-shadow"></a>

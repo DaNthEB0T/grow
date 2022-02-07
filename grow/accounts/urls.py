@@ -9,4 +9,5 @@ urlpatterns = [
     path("verification/<uidb64>/<token>", views.verification_view, name="verification"),
     path("forgot_password/", views.forgot_password_view, name="forgot_password"),
     path("password_reset/<uidb64>/<token>", views.password_reset_view, name="password_reset"),
+    path("account/settings", views.settings_view, name="settings"),
 ]

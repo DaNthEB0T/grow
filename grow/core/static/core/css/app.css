@@ -496,6 +496,87 @@ input:not(:placeholder-shown) {
 }
 
 /**
+ * Cards
+ */
+.g-card {
+  border-radius: 7px;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+}
+.g-card.dark {
+  background-color: #e8e8e8;
+}
+.g-card .h {
+  font-size: 2rem;
+  font-family: "Comfortaa", cursive;
+  font-weight: 300;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+/**
+ * Modal windows
+ */
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0003;
+  z-index: 99;
+  display: none;
+}
+.modal-window {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  transform: translateX(-50%) translateY(-50%);
+  min-width: 50vw;
+  min-height: 50vh;
+  width: 30rem;
+  height: 20rem;
+  max-width: 90%;
+  border-radius: 7px;
+  background-color: #fff;
+  box-shadow: 0 0 5px 0 #0003;
+  padding: 1rem;
+}
+.modal-window .h {
+  font-size: 2rem;
+  font-family: "Comfortaa", cursive;
+  font-weight: 300;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+/**
+ * Universal form group
+ */
+ .form-group {
+  width: 100%;
+  padding: 2rem;
+}
+.form-group label {
+  width: 100%;
+  font-size: 1.1rem !important;
+}
+.form-group input, .form-group textarea, .form-group select {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: white;
+  padding: 0.7rem 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.form-group input:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/**
  * SimpleMDE
  */
 .editor-toolbar {
@@ -596,4 +677,34 @@ blockquote {
     top: -3rem;
     opacity: 0;
   }
+}
+
+
+/**
+ * Cookielaw element
+ */
+.cookielaw {
+  position: fixed;
+  bottom: 1rem;
+  max-width: 90%;
+  min-width: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  box-shadow: 0px 1px 2px 0 black;
+  padding: 0.6rem 1rem;
+  padding-right: 2rem;
+  text-align: center;
+  z-index: 999;
+}
+.cookielaw .b {
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  background-image: linear-gradient(230deg, var(--primary), hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.69));
+  padding: 0.3rem 0.5rem;
+  border-radius: 5px;
 }

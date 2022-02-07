@@ -45,3 +45,6 @@ def unvalidated_view(request):
             messages.info(request, _("Validation email has been sent"))
     
     return render(request, "core/unvalidated.html", context)
+
+def cookie_view(request):
+    return render(request, "core/cookielaw.html")

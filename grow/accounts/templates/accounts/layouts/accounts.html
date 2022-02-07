@@ -4,7 +4,7 @@
     {% load static %}
     <!-- favicon -->
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}">
-
+    
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,6 +15,8 @@
 
     <!-- JS + CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'core/css/app.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/accounts.css' %}">
+    <script src="{% static 'accounts/js/accounts.js' %}"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -40,9 +42,14 @@
   <body>
     {% include "core/includes/messages.html" %}
     
-    {% block body %}
-      <h1>Wadap noob</h1>
-    {% endblock %}
+    <div class="content-container">
+        {% include 'components/sidebar.html' %}
+        <div class="content">
+            {% block content %}
+                <h1>Wadap nerd</h1>
+            {% endblock %}
+        </div>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
