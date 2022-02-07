@@ -43,7 +43,7 @@
     </div>
 
     <div class="sidebar-bottom">
-        <a class="sidebar-link{% if request.path == '/account/settings' %} active{% endif %}" href="user/settings">
+        <a class="sidebar-link{% if request.path == '/account/settings' %} active{% endif %}" href="{% url "accounts:settings" %}">
             <i class="fas fa-users-cog"></i>
             <span class="sidebar-hide">User settings</span>
         </a>
