@@ -3,19 +3,16 @@ from django.contrib.auth.decorators import login_required
 from accounts.views import send_verification_email
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
+from .decorators import validation_required
 from media_handler.models import Post
 from media_handler.recomai import search_posts
 
 # Create your views here.
 
+@validation_required
 @login_required
 def dashboard_view(request):          
     context = {}
-
-    user = request.user
-    
-    if not user.is_validated:
-        return redirect("core:unvalidated") # TODO: greg
     
     search=False
     if "search" in request.POST:

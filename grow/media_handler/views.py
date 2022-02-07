@@ -6,11 +6,13 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
+from core.decorators import validation_required
 from .forms import ImageUploadForm, PostUploadForm
 from .models import Post
 
 # Create your views here.
 
+@validation_required
 @login_required
 def mh_view(request):
     context = {}
@@ -25,6 +27,7 @@ def mh_view(request):
     context['form'] = form
     return render(request, "media_handler/index.html", context)
 
+@validation_required
 @login_required
 def post_handle_view(request):
     context = {}
@@ -40,6 +43,7 @@ def post_handle_view(request):
     context['form'] = form
     return render(request, "media_handler/postu.html", context)
 
+@validation_required
 @login_required
 def post_view(request, slug):
     context = {}
@@ -59,6 +63,7 @@ def post_view(request, slug):
     context['saved'] = saved
     return render(request, "media_handler/post.html", context)
 
+@validation_required
 @login_required
 def history_view(request):
     context = {}
@@ -71,6 +76,7 @@ def history_view(request):
     
     return render(request, "media_handler/post_list/history.html", context)
 
+@validation_required
 @login_required
 @require_POST
 def remove_from_history_view(request, slug):
@@ -82,7 +88,7 @@ def remove_from_history_view(request, slug):
         
         return HttpResponse(content_type="application/json")
 
-
+@validation_required
 @login_required
 def saved_view(request):
     context = {}
@@ -95,6 +101,7 @@ def saved_view(request):
     
     return render(request, "media_handler/post_list/saved.html", context)
 
+@validation_required
 @login_required
 @require_POST
 def remove_from_saved_view(request, slug):
@@ -106,6 +113,7 @@ def remove_from_saved_view(request, slug):
         
         return HttpResponse(content_type="application/json")
 
+@validation_required
 @login_required
 def watchlist_view(request):
     context = {}
@@ -118,6 +126,7 @@ def watchlist_view(request):
     
     return render(request, "media_handler/post_list/watchlist.html", context)
 
+@validation_required
 @login_required
 @require_POST
 def remove_from_watchlist_view(request, slug):
@@ -129,6 +138,7 @@ def remove_from_watchlist_view(request, slug):
         
         return HttpResponse(content_type="application/json")
 
+@validation_required
 @login_required
 @require_POST
 def post_save_view(request, slug):
@@ -143,6 +153,7 @@ def post_save_view(request, slug):
         context['saved'] = saved
         return HttpResponse(json.dumps(context), content_type="application/json")
         
+@validation_required
 @login_required
 @require_POST
 def watch_later_view(request, slug):
