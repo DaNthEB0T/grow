@@ -178,3 +178,10 @@ def login_extended(request, user):
     login(request, user)
     messages.success(request, _(f"Successfully logged in as {user.username}"))
 
+@login_required
+def settings_view(request):
+    # context = {}
+
+    # user = request.user
+
+    return render(request, "accounts/settings.html")
