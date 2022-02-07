@@ -10,7 +10,6 @@ from media_handler.recomai import search_posts
 # Create your views here.
 
 @validation_required
-@login_required
 def dashboard_view(request):          
     context = {}
     
