@@ -47,7 +47,7 @@
                             {{field.label_tag}}
 
                             {% for error in field.errors %}
-                                <p style="color: red;">{{error}}</p>                    
+                            <script>popup('{{error}}', 'danger')</script>                  
                             {% endfor %}
                         </div>
 
@@ -112,21 +112,21 @@
                             {{registration_form.email}}
                             {{registration_form.email.label_tag}}
                             {% for error in registration_form.email.errors %}
-                                <p style="color: red;">{{error}}</p>                    
+                                <script>popup('{{error}}', 'danger')</script>                  
                             {% endfor %}
                         </div>
                         <div class="form-input-container">
                             {{registration_form.password1}}
                             {{registration_form.password1.label_tag}}
                             {% for error in registration_form.password1.errors %}
-                                <p style="color: red;">{{error}}</p>                    
+                                <script>popup('{{error}}', 'danger')</script>           
                             {% endfor %}
                         </div>
                         <div class="form-input-container">
                             {{registration_form.password2}}
                             {{registration_form.password2.label_tag}}
                             {% for error in registration_form.password2.errors %}
-                                <p style="color: red;">{{error}}</p>                    
+                                <script>popup('{{error}}', 'danger')</script>                
                             {% endfor %}
                         </div>
 
@@ -140,21 +140,21 @@
                             {{registration_form.username}}
                             {{registration_form.username.label_tag}}
                             {% for error in registration_form.username.errors %}
-                                <p style="color: red;">{{error}}</p>                    
+                                <script>popup(''{{error}}'', 'danger')</script>            
                             {% endfor %}
                         </div>
                         <div class="form-input-container">
                             {{registration_form.first_name}}
                             {{registration_form.first_name.label_tag}}
                             {% for error in registration_form.first_name.errors %}
-                                <p style="color: red;">{{error}}</p>                    
+                                <script>popup(''{{error}}'', 'danger')</script>        
                             {% endfor %}
                         </div>
                         <div class="form-input-container">
                             {{registration_form.last_name}}
                             {{registration_form.last_name.label_tag}}
                             {% for error in registration_form.last_name.errors %}
-                                <p style="color: red;">{{error}}</p>                    
+                                <script>popup(''{{error}}'', 'danger')</script>                 
                             {% endfor %}
                         </div>
                         <div class="button-container">
