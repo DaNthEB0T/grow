@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang="en">
   <head>
+    {% load static %}
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}">
+    
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,7 +14,6 @@
 
 
     <!-- JS + CSS -->
-    {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'core/css/app.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/accounts.css' %}">
     <script src="{% static 'accounts/js/accounts.js' %}"></script>
