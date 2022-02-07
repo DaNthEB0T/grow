@@ -417,15 +417,6 @@ input:not(:placeholder-shown) {
       grid-column-end: 2 !important;
   }
 
-  .search {
-      width: 100%;
-      justify-content: initial;
-  }
-  .search-text {
-      transition: opacity 0.2s ease !important;
-      width: initial !important;
-  }
-
   .resource-title {
       font-size: 4vw;
   }

@@ -113,6 +113,15 @@ body {
     .inner-content-container {
         width: calc(100% - 4rem);
     }
+
+    .search {
+        width: 100%;
+        justify-content: initial;
+    }
+    .search-text {
+        transition: opacity 0.2s ease !important;
+        width: initial !important;
+    }
 }
 
 
