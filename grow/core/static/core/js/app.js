@@ -106,3 +106,26 @@ function viewLater(el)
     el.innerHTML = el.innerHTML.replace("clock", "check");
     el.innerHTML = el.innerHTML.replace("Save for later", "Saved");
 }
+
+/**
+ * Opens modal window based on ID
+ * @param {string} id 
+ */
+function modal(id)
+{
+    el = document.getElementById(id);
+    el.style.display = "block";
+}
+
+/**
+ * Closes modal widnow based on element
+ * @param {element | string} el 
+ */
+function closeModal(el)
+{
+    if (typeof el === 'string' || el instanceof String)
+    {
+        el = document.getElementById(el);
+    }
+    el.style.display = "none";
+}

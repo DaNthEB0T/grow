@@ -535,6 +535,7 @@ input:not(:placeholder-shown) {
   bottom: 0;
   background-color: #0003;
   z-index: 99;
+  display: none;
 }
 .modal-window {
   position: absolute;
