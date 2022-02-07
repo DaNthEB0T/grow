@@ -57,7 +57,7 @@ def post_view(request, slug):
     return render(request, "media_handler/post.html", context)
 
 @login_required
-def history(request):
+def history_view(request):
     context = {}
 
     user = request.user
@@ -69,7 +69,7 @@ def history(request):
     return render(request, "media_handler/post_list/history.html", context)
 
 @login_required
-def saved(request):
+def saved_view(request):
     context = {}
 
     user = request.user
@@ -81,7 +81,7 @@ def saved(request):
     return render(request, "media_handler/post_list/saved.html", context)
 
 @login_required
-def view_later(request):
+def watchlist_view(request):
     context = {}
 
     user = request.user
