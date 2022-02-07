@@ -39,3 +39,6 @@ def unvalidated_view(request):
 
 def error_404_view(request):
     return render(request, "core/errors/404.html")
+
+def cookie_view(request):
+    return render(request, "core/cookielaw.html")
