@@ -65,7 +65,7 @@ def history_view(request):
 
     user = request.user
 
-    history = Post.get_user_history(user)
+    history = Post.get_user_history(user).reverse()
 
     context['history'] = history
     
@@ -88,7 +88,7 @@ def saved_view(request):
 
     user = request.user
 
-    saved_posts = Post.get_user_saved(user)
+    saved_posts = Post.get_user_saved(user).reverse()
 
     context['saved_posts'] = saved_posts
     
@@ -111,7 +111,7 @@ def watchlist_view(request):
 
     user = request.user
 
-    watchlist = Post.get_user_watchlist(user)
+    watchlist = Post.get_user_watchlist(user).reverse()
 
     context['watchlist'] = watchlist
     
