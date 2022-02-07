@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/dashboard.css' %}">
+{% endblock head %}
+
+{% block title %}404 Not Found{% endblock title %}
+
+{% block body %}
+    <div class="unverified" style="background-image:url('{% static 'core/images/error-bg.jpg' %}')">
+        <div class="uv-content" style="border:1px solid white;color:#ddd">
+            <h2 class="w-100 text-center">404 - Not Found</h2>
+            <p>The page you were looking for cannot be found. If you think the website is at fault, please contact us.</p>
+            <a href="/" class="text-white w-100 text-center d-inline-block">To main page</a>
+        </div>
+        <div class="uv-footer text-white">&copy; Grow 2022 &bull; Made by Dan &amp; Greg</div>
+    </div>
+{% endblock %}

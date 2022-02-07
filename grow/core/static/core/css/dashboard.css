@@ -71,7 +71,6 @@ body {
 .search label {
     font-size: 1.15rem !important;
     opacity: 1;
-    pointer-events: none;
 }
 .search label .search-text {
     width: 4rem;
@@ -112,6 +111,15 @@ body {
     
     .inner-content-container {
         width: calc(100% - 4rem);
+    }
+
+    .search {
+        width: 100%;
+        justify-content: initial;
+    }
+    .search-text {
+        transition: opacity 0.2s ease !important;
+        width: initial !important;
     }
 }
 

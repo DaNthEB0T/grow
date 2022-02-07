@@ -96,18 +96,18 @@ function deletePopup(el)
 /**
  * Visual effect when Save for Later button is clicked
  */
-function viewLater(el)
-{
-    if (el.classList.contains('saved'))
-    {
-        return;
-    }
-
-    el.classList.add('saved');
-    el.innerHTML = el.innerHTML.replace("clock", "check");
-    el.innerHTML = el.innerHTML.replace("Save for later", "Saved");
-}
-
+ function viewLater(el)
+ {
+     if (el.classList.contains('saved'))
+     {
+         return;
+     }
+ 
+     el.classList.add('saved');
+     el.innerHTML = el.innerHTML.replace("clock", "check");
+     el.innerHTML = el.innerHTML.replace("Save for later", "Saved");
+ }
+ 
 /**
  * Opens modal window based on ID
  * @param {string} id 

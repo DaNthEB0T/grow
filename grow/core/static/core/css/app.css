@@ -417,15 +417,6 @@ input:not(:placeholder-shown) {
       grid-column-end: 2 !important;
   }
 
-  .search {
-      width: 100%;
-      justify-content: initial;
-  }
-  .search-text {
-      transition: opacity 0.2s ease !important;
-      width: initial !important;
-  }
-
   .resource-title {
       font-size: 4vw;
   }
@@ -625,6 +616,23 @@ blockquote {
   padding-left: 1rem;
   border-radius: 3px;
   background-color: #f8f8f8;
+}
+
+.btn-none {
+  position: relative;
+  z-index: 1;
+  padding: 0;
+  border: none;
+  background: none;
+  color: white;
+}
+
+.text-white {
+  color: white !important;
+}
+
+.text-black {
+  color: black !important;
 }
 
 /*

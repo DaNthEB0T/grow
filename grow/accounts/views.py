@@ -10,6 +10,8 @@ from django.utils.translation import gettext_lazy as _
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.contrib import messages
+
+from core.decorators import unauthenticated_required
 from .tokens import *
 from .forms import *
 
@@ -57,9 +59,8 @@ def send_forgot_password_email(request, user):
 #     context['registration_form'] = form
 #     return render(request, "accounts/register.html", context)
 
+@unauthenticated_required
 def welcome_view(request):
-    if request.user.is_authenticated:
-        return redirect("core:dashboard")
 
     context = {}
     
