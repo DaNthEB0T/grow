@@ -57,30 +57,44 @@ function updateTags()
     if (tagInput.value.includes(' '))
     {
         // remove unwanted characters form input
-        tagInput.value = tagInput.value.replace(/[^\w\-]/gi, '');
+        tagInput.value = tagInput.value.replace(/[^\w\-\ ]/gi, '');
 
         // split the string
         var split = tagInput.value.split(' ');
+
+        // check for duplicate tags
+        var duplicate = false;
+        for (tag of document.getElementsByClassName('input-tag'))
+        {
+            if (tag.innerText.replace(/ /g, "") == split[0])
+            {
+                duplicate = true;
+                break;
+            }
+        }
 
         // tagify first element of array
         if (split[0])
         {
             // add the tag element
-            var newtag = document.createElement('span');
-            newtag.classList.add('input-tag');
-            newtag.innerHTML = split[0].toLowerCase() + ' <i class="fas fa-times" onclick="removeTag(this.parentElement)"></i>';
-            document.getElementById('tags').appendChild(newtag);
+            if (!duplicate)
+            {
+                var newtag = document.createElement('span');
+                newtag.classList.add('input-tag');
+                newtag.innerHTML = split[0].toLowerCase() + ' <i class="fas fa-times" onclick="removeTag(this.parentElement)"></i>';
+                document.getElementById('tags').appendChild(newtag);
+            }
             
             // delete tagified text from input
-            tagInput.value = tagInput.value.replace(split[0], "")
+            tagInput.value = tagInput.value.replace(split[0], "");
         }
 
         // delete all spaces in input
-        tagInput.value = tagInput.value.replace(/ /g, "")
+        tagInput.value = tagInput.value.replace(/ /g, "");
     }
 
     // update actual input according to existing tags and tag input
-    updateTagInput()
+    updateTagInput();
 }
 
 function updateTagInput()

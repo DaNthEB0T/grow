@@ -372,6 +372,9 @@ input:not(:placeholder-shown) {
   opacity: 1;
   bottom: 0.5rem;
 }
+.resource-save.saved {
+  cursor: default;
+}
 
 /* This is for content that shows only on small devices */
 .small-show {
@@ -534,6 +537,13 @@ input:not(:placeholder-shown) {
 .tiny-text {
   font-size: 0.6rem;
   line-height: 0.6rem;
+}
+
+blockquote {
+  border-left: 5px solid #ccc;
+  padding-left: 1rem;
+  border-radius: 3px;
+  background-color: #f8f8f8;
 }
 
 /*
