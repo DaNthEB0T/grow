@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from .validators import MimeTypeValidator
 from .models import *
 import grow.settings as settings
+from .library import contains_whitespace
 
 class ImageUploadForm(forms.ModelForm):
     class Meta:
@@ -25,6 +26,15 @@ class PostUploadForm(forms.ModelForm):
         self.label_suffix = ""
         if user.posts:
             self.fields["prequel"].queryset = user.posts        
+            
+    def clean_tags(self):
+        tags = self.cleaned_data['tags']
+        
+        for tag in tags:
+            if contains_whitespace(tag):
+                tags.remove(tag)    
+        
+        return tags
         
             
     def save(self, commit=True):

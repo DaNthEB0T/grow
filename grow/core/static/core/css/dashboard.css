@@ -5,14 +5,15 @@ body {
 .content {
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
-    max-height: 100vh;
-    overflow-y: auto;
     padding: 1rem;
     background-attachment: fixed;
+    height: initial;
 }
 
 .inner-content-container {
     width: calc(100% - 15rem);
+    max-height: 100vh;
+    overflow-y: auto;
     background-size: auto 100%;
     background-position: left center;
 }

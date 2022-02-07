@@ -34,6 +34,7 @@
                             </div>
                         </div>
                         <div class="video-stats-bottom">
+                            <span class="media-author">By {{ post.author }}</span>
                             <span class="upload-date">Published: {{ post.created_on }}</span>
                             <span class="tags">
                                 {% for tag in post.tags.all %}
@@ -41,16 +42,46 @@
                                 {% endfor %}
                             </span>
                         </div>
-                        <div class="video-description">
-                            {{ post.description | markdown | safe }}
-                        </div>
+                        {% if post.description %}
+                            <div class="video-description">
+                                {{ post.description | markdown | safe }}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             {% else %}
-                <div class="media-container">
-                    {% if post.thumbnail %}
-                        <img src="{{ post.thumbnail.image.path }}">
-                    {% endif %}
+                <div class="media-container {% if not post.media_content %}no-media{% endif %}">
+                        <div class="big-tile resource media-thumbnail">
+                            {% if post.media_content and "audio" in post.media_content.mime_type %}
+                            <audio controls class="audio-control">
+                                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+                            </audio>
+                            {% endif %}
+                            <img class="resource-thumbnail" {% if post.thumbnail %}src="{{ post.thumbnail.image.url }}"{% else %}src="{% static 'core/images/default-img.jpg' %}"{% endif %} alt="Post thumbnail">
+                            <div class="resource-shadow"></div>
+                        </div>
+                        <div class="video-stats">
+                            <div class="video-stats-head">
+                                <span class="video-title">{{ post.title }}</span>
+                                <div class="video-stats-right">
+                                    <span id="post-save" title="Save post" data-toggle="tooltip" class="video-saved"><span id="saved-count">{{ post.saved.all | length}}</span> <i class="far fa-bookmark"></i></span>
+                                </div>
+                            </div>
+                            <div class="video-stats-bottom">
+                                <span class="media-author">By {{ post.author }}</span>
+                                <span class="upload-date">Published: {{ post.created_on }}</span>
+                                <span class="tags">
+                                    {% for tag in post.tags.all %}
+                                    <span class="tag">{{ tag }}</span>
+                                    {% endfor %}
+                                </span>
+                            </div>
+                            {% if post.description %}
+                                <div class="video-description">
+                                    {{ post.description | markdown | safe }}
+                                </div>
+                            {% endif %}
+                        </div>
                 </div>
             {% endif %}
             
@@ -59,14 +90,14 @@
                 <div class="resource">
                     <span class="resource-title">Placeholder Title</span>
                     <span class="resource-tags">By Author</span>
-                    <span class="resource-save"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
+                    <span class="resource-save" onclick="viewLater(this)"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
                     <img class="resource-thumbnail" src="https://www.thoughtco.com/thmb/_fjKZyImBppgDXa6L5yejRch35s=/1881x1411/smart/filters:no_upscale()/Mindfulness-8e38c4e97d94416392442d4430a3812d.jpg" alt="Media thumbnail">
                     <div class="resource-shadow"></div>
                 </div>
                 <div class="resource">
                     <span class="resource-title">Placeholder Title</span>
                     <span class="resource-tags">By Author</span>
-                    <span class="resource-save"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
+                    <span class="resource-save" onclick="viewLater(this)"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
                     <img class="resource-thumbnail" src="https://www.thoughtco.com/thmb/_fjKZyImBppgDXa6L5yejRch35s=/1881x1411/smart/filters:no_upscale()/Mindfulness-8e38c4e97d94416392442d4430a3812d.jpg" alt="Media thumbnail">
                     <div class="resource-shadow"></div>
                 </div>
@@ -78,7 +109,8 @@
         $(function($){
             var saveButton = $("#post-save");
             {% if saved %}
-                saveButton.addClass("saved")
+                saveButton.addClass("saved");
+                $(saveButton).attr('data-bs-original-title', 'Unsave post');
             {% endif %}
 
             console.log($)

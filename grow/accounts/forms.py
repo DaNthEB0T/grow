@@ -151,6 +151,3 @@ class GrowUserPasswordChangeForm(forms.Form):
         if commit:
             self.user.save()
         return self.user
-
-            
-

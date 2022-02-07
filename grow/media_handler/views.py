@@ -3,7 +3,7 @@ from multiprocessing import context
 from django.contrib import messages
 import json
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from .forms import ImageUploadForm, PostUploadForm
@@ -33,6 +33,8 @@ def post_handle_view(request):
         if form.is_valid():
             post = form.save()
             form.save_m2m()
+            messages.success(request, "Post created successfuly")
+            return redirect("media_handler:post", slug=post.slug)
     else:
         form = PostUploadForm(user=request.user)
     context['form'] = form
@@ -45,10 +47,7 @@ def post_view(request, slug):
     post = get_object_or_404(Post, slug=slug)
     user = request.user
     
-    if post in user.post_history.all():
-        user.post_history.remove(post)
-    user.post_history.add(post)
-    user.save()
+    post.add_to_user_history(user)
      
     saved = post in user.saved_posts.all()
 
@@ -57,7 +56,7 @@ def post_view(request, slug):
     return render(request, "media_handler/post.html", context)
 
 @login_required
-def history(request):
+def history_view(request):
     context = {}
 
     user = request.user
@@ -69,7 +68,7 @@ def history(request):
     return render(request, "media_handler/post_list/history.html", context)
 
 @login_required
-def saved(request):
+def saved_view(request):
     context = {}
 
     user = request.user
@@ -81,7 +80,7 @@ def saved(request):
     return render(request, "media_handler/post_list/saved.html", context)
 
 @login_required
-def view_later(request):
+def watchlist_view(request):
     context = {}
 
     user = request.user
@@ -101,13 +100,7 @@ def post_save_view(request, slug):
         context = {}
         
         user = request.user
-        if post in user.saved_posts.all():
-            user.saved_posts.remove(post)
-            saved = False
-        else:
-            user.saved_posts.add(post)
-            saved = True
-        user.save()
+        saved = post.toggle_add_to_user_saved(user)
         
         context['saved'] = saved
         return HttpResponse(json.dumps(context), content_type="application/json")
@@ -121,13 +114,7 @@ def watch_later_view(request, slug):
         context = {}
         
         user = request.user
-        if post in user.watch_later_posts.all():
-            user.watch_later_posts.remove(post)
-            added = False
-        else:
-            user.watch_later_posts.add(post)
-            added = True
-        user.save()
+        added = post.toggle_add_to_user_watchlist(user)
         
         context['added'] = added
         return HttpResponse(json.dumps(context), content_type="application/json")
