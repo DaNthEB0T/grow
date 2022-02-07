@@ -6,13 +6,18 @@
     <div class="modal-container" id="modal-password" onclick="closeModal(this)">
         <div class="modal-window" onclick="event.stopPropagation()">
             <div class="h d-flex justify-content-between"><span>Change password</span> <i class="fas fa-times cursor-pointer" onclick="closeModal('modal-password')"></i></div>
-            <form class="form-group p-0 pb-4">
-                <label>Current password</label>
-                <input type="password">
-                <label>New password</label>
-                <input type="password">
-                <label>Confirm new password</label>
-                <input type="password">
+            <form class="form-group p-0 pb-4" method="POST">
+                {% csrf_token %}
+
+                {% for field in form %}
+                    {{field.label_tag}}
+                    {{field}}
+
+                    {% for error in field.errors %}
+                        <script>popup('{{error}}', 'danger')</script>                    
+                    {% endfor %}
+                {% endfor %}
+
                 <div class="button-container">
                     <button class="btn btn-success" type="submit"> Submit </button>
                 </div>
@@ -25,7 +30,7 @@
                 <div class="g-card p-3">
                     <span class="h">General</span>
                     <span class="input-label">Username</span>
-                    <span title="Click to edit" data-toggle="tooltip" class="input-box mb-3 muted">{{ user.username }} <i class="fas fa-lock input-icon"></i></span>
+                    <span title="Not editable" data-toggle="tooltip" class="input-box mb-3 muted">{{ user.username }} <i class="fas fa-lock input-icon"></i></span>
                     <span class="input-label">Password</span>
                     <span onclick="modal('modal-password')" title="Click to edit" data-toggle="tooltip" class="input-box">&#8226;&#8226;&#8226;&#8226;&#8226;&#8226; <i class="fas fa-edit input-icon"></i></span>
                 </div>

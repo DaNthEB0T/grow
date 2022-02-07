@@ -13,7 +13,6 @@ from django.contrib import messages
 from .tokens import *
 from .forms import *
 
-
 def token_generated_email(request, user, email_subject, template_path, token_generator):
     current_site = get_current_site(request)
     user = user
@@ -180,8 +179,20 @@ def login_extended(request, user):
 
 @login_required
 def settings_view(request):
-    # context = {}
+    context = {}
 
-    # user = request.user
+    user = request.user
 
-    return render(request, "accounts/settings.html")
+    form = GrowUserLoggedPasswordChangeForm(user)
+
+    if request.POST:
+        form = GrowUserLoggedPasswordChangeForm(user, request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, _("Password successfully changed"))
+
+            return redirect("accounts:login")
+    
+    context['form'] = form
+
+    return render(request, "accounts/settings.html", context)
