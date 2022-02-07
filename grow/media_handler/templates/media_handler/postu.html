@@ -36,7 +36,7 @@
                     {{form.tags}}{% for error in form.tags.errors %}<script>popup("{{ error }}", "danger")</script>{% endfor %}
 
                     {{form.description.label_tag}}
-                    <div class="tiny-text">Note: images are not supported in video posts.</div>                    
+                    <div class="tiny-text">Note: images are not supported in video/audio posts.</div>                    
                     {{form.description}}{% for error in form.description.errors %}<script>popup("{{ error }}", "danger")</script>{% endfor %}
                     {{form.prequel.label_tag}}{{form.prequel}}{% for error in form.prequel.errors %}<script>popup("{{ error }}", "danger")</script>{% endfor %}
                     {{form.status.label_tag}}{{form.status}}{% for error in form.status.errors %}<script>popup("{{ error }}", "danger")</script>{% endfor %}

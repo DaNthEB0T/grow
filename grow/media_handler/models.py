@@ -82,7 +82,7 @@ class Image(models.Model):
 
 
         # Set our max thumbnail size in a tuple (max width, max height)
-        THUMBNAIL_SIZE = (256, 144)
+        THUMBNAIL_SIZE = (640, 480)
 
         DJANGO_TYPE = self.image.file.content_type
 
@@ -309,11 +309,11 @@ class Post(models.Model):
         
     # Toggles add self to user watchlist
     def toggle_add_to_user_watchlist(self, user):
-        if self in user.watch_later_posts.all():
-            user.watch_later_posts.remove(self)
+        if self in user.watchlist_posts.all():
+            user.watchlist_posts.remove(self)
             added = False
         else:
-            user.watch_later_posts.add(self)
+            user.watchlist_posts.add(self)
             added = True
         user.save()
         return added  

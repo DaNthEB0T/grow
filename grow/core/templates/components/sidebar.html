@@ -5,30 +5,39 @@
         <a class="sidebar-logo mb-3" href="{% url "core:dashboard" %}" style="background-image:url('{% static 'core/images/logo/grow-long-transparent-white.png' %}')"></a>
 
         <div class="sidebar-links-container">
-            <a class="sidebar-link active" href="{% url "core:dashboard" %}">
+            <a class="sidebar-link{% if request.path == '/dashboard/' %} active{% endif %}" href="{% url "core:dashboard" %}">
                 <i class="fas fa-tachometer-alt"></i>
                 <span class="sidebar-hide">Dashboard</span>
             </a>
-            <a class="sidebar-link" href="{% url "core:dashboard" %}">
+            {% comment %} <a class="sidebar-link" href="{% url "core:dashboard" %}">
                 <i class="fas fa-chart-bar"></i>
                 <span class="sidebar-hide">My Progress</span>
+            </a> {% endcomment %}
+        </div>
+
+        <div class="sidebar-hline"></div>
+
+        <div class="sidebar-links-container mt-0">
+            <a class="sidebar-link{% if request.path == '/watchlist' %} active{% endif %}" href="{% url "media_handler:watchlist" %}">
+                <i class="far fa-clock"></i>
+                <span class="sidebar-hide">View later</span>
+            </a>
+            <a class="sidebar-link{% if request.path == '/history' %} active{% endif %}" href="{% url "media_handler:history" %}">
+                <i class="fas fa-history"></i>
+                <span class="sidebar-hide">History</span>
+            </a>
+            <a class="sidebar-link{% if request.path == '/saved' %} active{% endif %}" href="{% url "media_handler:saved" %}">
+                <i class="far fa-bookmark"></i>
+                <span class="sidebar-hide">Saved</span>
             </a>
         </div>
 
         <div class="sidebar-hline"></div>
 
-        <div class="sidebar-links-container">
-            <a class="sidebar-link" href="{% url "core:dashboard" %}">
-                <i class="far fa-clock"></i>
-                <span class="sidebar-hide">Watch later</span>
-            </a>
-            <a class="sidebar-link" href="{% url "core:dashboard" %}">
-                <i class="fas fa-history"></i>
-                <span class="sidebar-hide">History</span>
-            </a>
-            <a class="sidebar-link" href="{% url "core:dashboard" %}">
-                <i class="far fa-bookmark"></i>
-                <span class="sidebar-hide">Saved</span>
+        <div class="sidebar-links-container mt-0">
+            <a class="sidebar-link{% if request.path == '/postu' %} active{% endif %}" href="{% url "media_handler:post_upload" %}">
+                <i class="fas fa-plus-square"></i>
+                <span class="sidebar-hide">Create post</span>
             </a>
         </div>
     </div>

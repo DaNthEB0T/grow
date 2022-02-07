@@ -17,7 +17,7 @@
                 <div class="video-container">
                     <div class="video">
                         <video id="video" class="ratio ratio-16x9" controls>
-                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                            <source src="{{ post.media_content.upload.url }}" type="{{ post.media_content.mime_type }}">
                         </video>
                         <!--div class="controls" onclick="pauseVid()">
                             <div class="bottom-bar" onclick="event.stopPropagation()">
@@ -54,7 +54,7 @@
                         <div class="big-tile resource media-thumbnail">
                             {% if post.media_content and "audio" in post.media_content.mime_type %}
                             <audio controls class="audio-control">
-                                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+                                <source src="{{ post.media_content.upload.url }}" type="{{ post.media_content.mime_type }}">
                             </audio>
                             {% endif %}
                             <img class="resource-thumbnail" {% if post.thumbnail %}src="{{ post.thumbnail.image.url }}"{% else %}src="{% static 'core/images/default-img.jpg' %}"{% endif %} alt="Post thumbnail">
@@ -85,22 +85,34 @@
                 </div>
             {% endif %}
             
-            <span class="w-100 text-center d-inline-block h3 mb-0 mt-3">Recommended</span>
+            <span class="w-100 text-center d-inline-block h3 mb-0 mt-3">Similar posts</span>
             <div class="recommended-posts">
-                <div class="resource">
-                    <span class="resource-title">Placeholder Title</span>
-                    <span class="resource-tags">By Author</span>
-                    <span class="resource-save" onclick="viewLater(this)"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
-                    <img class="resource-thumbnail" src="https://www.thoughtco.com/thmb/_fjKZyImBppgDXa6L5yejRch35s=/1881x1411/smart/filters:no_upscale()/Mindfulness-8e38c4e97d94416392442d4430a3812d.jpg" alt="Media thumbnail">
-                    <div class="resource-shadow"></div>
-                </div>
-                <div class="resource">
-                    <span class="resource-title">Placeholder Title</span>
-                    <span class="resource-tags">By Author</span>
-                    <span class="resource-save" onclick="viewLater(this)"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
-                    <img class="resource-thumbnail" src="https://www.thoughtco.com/thmb/_fjKZyImBppgDXa6L5yejRch35s=/1881x1411/smart/filters:no_upscale()/Mindfulness-8e38c4e97d94416392442d4430a3812d.jpg" alt="Media thumbnail">
-                    <div class="resource-shadow"></div>
-                </div>
+                {% for post, watchlist in recommended.items %}
+                    <div class="resource">
+                        <span class="resource-title">{{ post.title }}</span>
+                        <span class="resource-tags">By {{ post.author }}</span>
+                        <span id="{{post.slug}}" class="resource-save"><i class="fas fa-clock"></i> <span class="small-show">Save for later</span></span>
+                        <img class="resource-thumbnail" {% if post.thumbnail.image %}src="{{ post.thumbnail.image.url }}"{% else %}src="{% static 'core/images/default-img.jpg' %}"{% endif %} alt="Media thumbnail">
+                        <a href="{% url 'media_handler:post' slug=post.slug %}" class="resource-shadow"></a>
+                    </div>
+
+                    <script>
+                        $(function($){
+                            var saveButton = $("#{{post.slug}}");
+                            var saveText = saveButton.find(".small-show")[0]
+                            var icon = saveButton.find(".fas")[0]
+                            {% if watchlist %}
+                                $(saveText).text("Saved")
+                                $(saveButton).addClass("saved");
+                                $(icon).addClass("fa-check").removeClass("fa-clock");
+                            {% endif %}
+                            
+                            $(saveButton).click(function(){
+                                $(watchlistEvent("{% url 'media_handler:post_to_watchlist' slug=post.slug  %}", "{{ csrf_token }}", saveButton));
+                            });
+                        });
+                    </script>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -112,8 +124,6 @@
                 saveButton.addClass("saved");
                 $(saveButton).attr('data-bs-original-title', 'Unsave post');
             {% endif %}
-
-            console.log($)
             
             $(saveButton).click(function(){
                 $(saveEvent("{% url 'media_handler:post_save' slug=post.slug  %}", "{{ csrf_token }}", saveButton));

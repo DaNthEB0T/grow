@@ -46,7 +46,6 @@ function muteVid()
 function saveEvent(url, csrfToken, sender) { 
     var saveCount = $("#saved-count")
     var saveButton = sender
-    console.log($)
     $.ajax({
         type: "POST",
         url: url,
@@ -59,17 +58,17 @@ function saveEvent(url, csrfToken, sender) {
                 // change tooltip
                 $(saveButton).attr('data-bs-original-title', 'Unsave post').tooltip('show');
 
-                saveButton.addClass("saved");
-                saveCount.text(function() {
+                $(saveButton).addClass("saved");
+                $(saveCount).text(function() {
                     return $(this).text().replace($(this).text(), parseInt($(this).text()) + 1); 
                 });
             }
-            else if(response.saved == false){
+            else{
                 // change tooltip
                 $(saveButton).attr('data-bs-original-title', 'Save post').tooltip('show');
 
-                saveButton.removeClass("saved");
-                saveCount.text(function() {
+                $(saveButton).removeClass("saved");
+                $(saveCount).text(function() {
                     return $(this).text().replace($(this).text(), parseInt($(this).text()) - 1); 
                 });
             }
@@ -78,7 +77,8 @@ function saveEvent(url, csrfToken, sender) {
 }
 
 function watchlistEvent(url, csrfToken, sender) { 
-    console.log($)
+    var saveText = sender.find(".small-show")[0]
+    var icon = sender.find(".fas")[0]
     $.ajax({
         type: "POST",
         url: url,
@@ -87,13 +87,43 @@ function watchlistEvent(url, csrfToken, sender) {
         },
         dataType: "json",
         success: function(response) {
-            selector = document.getElementsByName(response.content_id);
             if(response.added == true){
-
+                $(saveText).text("Saved");
+                $(icon).addClass("fa-check").removeClass("fa-clock");
             }
-            else if(response.added == false){
-
+            else{
+                $(saveText).text("Save for later");
+                $(icon).addClass("fa-clock").removeClass("fa-check");
             }
         }
     });
 }
+
+function removeFromList(url, csrfToken, sender) { 
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            'csrfmiddlewaretoken': csrfToken
+        },
+        dataType: "json",
+        complete: function () {
+            removePost(sender.get(0));
+        }
+    });
+}
+
+/**
+ * Visual effect when Save for Later button is clicked
+ */
+ function viewLater(el)
+ {
+     if (el.classList.contains('saved'))
+     {
+         return;
+     }
+ 
+     el.classList.add('saved');
+     el.innerHTML = el.innerHTML.replace("clock", "check");
+     el.innerHTML = el.innerHTML.replace("Save for later", "Saved");
+ }
