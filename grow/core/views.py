@@ -25,7 +25,7 @@ def dashboard_view(request):
         recommended = Post.get_recommended_posts(user, amount=9)
         context['most_recommended'] = {post: post in user.watchlist_posts.all() for post in recommended[:1]}
         context['recommended'] = {post: post in user.watchlist_posts.all() for post in recommended[1:]}
-        continue_watching = Post.get_user_history(user)
+        continue_watching = Post.get_user_history(user).reverse()
         context['continue'] = {post: post in user.watchlist_posts.all() for post in continue_watching[:1]}            
             
     context['search'] = search
