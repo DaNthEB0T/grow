@@ -11,19 +11,19 @@ from .models import Post
 
 # Create your views here.
 
-@validation_required
-def mh_view(request):
-    context = {}
-    if request.POST:
-        form = ImageUploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            img = form.save(commit=False)
-            img.author = request.user
-            img.save()
-    else:
-        form = ImageUploadForm()
-    context['form'] = form
-    return render(request, "media_handler/index.html", context)
+# @validation_required
+# def mh_view(request):
+#     context = {}
+#     if request.POST:
+#         form = ImageUploadForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             img = form.save(commit=False)
+#             img.author = request.user
+#             img.save()
+#     else:
+#         form = ImageUploadForm()
+#     context['form'] = form
+#     return render(request, "media_handler/index.html", context)
 
 @validation_required
 def post_handle_view(request):
