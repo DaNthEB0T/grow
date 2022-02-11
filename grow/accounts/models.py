@@ -144,7 +144,7 @@ class GrowUser(AbstractBaseUser, PermissionsMixin):
 
     # Important Dates
     date_joined = models.DateTimeField(_("date joined"),auto_now_add=True)
-    last_login = models.DateTimeField(_("last_login"),auto_now=True)
+    last_login = models.DateTimeField(_("last login"),auto_now=True)
 
     # Permissions
     is_active = models.BooleanField(default=True)
