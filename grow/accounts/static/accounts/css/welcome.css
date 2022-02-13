@@ -281,6 +281,10 @@
     align-items: center;
 }
 
+.parallax-10 > img {
+    object-fit: cover;
+}
+
 .parallax-10 {
     position: relative;
     top: 0;
@@ -455,6 +459,7 @@ register form
  * Mostly for mobile phones
  */
 @media screen and (orientation:portrait) { 
+    /* general layout */
     .half {
         animation-name: no-transition;
         animation-duration: 1s;
