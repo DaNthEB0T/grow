@@ -1,4 +1,10 @@
 function setActive(el) {
+    // prevent clicking on both halfs at the same time
+    if (document.getElementById('right-block').classList.contains("active") || document.getElementById('left-block').classList.contains("active"))
+    {
+        return;
+    }
+
     document.getElementById(el).classList.add("active");
     document.getElementById(el).classList.remove("nonactive");
     if (el == "left-block")
