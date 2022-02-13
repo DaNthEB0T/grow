@@ -3,7 +3,7 @@
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/welcome.css' %}">
-<script src="{% static 'accounts/js/welcome.js' %}"></script>
+<script src="{% static 'accounts/js/welcome.js' %}" defer></script>
 
 {% endblock head %}
 
@@ -18,9 +18,6 @@
                 <div class="title-text">GET STARTED<br><span style="font-size:1rem;">I'm new here</span></div>
             </div>
         </div>
-        <div class="title-text-container" style="left:0;">
-            <div class="title-text">GET STARTED<br><span style="font-size:1rem;">I'm new here</span></div>
-        </div>
     </div>
 
 
@@ -30,9 +27,6 @@
             <div class="title-text-container">
                 <div class="title-text">LOGIN<br><span style="font-size:1rem;">I already have an account</span></div>
             </div>
-        </div>
-        <div class="title-text-container">
-            <div class="title-text">LOGIN<br><span style="font-size:1rem;">I already have an account</span></div>
         </div>
 
         <div class="title-text-container">

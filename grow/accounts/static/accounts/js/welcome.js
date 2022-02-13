@@ -1,3 +1,25 @@
+/**
+ * Stop annoying transitions on window resize
+ */
+(function() { 
+    const classes = document.body.classList;
+    let timer = 0;
+    window.addEventListener('resize', function () {
+        if (timer) {
+            clearTimeout(timer);
+            timer = null;
+        }
+        else
+            classes.add('stop-transitions');
+
+        timer = setTimeout(() => {
+            classes.remove('stop-transitions');
+            timer = null;
+        }, 100);
+    });
+})();
+
+
 function setActive(el) {
     // prevent clicking on both halfs at the same time
     if (document.getElementById('right-block').classList.contains("active") || document.getElementById('left-block').classList.contains("active"))
@@ -96,17 +118,17 @@ function registerForm()
     document.getElementsByClassName('register-form')[0].classList.add('active');
 }
 
-window.onload = function ()
+/**
+ * Check browser for Firefox-exclusive code
+ */
+if (!window.CSS.supports('-moz-transform', 'translateY(1px)'))
 {
-    if (!window.CSS.supports('-moz-transform', 'translateY(1px)'))
+    introContent = document.getElementsByClassName('intro-content')[0];
+    introContent.onscroll = function (e)
     {
-        introContent = document.getElementsByClassName('intro-content')[0];
-        introContent.onscroll = function (e)
+        for (let i = 0; i < 3; i++)
         {
-            for (let i = 0; i < 3; i++)
-            {
-                document.getElementsByClassName('jscroll')[i].style.transform = "translateY(" + (introContent.scrollTop-document.getElementsByClassName('parallax-container')[i].offsetTop)/1.1 + "px)";
-            }
+            document.getElementsByClassName('jscroll')[i].style.transform = "translateY(" + (introContent.scrollTop-document.getElementsByClassName('parallax-container')[i].offsetTop)/1.1 + "px)";
         }
     }
 }
