@@ -43,7 +43,7 @@
     height: 100vh;
     width: 50vw;
     z-index: 2;
-    font-size: 5rem;
+    font-size: clamp(2rem , 20vw, 5rem);
     pointer-events: none;
     display: flex;
     justify-content: center;
@@ -59,7 +59,7 @@
  */
 .half .title-text-container {
     opacity: 0.8;
-    filter: blur(5px);
+    text-shadow: 0 0 5px white;
 }
 
 /*
@@ -281,6 +281,10 @@
     align-items: center;
 }
 
+.parallax-10 > img {
+    object-fit: cover;
+}
+
 .parallax-10 {
     position: relative;
     top: 0;
@@ -317,14 +321,16 @@
 }*/
 
 .svg-shape-container {
-    margin: -4.5vw 0;
     position: relative;
     z-index:1;
     display: flex;
     align-items: center;
+    margin: clamp(-999rem, -4.5vw, -3.6rem) 0;
 }
 .svg-shape-container > svg {
     z-index: 10;
+    width: 100%;
+    min-width: 80rem;
 }
 
 .big-text {
@@ -351,6 +357,7 @@ register form
 .register-form {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 .register-form > div {
     width: 100%;
@@ -430,6 +437,10 @@ register form
     100% {right: 2rem;}
 }
 
+@keyframes no-transition {
+    0% {transition: none;}
+    100% {transition: none;}
+}
 
 /*
  * Firefox exclusive
@@ -444,5 +455,96 @@ register form
     }
     .parallax-10 {
         transform: translateZ(-900px) scale(10.5);
+    }
+}
+
+/*
+ * Mostly for mobile phones
+ */
+@media screen and (orientation:portrait) { 
+    /* general layout */
+    .half {
+        animation-name: no-transition;
+        animation-duration: 1s;
+        filter: grayscale(0);
+    }
+    .half-left {
+        clip-path: polygon(0 0, 0 60.1%, 100% 40.1%, 100% 0);
+    }
+    
+    .half-right {
+        clip-path: polygon(100% 40%, 100% 100%, 0 100%, 0 60%);
+    }
+
+    #left-block.active + #right-block {
+        pointer-events: none;
+    }
+
+    .title-text-container {
+        left: 0;
+        height: 50vh;
+        width: 100vw;
+    }
+    #right-block .title-text-container {
+        bottom: 0;
+        top: initial;
+        transition: bottom 1s ease-in-out;
+    }
+    #left-block .title-text-container {
+        top: 0;
+        bottom: initial;
+    }
+
+    #right-block .back-button {
+        left: 1rem;
+    }
+    #left-block .back-button {
+        right: 1rem !important;
+    }
+
+    .back-button, .skip-button {
+        transition: opacity 1s ease-in-out;
+    }
+
+    .active#right-block .title-text-container {
+        bottom: 25vh;
+    }
+
+    .intro-content {
+        top: 0 !important;
+    }
+
+    @keyframes intro-scroll {
+        0% {height: 50vh; top: 0; left: 0; animation-timing-function: ease-in-out;}
+        50% {height: 100vh; top: 0; left: 0; animation-timing-function: ease-in-out;}
+        100% {height: 100vh; top: 0; left: -100vw; animation-timing-function: ease-in-out;}
+    }
+    
+    @keyframes intro-scroll-content {
+        0% {left: 100vw; opacity: 0; animation-timing-function: ease-in-out;}
+        50% {left: 100vw; opacity: 0; animation-timing-function: ease-in-out;}
+        100% {left: 0;  opacity: 1; animation-timing-function: ease-in-out;}
+    }
+
+    @keyframes deactivate-intro-scroll {
+        0% {height: 100vh; left: -100vw; z-index: 3; animation-timing-function: ease-in-out;}
+        50% {height: 100vh; left: 0; z-index: 3; animation-timing-function: ease-in-out;}
+        100% {height: 50vh; left: 0; z-index: 3; animation-timing-function: ease-in-out;}
+    }
+    @keyframes deactivate-intro-scroll-content {
+        0% {left: 0; opacity: 1; visibility: visible; animation-timing-function: ease-in-out;}
+        50% {left: 100vw; opacity: 0; visibility: visible; animation-timing-function: ease-in-out;}
+        100% {left: 100vw; opacity: 0; visibility: visible; animation-timing-function: ease-in-out;}
+    }
+    @keyframes nonactive-left {
+        0% {clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0); z-index: 3; animation-timing-function: ease-in-out;}
+        50% {clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0); z-index: 3; animation-timing-function: ease-in-out;}
+        100% {clip-path: polygon(0 0, 0 60.1%, 100% 40.1%, 100% 0); z-index: 3; animation-timing-function: ease-in-out;}
+    }
+
+    /* forms */
+
+    .form-box {
+        width: 100% !important;
     }
 }

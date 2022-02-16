@@ -3,7 +3,7 @@
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/welcome.css' %}">
-<script src="{% static 'accounts/js/welcome.js' %}"></script>
+<script src="{% static 'accounts/js/welcome.js' %}" defer></script>
 
 {% endblock head %}
 
@@ -18,9 +18,6 @@
                 <div class="title-text">GET STARTED<br><span style="font-size:1rem;">I'm new here</span></div>
             </div>
         </div>
-        <div class="title-text-container" style="left:0;">
-            <div class="title-text">GET STARTED<br><span style="font-size:1rem;">I'm new here</span></div>
-        </div>
     </div>
 
 
@@ -30,9 +27,6 @@
             <div class="title-text-container">
                 <div class="title-text">LOGIN<br><span style="font-size:1rem;">I already have an account</span></div>
             </div>
-        </div>
-        <div class="title-text-container">
-            <div class="title-text">LOGIN<br><span style="font-size:1rem;">I already have an account</span></div>
         </div>
 
         <div class="title-text-container">
@@ -67,7 +61,7 @@
                 EXPLORE.
             </div>
             <div class="parallax-10 jscroll">
-                <img class="w-100" src="{% static 'accounts/images/1.jpg' %}">
+                <img src="{% static 'accounts/images/1.jpg' %}">
             </div>
         </div>
         <div class="svg-shape-container">
@@ -75,7 +69,7 @@
                 <u>FIND A NEW LIFESTYLE</u>
                 <p class="smaller-text">We will help you find hobbies and activities that suit you best, and which will help you on your life's journey.</p>
             </div>
-            <svg viewBox="0 0 40 10" class="w-100">
+            <svg viewBox="0 0 40 10">
                 <path d="M 0 1 C 6 0 14 0 20 1 C 26 2 34 2 40 1 L 40 9 C 34 10 26 10 20 9 C 14 8 6 8 0 9" stroke="white" fill="white" stroke-width="0.01" fill="black"></path>
             </svg>
         </div>
@@ -84,7 +78,7 @@
                 LEARN.
             </div>
             <div class="parallax-10 jscroll">
-                <img class="w-100" src="{% static 'accounts/images/2.jpg' %}">
+                <img src="{% static 'accounts/images/2.jpg' %}">
             </div>
         </div>
         <div class="svg-shape-container">
@@ -92,7 +86,7 @@
                 <u>GAIN VALUABLE KNOWLEDGE</u>
                 <p class="smaller-text">Choose from a wide range of lessons to pick up wisdom for any field you're interested in.</p>
             </div>
-            <svg viewBox="0 0 40 10" class="w-100">
+            <svg viewBox="0 0 40 10">
                 <path d="M 0 1 C 6 0 14 0 20 1 C 26 2 34 2 40 1 L 40 9 C 34 10 26 10 20 9 C 14 8 6 8 0 9" stroke="white" fill="white" stroke-width="0.01" fill="black"></path>
             </svg>
         </div>
@@ -101,7 +95,7 @@
                 SHARE.
             </div>
             <div class="parallax-10 jscroll">
-                <img class="w-100" src="{% static 'accounts/images/3.jpg' %}">
+                <img src="{% static 'accounts/images/3.jpg' %}">
             </div>
         </div>
         <div class="svg-shape-container">
@@ -109,7 +103,7 @@
                 <u>CONTRIBUTE TO THE GROW NETWORK</u>
                 <p class="smaller-text">Take part in helping friends and strangers alike on their own journey.</p>
             </div>
-            <svg viewBox="0 0 40 10" class="w-100">
+            <svg viewBox="0 0 40 10">
                 <path d="M 0 1 C 6 0 14 0 20 1 C 26 2 34 2 40 1 L 40 9 C 34 10 26 10 20 9 C 14 8 6 8 0 9" stroke="white" fill="white" stroke-width="0.01" fill="black"></path>
             </svg>
         </div>

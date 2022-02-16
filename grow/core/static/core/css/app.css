@@ -635,6 +635,10 @@ blockquote {
   color: black !important;
 }
 
+.stop-transitions * {
+  transition: none !important;
+}
+
 /*
  * FONTS
  * Always use "font-" prefix
